@@ -185,6 +185,33 @@ def overlay_of(rp, mp):
     return 1.0 if ink == 0 else matched / ink
 
 
+MISS = 0.99  # a document below this, or with content that differs, is listed with its pictures
+
+
+def small_pictures(work, docs):
+    """compare's pictures of the pages that differ, for the listed documents, in 32 colours
+    (a tenth of the size, as legible) in WORK/pictures, named SET--PICTURE"""
+    out = work / "pictures"
+    out.mkdir(exist_ok=True)
+    try:
+        from PIL import Image
+    except ImportError:
+        Image = None
+    for d in docs:
+        if not d["miss"]:
+            continue
+        for p in d.get("pictures", []):
+            src = work / "compare" / d["set"] / "pairs" / p
+            dst = out / f"{d['set']}--{p}"
+            if not src.exists():
+                continue
+            if Image is None:
+                dst.write_bytes(src.read_bytes())
+                continue
+            im = Image.open(src).convert("RGB")
+            im.quantize(colors=32, method=Image.Quantize.MEDIANCUT, dither=Image.Dither.NONE).save(dst, optimize=True)
+
+
 def fonts_of(p):
     """The fonts a PDF names, without the six-letter prefix of a subset (as the harness lists them)."""
     if not pdf_ok(p):
@@ -314,8 +341,11 @@ def main():
         d["notes"] = [dict(of=x.get("of", ""), kind=x.get("kind", ""), level=x.get("level", ""), note=x.get("note", "")) for x in diffs]
         d["pictures"] = sorted((p.name for p in (work / "compare" / d["set"] / "pairs").glob(f"{d['name']}.page-*.png")),
                                key=lambda x: int(re.sub(r"\D", "", x.rsplit(".page-", 1)[-1]) or 0))
+        d["miss"] = d["score"] < MISS or d["verdict"] == "content differs"
         for key in ("score", "text", "geom", "overlay"):
             d[key] = round(d[key], 6)
+
+    small_pictures(work, docs)
 
     # each set: its parity, its spread, compare's verdicts, its time through each program
     set_times = {}

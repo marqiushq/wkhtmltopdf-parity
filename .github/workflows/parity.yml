@@ -71,7 +71,7 @@ jobs:
         if: always()
         run: |
           if [ -f out/corpus/report.md ]; then cat out/corpus/report.md >> "$GITHUB_STEP_SUMMARY"; fi
-      # the report, what publishing needs: scores, compare's summaries and its pictures of the pages that differ
+      # the report, what publishing needs: scores, compare's summaries, small pictures of the pages that differ
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         if: always()
         with:
@@ -84,7 +84,7 @@ jobs:
             out/corpus/times
             out/corpus/compare/*/summary.*
             out/corpus/compare/*/causes.csv
-            out/corpus/compare/*/pairs/*.png
+            out/corpus/pictures
           if-no-files-found: error
           retention-days: 90
       # both programs' PDFs, for anyone who wants to look for themselves

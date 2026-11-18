@@ -55,11 +55,13 @@ def file_run(folder, results, tag=None):
         if summ.exists():
             text = summ.read_text(encoding="utf-8").replace("/parity/work/", "")
             (dest / f"compare-{s}.txt").write_text(text, encoding="utf-8")
-    # the pages that differ, for each document below the line or with content that differs
+    # the pages that differ, for each document below the line or with content that differs: the
+    # small copies score.py made, else compare's own
     for d in r["documents"]:
-        if d["score"] < MISS or d["verdict"] == "content differs":
+        if d.get("miss", d["score"] < MISS or d["verdict"] == "content differs"):
             for p in d.get("pictures", []):
-                src = folder / "compare" / d["set"] / "pairs" / p
+                small = folder / "pictures" / f"{d['set']}--{p}"
+                src = small if small.exists() else folder / "compare" / d["set"] / "pairs" / p
                 if src.exists():
                     shutil.copy2(src, dest / "pictures" / f"{d['set']}--{p}")
     h = r.get("headline") or {}
