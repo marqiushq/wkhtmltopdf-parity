@@ -15,7 +15,7 @@ cp corpus/everyday/*.html mine/
 ./run.sh mine
 ```
 
-That runs eight sample documents. For yours, copy your templates into `mine/` instead, with the pictures and style sheets they load, write the options your app passes in `mine/options.txt`, and run `./run.sh mine` again. Then open `out/mine/report.html`. For each template it gives the score, what differs and where, both PDFs, and pictures of the pages that differ. A few dozen templates take under a minute once the images are downloaded (about 175 MB the first time). [What goes in `mine/`](mine/README.md).
+That runs eight sample documents. For yours, take the samples out of `mine/` (keep its README), put your templates there with the pictures and style sheets they load, write the options your app passes in `mine/options.txt`, and run `./run.sh mine` again. Then open `out/mine/report.html`. For each template it gives the score, what differs and where, both PDFs, and pictures of the pages that differ. A few dozen templates take under a minute once the images are downloaded (about 175 MB the first time). [What goes in `mine/`](mine/README.md).
 
 ## The scoreboard
 
