@@ -1,0 +1,111 @@
+# Runs the suite on GitHub's own machines, in public, and files what it found under results/ with
+# a link back to the run, so anyone can read the log of the run that made a number.
+#
+#   every day      each version of marqius/wkhtmltopdf on Docker Hub that was never tested (by
+#                  image digest), so a release is tested within a day; on Mondays latest again
+#   by hand        Actions > Parity > Run workflow, with the tags to test (or none: as the schedule)
+#   on a change    to the corpus or the harness: latest, to show the change keeps working; a pull
+#                  request is tested the same way, and nothing is filed for it
+#
+# Each tag runs on x86-64 and on ARM64. Only the publish job can write to the repository.
+name: Parity
+
+on:
+  schedule:
+    - cron: "23 4 * * *"
+  workflow_dispatch:
+    inputs:
+      tags:
+        description: "Tags of marqius/wkhtmltopdf to test, separated by spaces (empty: what the daily run would pick)"
+        required: false
+        default: ""
+      publish:
+        description: "File the results under results/ and update the README"
+        type: boolean
+        default: true
+  push:
+    branches: [main]
+    paths: ["corpus/**", "harness/**", "run.sh", ".github/workflows/parity.yml"]
+  pull_request:
+    paths: ["corpus/**", "harness/**", "run.sh", ".github/workflows/parity.yml"]
+
+permissions:
+  contents: read
+
+jobs:
+  plan:
+    runs-on: ubuntu-24.04
+    outputs:
+      tags: ${{ steps.pick.outputs.tags }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - id: pick
+        name: Pick the tags
+        env:
+          EVENT: ${{ github.event_name }}
+          INPUT_TAGS: ${{ inputs.tags }}
+        run: python3 harness/plan.py >> "$GITHUB_OUTPUT"
+
+  parity:
+    needs: plan
+    if: needs.plan.outputs.tags != '[]'
+    strategy:
+      fail-fast: false
+      matrix:
+        tag: ${{ fromJSON(needs.plan.outputs.tags) }}
+        runner: [ubuntu-24.04, ubuntu-24.04-arm]
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: The machine
+        run: |
+          uname -a
+          nproc
+          docker version --format 'Docker {{.Server.Version}} {{.Server.Os}}/{{.Server.Arch}}'
+      - name: Run the suite
+        env:
+          TAG: ${{ matrix.tag }}
+        run: ./run.sh --tag "$TAG"
+      - name: The report
+        if: always()
+        run: |
+          if [ -f out/corpus/report.md ]; then cat out/corpus/report.md >> "$GITHUB_STEP_SUMMARY"; fi
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: always()
+        with:
+          name: parity-${{ matrix.tag }}-${{ matrix.runner }}
+          path: out/corpus
+          if-no-files-found: error
+          retention-days: 90
+
+  publish:
+    needs: [plan, parity]
+    if: >-
+      always() && needs.parity.result == 'success' && github.ref == 'refs/heads/main' &&
+      (github.event_name == 'schedule' || github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.publish))
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    concurrency:
+      group: publish
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          path: artifacts
+      - name: File the results and write the scoreboard
+        run: python3 harness/publish.py artifacts
+      - name: Commit
+        env:
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add results README.md
+          if git diff --cached --quiet; then echo "nothing new"; exit 0; fi
+          versions=$(git diff --cached --name-only -- 'results/*/*/report.json' | cut -d/ -f2 | sort -u | tr '\n' ' ')
+          git commit -q -m "Results for ${versions:-the suite}" -m "From $RUN_URL"
+          git pull -q --rebase
+          git push -q

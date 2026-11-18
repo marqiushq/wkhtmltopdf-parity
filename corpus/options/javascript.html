@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>Invoice built by a script</title>
+<style>
+body { font-family: Arial, sans-serif; font-size: 12px }
+table { width: 100%; border-collapse: collapse } th, td { border-bottom: 1px solid #ccc; padding: 6px; text-align: left }
+td.n, th.n { text-align: right } tfoot td { font-weight: bold; border-top: 2px solid #333 }
+.bar { height: 12px; background: #1f4e79 }
+</style></head><body>
+<h1>Invoice <span id="number"></span></h1>
+<p id="intro"></p>
+<table><thead><tr><th>Item</th><th class="n">Qty</th><th class="n">Unit</th><th class="n">Amount</th><th>Share</th></tr></thead>
+<tbody id="lines"></tbody><tfoot><tr><td colspan="3">Total due</td><td class="n" id="total"></td><td></td></tr></tfoot></table>
+<script>
+var invoice = { number: "2026-131", customer: "Acme Trading Ltd", lines: [
+  { item: "A4 copier paper, box of 5 reams", qty: 12, unit: 24.5 },
+  { item: "Toner cartridge, black", qty: 4, unit: 68 },
+  { item: "Archive boxes, pack of 10", qty: 6, unit: 15.75 },
+  { item: "Delivery", qty: 1, unit: 12 } ] };
+function money(x) { return "£" + x.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
+document.getElementById("number").textContent = invoice.number;
+document.getElementById("intro").textContent = "For " + invoice.customer + ", " + invoice.lines.length + " lines.";
+var total = 0, body = document.getElementById("lines");
+for (var i = 0; i < invoice.lines.length; i++) total += invoice.lines[i].qty * invoice.lines[i].unit;
+for (var i = 0; i < invoice.lines.length; i++) {
+  var l = invoice.lines[i], amount = l.qty * l.unit, tr = document.createElement("tr");
+  tr.innerHTML = "<td>" + l.item + "</td><td class='n'>" + l.qty + "</td><td class='n'>" + money(l.unit) + "</td><td class='n'>" +
+    money(amount) + "</td><td><div class='bar' style='width:" + Math.round(100 * amount / total) + "%'></div></td>";
+  body.appendChild(tr);
+}
+document.getElementById("total").textContent = money(total);
+window.status = "ready";
+</script>
+</body></html>

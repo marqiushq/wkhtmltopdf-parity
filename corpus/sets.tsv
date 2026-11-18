@@ -1,0 +1,5 @@
+set	image	published	title	what it holds
+print	reference	yes	CSS features, one to a page	78 short pages, each on one part of CSS and HTML: text, lists, tables, floats, flexbox, grid, positioning, columns, images, SVG, forms, page rules. The engine's own print test pages.
+everyday	reference	yes	Business documents	8 everyday documents: an invoice, a statement, a letter, a receipt, a shipping label, a certificate, a report and a product sheet.
+options	reference	no	wkhtmltopdf's own options	18 command lines that use wkhtmltopdf's own features: text and HTML headers and footers with page numbers, a cover and a table of contents, bookmarks, paper sizes and margins, zoom, print media, a page built by a script, a 150-row statement over several pages.
+international	cjk	no	Languages and scripts	10 documents in Chinese, Japanese, Korean, Arabic, Hebrew, Hindi, Thai, Greek, Russian and accented Latin, some mixed on one line. Run with Noto CJK added to the reference system, for both programs.

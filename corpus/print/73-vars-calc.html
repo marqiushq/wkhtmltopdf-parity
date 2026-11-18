@@ -1,0 +1,5 @@
+<!DOCTYPE html><html lang="en"><head><title>73-vars-calc</title><style>
+:root { --pad: 12pt; --size: 15pt } .a { width: calc(100% - 100pt); border: 0.5pt solid black } .b { padding-left: var(--pad); font-size: var(--size); margin-top: calc(var(--pad) * 2) } .c { margin-left: var(--missing, 40pt) }
+</style></head><body>
+<div class="a">Width calc(100% - 100pt)</div><div class="b">Variable padding and size</div><p class="c">Fallback var.</p>
+</body></html>

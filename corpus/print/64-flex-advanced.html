@@ -1,0 +1,5 @@
+<!DOCTYPE html><html lang="en"><head><title>64-flex-advanced</title><style>
+.row { display: flex; gap: 6pt; margin-bottom: 10pt } .row > div, .col > div { border: 0.5pt solid black; padding: 3pt } .g1 { flex: 1 } .g2 { flex: 2 } .fx { width: 80pt; flex: none } .wrap { flex-wrap: wrap } .w { width: 120pt } .col { display: flex; flex-direction: column; gap: 4pt; margin-bottom: 10pt } .mid { align-items: center }
+</style></head><body>
+<div class="row"><div class="g1">grow 1</div><div class="g2">grow 2</div><div class="fx">fixed 80pt</div></div><div class="row wrap"><div class="w">item 1</div><div class="w">item 2</div><div class="w">item 3</div><div class="w">item 4</div><div class="w">item 5</div><div class="w">item 6</div><div class="w">item 7</div></div><div class="col"><div>col one</div><div>col two</div></div><div class="row"><div>left</div><div style="margin-left:auto">pushed right</div></div><div class="row mid"><div style="height:40pt">tall</div><div>centered</div></div>
+</body></html>

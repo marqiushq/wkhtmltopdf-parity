@@ -1,0 +1,5 @@
+<!DOCTYPE html><html lang="en"><head><title>43-selectors</title><style>
+#main > p:first-child { margin-left: 20pt } p.a.b { font-size: 14pt } p[data-kind=note] { margin-left: 40pt } li:nth-child(2n) { margin-left: 30pt } li:last-child { font-size: 16pt } div p + p { text-indent: 24pt } h2 + p { margin-left: 50pt } h2 ~ p { font-size: 10pt } p:not(.a) { margin-top: 4pt; margin-bottom: 4pt }
+</style></head><body>
+<div id="main"><p class="a b">First child of main.</p><p>Second paragraph.</p><p data-kind="note">Attribute match.</p><ul><li>one</li><li>two</li><li>three</li><li>four</li></ul></div><p>Outside.</p><h2>Heading</h2><p>Adjacent sibling.</p><p>General sibling.</p>
+</body></html>

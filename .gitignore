@@ -1,0 +1,6 @@
+# your templates stay on your machine
+/mine/*
+!/mine/README.md
+# reports
+/out/
+.DS_Store

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<script>
+function subst() {
+  var vars = {};
+  var query = window.location.search.substring(1).split('&');
+  for (var i = 0; i < query.length; i++) {
+    var pair = query[i].split('=', 2);
+    vars[pair[0]] = decodeURIComponent(pair[1]);
+  }
+  var names = ['page', 'topage', 'section', 'doctitle'];
+  for (var n = 0; n < names.length; n++) {
+    var els = document.getElementsByClassName(names[n]);
+    for (var j = 0; j < els.length; j++) els[j].textContent = vars[names[n]];
+  }
+}
+</script>
+<style>
+body { font-family: Arial, sans-serif; font-size: 10px; color: #555; margin: 0 }
+table { width: 100%; border-bottom: 1px solid #1f4e79 }
+td.r { text-align: right }
+.brand { color: #1f4e79; font-weight: bold; font-size: 12px }
+</style></head>
+<body onload="subst()"><table><tr><td class="brand">Northwind Supplies</td><td class="r"><span class="doctitle"></span></td></tr></table></body></html>

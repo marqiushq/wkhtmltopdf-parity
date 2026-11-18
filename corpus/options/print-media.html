@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>Order confirmation</title>
+<style>
+body { font-family: Arial, sans-serif; font-size: 13px }
+.screen-only { background: #ffeeba; padding: 10px; font-size: 16px }
+.print-only { display: none }
+nav { background: #333; color: #fff; padding: 8px }
+@media print {
+  .screen-only, nav { display: none }
+  .print-only { display: block; border: 1px solid #000; padding: 6px; margin-bottom: 10px }
+  body { font-size: 11px }
+  a::after { content: " (" attr(href) ")" }
+}
+</style></head><body>
+<nav>Home · Orders · Account</nav>
+<div class="screen-only">Tip: press Print to keep a copy of this page.</div>
+<div class="print-only">Printed copy: keep this for your records.</div>
+<h1>Order 2026-118 confirmed</h1>
+<p>Thank you. Your order will be delivered on Thursday between 08:00 and 12:00. You can follow it at <a href="https://example.com/track/2026-118">our tracking page</a>.</p>
+<table><tr><td>12 × A4 copier paper</td><td>£294.00</td></tr><tr><td>4 × toner cartridge</td><td>£272.00</td></tr><tr><td><b>Total, with VAT</b></td><td><b>£679.20</b></td></tr></table>
+</body></html>

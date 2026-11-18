@@ -1,0 +1,21 @@
+<!DOCTYPE html><html><head><title>TOC Test</title><style>
+@page { size: letter; margin: 60pt; @bottom-center { content: counter(page) " of " counter(pages) } }
+nav a { display: block; text-decoration: none; color: black }
+nav a::after { content: " ....... " target-counter(attr(href), page) }
+h1 { margin-top: 30pt }
+</style></head><body>
+<h1>Table of Contents</h1>
+<nav>
+<a href="#ch1">Chapter One</a>
+<a href="#ch2">Chapter Two</a>
+<a href="#ch3">Chapter Three</a>
+</nav>
+<h1 id="ch1">Chapter One</h1>
+<p>Content of chapter one fills the page.</p>
+<p style="margin-top:400pt">spacer</p>
+<h1 id="ch2">Chapter Two</h1>
+<p>Content of chapter two.</p>
+<p style="margin-top:400pt">spacer</p>
+<h1 id="ch3">Chapter Three</h1>
+<p>Content of chapter three.</p>
+</body></html>
