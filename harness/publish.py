@@ -133,17 +133,23 @@ def scoreboard(results, readme_dir):
     for s in order:
         x = sets[s]
         vc = x["verdicts"]
-        L.append(f"| {x['title']} (`{s}`) | {x['documents']} | {x['parity']:.4f} | {x.get('looks', 0):.3f} | {vc.get('same pages', 0)} | {vc.get('appearance only', 0)} | "
+        L.append(f"| {x['title']} (`{s}`) | {x['documents']} | {x['parity']:.4f} | {x.get('overlay', 0):.3f} | {vc.get('same pages', 0)} | {vc.get('appearance only', 0)} | "
                  f"{vc.get('content differs', 0)} | {speed_cell(x.get('speed'))} |")
         if h and s == order[1] and set(h["sets"]) == {"everyday", "print"}:
             tot = {k: sum(sets[t]["verdicts"].get(k, 0) for t in h["sets"]) for k in ("same pages", "appearance only", "content differs")}
-            L.append(f"| **The {h['documents']} published documents together** | **{h['documents']}** | **{h['parity']:.4f}** | {h.get('looks', 0):.3f} | {tot['same pages']} | "
+            L.append(f"| **The {h['documents']} published documents together** | **{h['documents']}** | **{h['parity']:.4f}** | {h.get('overlay', 0):.3f} | {tot['same pages']} | "
                      f"{tot['appearance only']} | {tot['content differs']} | **{speed_cell(h.get('speed'))}** |")
     L.append("")
     if h and h.get("speed"):
         L.append(f"Speed is the time to convert the published documents one after another, wkhtmltopdf's divided by marqius-wkhtmltopdf's: "
                  f"{h['seconds_wk']:.1f} s against {h['seconds_mq']:.2f} s (median of {len(h['speed_runs'])} runs)"
                  + (f"; {h['nowait_speed']:.0f}× with wkhtmltopdf's 200 ms script wait turned off for both." if h.get("nowait_speed") else "."))
+        L.append("")
+    if h and h.get("bytes_wk"):
+        imgs = m.get("images", {})
+        L.append(f"Sizes: the {h['documents']} PDFs come to {h['bytes_wk'] / 1048576:.1f} MB from wkhtmltopdf and {h['bytes_mq'] / 1048576:.1f} MB from marqius-wkhtmltopdf."
+                 + (f" The `{imgs['marqius']['name'].split(':')[0]}` image is {imgs['marqius']['size_mb']:.0f} MB unpacked; the image wkhtmltopdf runs in here, with its fonts, {imgs['reference']['size_mb']:.0f} MB."
+                    if imgs.get("marqius", {}).get("size_mb") and imgs.get("reference", {}).get("size_mb") else ""))
         L.append("")
     others = [p for p in sorted(runs[v]) if p != plat]
     for p in others:
@@ -182,7 +188,7 @@ def scoreboard(results, readme_dir):
                 if len(why) > 160:
                     why = why[:157].rstrip() + "…"
             why = why.replace("|", "\\|")
-            L.append(f"| `{d['set']}/{d['name']}` | {d['score']:.4f} | {d.get('looks', 0):.3f} | {why} | {pics} |")
+            L.append(f"| `{d['set']}/{d['name']}` | {d['score']:.4f} | {d.get('overlay', 0):.3f} | {why} | {pics} |")
         L += ["", "</details>"]
     return "\n".join(L)
 

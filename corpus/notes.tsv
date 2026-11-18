@@ -31,3 +31,4 @@ international	greek-russian	marqius-wkhtmltopdf sets both floated columns 9.6 pt
 international	invoice-zh	The line with the dates breaks into three lines with marqius-wkhtmltopdf, two with wkhtmltopdf. wkhtmltopdf's text reads back with some characters as radicals (⻛ for 风), which the text measure counts.
 international	letter-ja	The pages look the same. wkhtmltopdf sets the text in Noto Sans Mono CJK HK, marqius-wkhtmltopdf in Noto Sans CJK JP, the face lang="ja" asks for; wkhtmltopdf's text reads back with some characters as radicals.
 international	mixed-scripts	The pages look the same. wkhtmltopdf sets all the Chinese, Japanese and Korean words in Noto Sans CJK HK, marqius-wkhtmltopdf in Noto Sans CJK JP.
+international	receipt-ko	The pages look the same. The wide space after the time reads back as a different space character in the two PDFs.

@@ -112,9 +112,9 @@ def score_pair(rp, mp):
 
 
 # ---------------------------------------------------------------------------------------------
-# How the pages look, apart from what their text says: each page drawn in grey at 72 dpi (a dot is
+# The overlay: how the pages look, apart from what their text says: each page drawn in grey at 72 dpi (a dot is
 # a point), every dot darker than INK is ink, and a dot of ink is matched when the other PDF has
-# ink within NEAR points of it. looks = matched ink of both / all ink of both; a page only one PDF
+# ink within NEAR points of it. overlay = matched ink of both / all ink of both; a page only one PDF
 # has counts as unmatched. Words that moved by a point or two still match; reversed or missing
 # letters, missing pictures and text set elsewhere do not.
 DPI, INK, NEAR = 72, 160, 2
@@ -162,7 +162,7 @@ def grow(rows):
     return out
 
 
-def looks_alike(rp, mp):
+def overlay_of(rp, mp):
     import tempfile
     if not pdf_ok(rp) or not pdf_ok(mp):
         return 0.0
@@ -199,7 +199,7 @@ def fonts_of(p):
 def one(job):
     s, n, rp, mp = job
     sc, text, geom, pr, pm = score_pair(rp, mp)
-    return dict(set=s, name=n, score=sc, text=text, geom=geom, pages_wk=pr, pages_mq=pm, looks=looks_alike(rp, mp),
+    return dict(set=s, name=n, score=sc, text=text, geom=geom, pages_wk=pr, pages_mq=pm, overlay=overlay_of(rp, mp),
                 fonts_wk=fonts_of(rp), fonts_mq=fonts_of(mp),
                 size_wk=Path(rp).stat().st_size if pdf_ok(rp) else 0,
                 size_mq=Path(mp).stat().st_size if pdf_ok(mp) else 0,
@@ -314,7 +314,7 @@ def main():
         d["notes"] = [dict(of=x.get("of", ""), kind=x.get("kind", ""), level=x.get("level", ""), note=x.get("note", "")) for x in diffs]
         d["pictures"] = sorted((p.name for p in (work / "compare" / d["set"] / "pairs").glob(f"{d['name']}.page-*.png")),
                                key=lambda x: int(re.sub(r"\D", "", x.rsplit(".page-", 1)[-1]) or 0))
-        for key in ("score", "text", "geom", "looks"):
+        for key in ("score", "text", "geom", "overlay"):
             d[key] = round(d[key], 6)
 
     # each set: its parity, its spread, compare's verdicts, its time through each program
@@ -338,7 +338,7 @@ def main():
             title=sets_info.get(s, {}).get("title", s), published=sets_info.get(s, {}).get("published", False),
             image=sets_info.get(s, {}).get("image", "reference"),
             documents=len(ds), parity=round(sum(sc) / len(sc), 6), lowest=round(min(sc), 6),
-            looks=round(sum(d["looks"] for d in ds) / len(ds), 6), looks_lowest=round(min(d["looks"] for d in ds), 6),
+            overlay=round(sum(d["overlay"] for d in ds) / len(ds), 6), overlay_lowest=round(min(d["overlay"] for d in ds), 6),
             at_least_099=sum(1 for x in sc if x >= 0.99), below_090=sum(1 for x in sc if x < 0.9),
             verdicts=vc, pdfs_wk=sum(1 for d in ds if d["made_wk"]), pdfs_mq=sum(1 for d in ds if d["made_mq"]),
             fonts_differ=sum(1 for d in ds if not d["fonts_same"]),
@@ -366,7 +366,8 @@ def main():
         ratios = [a[0] / a[1] for a in per_run.values() if a[2] == len(pub) and a[1] > 0]
         nwk = sum(summary[s].get("nowait", {}).get("seconds_wk", 0) for s in pub)
         nmq = sum(summary[s].get("nowait", {}).get("seconds_mq", 0) for s in pub)
-        headline = dict(sets=pub, documents=len(ds), parity=round(sum(sc) / len(sc), 6), looks=round(sum(d["looks"] for d in ds) / len(ds), 6),
+        headline = dict(sets=pub, documents=len(ds), parity=round(sum(sc) / len(sc), 6), overlay=round(sum(d["overlay"] for d in ds) / len(ds), 6),
+                        bytes_wk=sum(d["size_wk"] for d in ds), bytes_mq=sum(d["size_mq"] for d in ds),
                         by_set={s: summary[s]["parity"] for s in pub},
                         speed=round(median(ratios), 2) if ratios else None, speed_runs=[round(x, 2) for x in sorted(ratios)],
                         seconds_wk=round(median([a[0] / 1e6 for a in per_run.values() if a[2] == len(pub)]) or 0, 3) if ratios else None,
@@ -389,7 +390,7 @@ def main():
                   headline=headline, sets=summary, documents=docs)
     (work / "report.json").write_text(json.dumps(report, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
     with (work / "scores.csv").open("w", newline="", encoding="utf-8") as f:
-        cols = ["set", "name", "score", "text", "geom", "pages_wk", "pages_mq", "looks", "verdict", "level", "first", "fonts_same",
+        cols = ["set", "name", "score", "text", "geom", "pages_wk", "pages_mq", "overlay", "verdict", "level", "first", "fonts_same",
                 "size_wk", "size_mq", "status_wk", "status_mq", "ms_wk", "ms_mq"]
         w = csv.writer(f)
         w.writerow(cols)
@@ -436,11 +437,11 @@ def console(r):
     out.append(f"marqius-wkhtmltopdf {m['marqius']['version']} ({m['marqius']['image']}) beside {r['env'].get(m['first_label'], {}).get('wk_version', 'wkhtmltopdf')}")
     out.append(f"{m['platform']}, {r['env'].get(m['first_label'], {}).get('cpus', '?')} cpus; scored with {r['tools']['pdftotext']}, Python {r['tools']['python']}")
     out.append("")
-    out.append(f"  {'set':14s} {'docs':>4s} {'parity':>7s} {'lowest':>7s} {'looks':>6s}  {'same pages':>10s} {'appearance':>10s} {'content':>8s}  speed")
+    out.append(f"  {'set':14s} {'docs':>4s} {'parity':>7s} {'lowest':>7s} {'overlay':>7s}  {'same pages':>10s} {'appearance':>10s} {'content':>8s}  speed")
     for s, x in r["sets"].items():
         v = x["verdicts"]
         sp = f"{x['speed']:.0f}x" if x.get("speed") else ""
-        out.append(f"  {s:14s} {x['documents']:4d} {x['parity']:7.4f} {x['lowest']:7.4f} {x['looks']:6.3f}  {v.get('same pages', 0):10d} {v.get('appearance only', 0):10d} {v.get('content differs', 0):8d}  {sp}")
+        out.append(f"  {s:14s} {x['documents']:4d} {x['parity']:7.4f} {x['lowest']:7.4f} {x['overlay']:7.3f}  {v.get('same pages', 0):10d} {v.get('appearance only', 0):10d} {v.get('content differs', 0):8d}  {sp}")
     h = r.get("headline")
     if h:
         out.append("")
@@ -453,7 +454,7 @@ def console(r):
         for d in low:
             if d["score"] >= 0.99:
                 break
-            out.append(f"    {d['set']}/{d['name']}: {d['score']:.4f} (looks alike {d['looks']:.3f})  {why(d)[:80]}")
+            out.append(f"    {d['set']}/{d['name']}: {d['score']:.4f} (overlay {d['overlay']:.3f})  {why(d)[:80]}")
     return "\n".join(out)
 
 
@@ -467,27 +468,27 @@ def markdown(r):
     if h:
         L += [f"**The published documents ({' and '.join(h['sets'])}, {h['documents']} in all): parity {h['parity']:.4f}**"
               + (f", converted {h['speed']:.0f} times faster than wkhtmltopdf (median of {len(h['speed_runs'])} runs)." if h.get("speed") else "."), ""]
-    L += ["| Set | Documents | Parity | Lowest | Looks alike | Same pages | Appearance only | Content differs | Fonts differ | Speed |",
+    L += ["| Set | Documents | Parity | Lowest | Overlay | Same pages | Appearance only | Content differs | Fonts differ | Speed |",
           "|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|"]
     for s, x in r["sets"].items():
         v = x["verdicts"]
-        L.append(f"| {x['title']} (`{s}`) | {x['documents']} | {x['parity']:.4f} | {x['lowest']:.4f} | {x['looks']:.3f} | {v.get('same pages', 0)} | "
+        L.append(f"| {x['title']} (`{s}`) | {x['documents']} | {x['parity']:.4f} | {x['lowest']:.4f} | {x['overlay']:.3f} | {v.get('same pages', 0)} | "
                  f"{v.get('appearance only', 0)} | {v.get('content differs', 0)} | {x['fonts_differ']} | {(str(round(x['speed'])) + '×') if x.get('speed') else ''} |")
     L += ["", "Parity is the marqius engine's measure: 50% text, 30% word positions, 20% page count, from 0 to 1, read from the text in the PDFs. "
-          "*Looks alike* is drawn from the pages themselves: the share of ink, at 72 dpi, that has ink from the other PDF within 2 points. "
+          "*Overlay* lays one page on the other: the share of ink, at 72 dots an inch, with ink from the other page within 2 points. "
           "The verdicts are `marqius-wkhtmltopdf compare`'s: *same pages* counts the pairs whose pages are the same "
           "(the files themselves may differ, as PDF 1.4 against 1.7 does), *appearance only* those where something moved "
           "or changed size or colour, *content differs* those where words, numbers or pictures differ.", ""]
     for s, x in r["sets"].items():
         L += [f"## {x['title']} (`{s}`)", "",
-              "| Document | Score | Text | Positions | Pages | Looks alike | compare | First difference | Fonts | Size wk / mq | Time wk / mq |",
+              "| Document | Score | Text | Positions | Pages | Overlay | compare | First difference | Fonts | Size wk / mq | Time wk / mq |",
               "|---|---:|---:|---:|---:|---:|---|---|---|---:|---:|"]
         for d in doc_rows(r, s):
             fonts = "same" if d["fonts_same"] else "differ"
             first = why(d).replace("|", "\\|")
             if d["note"]:
                 first += f" — *{d['note']}*"
-            L.append(f"| {d['name']} | {d['score']:.4f} | {d['text']:.3f} | {d['geom']:.3f} | {d['pages_wk']}/{d['pages_mq']} | {d['looks']:.3f} | "
+            L.append(f"| {d['name']} | {d['score']:.4f} | {d['text']:.3f} | {d['geom']:.3f} | {d['pages_wk']}/{d['pages_mq']} | {d['overlay']:.3f} | "
                      f"{verdict_word(d['verdict'])} | {first} | {fonts} | {kb(d['size_wk'])} / {kb(d['size_mq'])} | "
                      f"{ms_text(d['ms_wk'])} / {ms_text(d['ms_mq'])} |")
         L.append("")
@@ -499,6 +500,12 @@ def markdown(r):
             if x.get("nowait"):
                 n = x["nowait"]
                 L.append(f"  - with wkhtmltopdf's 200 ms script wait off (`--javascript-delay 0`, for both): {n['seconds_wk']:.2f} s and {n['seconds_mq']:.3f} s, {n['speed']:.1f}×")
+    L += ["", "## Sizes", ""]
+    for s_, x in r["sets"].items():
+        L.append(f"- {s_}: the PDFs come to {kb(x['bytes_wk'])} from wkhtmltopdf and {kb(x['bytes_mq'])} from marqius-wkhtmltopdf")
+    imgs = r["meta"].get("images", {})
+    if imgs.get("marqius", {}).get("size_mb") and imgs.get("reference", {}).get("size_mb"):
+        L.append(f"- images, unpacked: `{imgs['marqius']['name']}` {imgs['marqius']['size_mb']:.0f} MB; the reference system with wkhtmltopdf and its fonts {imgs['reference']['size_mb']:.0f} MB")
     L += ["", "Each set's wall time, one document after another, each program warmed up first. A document's time is the median of its runs, "
           "read from /proc/uptime (10 ms steps), as the published figures were.", "", "## What ran", ""]
     L += system_lines(r)
@@ -531,7 +538,7 @@ def html_report(r):
     rows = []
     for s, x in r["sets"].items():
         v = x["verdicts"]
-        rows.append(f"<tr><td>{esc(x['title'])} <code>{esc(s)}</code></td><td>{x['documents']}</td><td><b>{x['parity']:.4f}</b></td><td>{x['lowest']:.4f}</td><td>{x['looks']:.3f}</td>"
+        rows.append(f"<tr><td>{esc(x['title'])} <code>{esc(s)}</code></td><td>{x['documents']}</td><td><b>{x['parity']:.4f}</b></td><td>{x['lowest']:.4f}</td><td>{x['overlay']:.3f}</td>"
                     f"<td>{v.get('same pages', 0)}</td><td>{v.get('appearance only', 0)}</td><td>{v.get('content differs', 0)}</td><td>{x['fonts_differ']}</td>"
                     f"<td>{(str(round(x['speed'])) + '×') if x.get('speed') else ''}</td></tr>")
     parts = []
@@ -545,13 +552,13 @@ def html_report(r):
                          for p in d.get("pictures", [])]
             cls = "bad" if d["score"] < 0.9 else "warn" if d["score"] < 0.98 else ""
             trs.append(f"<tr class='{cls}'><td>{esc(d['name'])}</td><td><b>{d['score']:.4f}</b></td><td>{d['text']:.3f}</td><td>{d['geom']:.3f}</td>"
-                       f"<td>{d['pages_wk']}/{d['pages_mq']}</td><td>{d['looks']:.3f}</td><td>{esc(verdict_word(d['verdict']))}</td><td>{first}</td>"
+                       f"<td>{d['pages_wk']}/{d['pages_mq']}</td><td>{d['overlay']:.3f}</td><td>{esc(verdict_word(d['verdict']))}</td><td>{first}</td>"
                        f"<td>{'same' if d['fonts_same'] else 'differ: ' + esc(', '.join(sorted(set(d['fonts_wk']) ^ set(d['fonts_mq']))))}</td>"
                        f"<td>{kb(d['size_wk'])} / {kb(d['size_mq'])}</td><td>{ms_text(d['ms_wk'])} / {ms_text(d['ms_mq'])}</td>"
                        f"<td>{' '.join(pic_links)}</td>"
                        f"<td><a href='pdf/wk/{esc(s)}/{esc(d['name'])}.pdf'>wk</a> <a href='pdf/mq/{esc(s)}/{esc(d['name'])}.pdf'>mq</a></td></tr>")
         parts.append(f"<h2>{esc(x['title'])} <code>{esc(s)}</code></h2><p>{x['documents']} documents, parity <b>{x['parity']:.4f}</b>, lowest {x['lowest']:.4f}.</p>"
-                     "<table><tr><th>Document</th><th>Score</th><th>Text</th><th>Positions</th><th>Pages wk/mq</th><th>Looks alike</th><th>compare</th><th>First difference</th>"
+                     "<table><tr><th>Document</th><th>Score</th><th>Text</th><th>Positions</th><th>Pages wk/mq</th><th>Overlay</th><th>compare</th><th>First difference</th>"
                      "<th>Fonts</th><th>Size wk / mq</th><th>Time wk / mq</th><th>Pages that differ</th><th>PDFs</th></tr>" + "".join(trs) + "</table>")
     sysl = "".join(f"<li>{esc(re.sub(r'[*`]', '', x))}</li>" for x in system_lines(r))
     head = ""
@@ -572,8 +579,8 @@ th {{ background: var(--head); position: sticky; top: 0 }} tr.bad td {{ backgrou
 <h1>wkhtmltopdf parity report</h1>
 <p>marqius-wkhtmltopdf <b>{esc(m['marqius']['version'])}</b> beside <b>{esc(e.get('wk_version', ''))}</b>, {esc(m['when'])}, on {esc(m['platform'])}.</p>
 {head}
-<table><tr><th>Set</th><th>Documents</th><th>Parity</th><th>Lowest</th><th>Looks alike</th><th>Same pages</th><th>Appearance only</th><th>Content differs</th><th>Fonts differ</th><th>Speed</th></tr>{''.join(rows)}</table>
-<p class="muted">Parity: 50% text, 30% word positions, 20% page count (the marqius engine's measure, read from the text in the PDFs). Looks alike: the share of ink, at 72 dpi, with ink from the other PDF within 2 points. Verdicts: <code>marqius-wkhtmltopdf compare</code>; its full report, with both PDFs marked where they differ, is in <a href="compare/">compare/</a>. Rows in yellow score below 0.98, in red below 0.90.</p>
+<table><tr><th>Set</th><th>Documents</th><th>Parity</th><th>Lowest</th><th>Overlay</th><th>Same pages</th><th>Appearance only</th><th>Content differs</th><th>Fonts differ</th><th>Speed</th></tr>{''.join(rows)}</table>
+<p class="muted">Parity: 50% text, 30% word positions, 20% page count (the marqius engine's measure, read from the text in the PDFs). Overlay: one page laid on the other; the share of ink, at 72 dots an inch, with ink from the other page within 2 points. Verdicts: <code>marqius-wkhtmltopdf compare</code>; its full report, with both PDFs marked where they differ, is in <a href="compare/">compare/</a>. Rows in yellow score below 0.98, in red below 0.90.</p>
 {''.join(parts)}
 <h2>What ran</h2><ul>{sysl}</ul>
 </body></html>
