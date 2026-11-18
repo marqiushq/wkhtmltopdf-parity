@@ -9,4 +9,4 @@ Put the HTML files you convert with wkhtmltopdf here, then run `./run.sh mine` f
 - **One template, its own command line:** instead of an `.html` file, write a `.cmd` file with one argument a line, as in `corpus/options`.
 - **Pages from a web address:** save the page with its files first (your browser's "Save page as, complete"), then put it here.
 
-Nothing here leaves your machine: the containers that read these files run with no network, unless you add `--network` so that both programs can load files from the internet. Everything in this folder except this README is left out of git.
+Nothing here leaves your machine: the containers that read these files run with no network, unless you add `--network` so that both programs can load files from the internet. `./run.sh share` sends a summary of the scores, never these files, and only if you say yes. Everything in this folder except this README is left out of git.

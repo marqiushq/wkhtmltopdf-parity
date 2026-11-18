@@ -15,10 +15,14 @@ here=$(cd "$(dirname "$0")" && pwd)
 
 usage() {
     cat <<'EOF'
-Usage: ./run.sh [mine] [options]
+Usage: ./run.sh [mine | share] [options]
 
   (no word)           convert and score the corpus: corpus/print, everyday, options, international
   mine                convert and score your own templates: every .html file at the top of ./mine
+  share               show the summary of your last run of mine (scores, counts and versions; no
+                      documents, names or paths) and send it to marqius only if you say yes, so we
+                      can help with the differences: --email ADDRESS and --note TEXT go with it if
+                      given, --yes sends without asking
 
 Options
   --tag TAG           the marqius/wkhtmltopdf tag to test (default: latest)
@@ -41,11 +45,17 @@ OUT/pdf/wk and OUT/pdf/mq; marqius-wkhtmltopdf compare's own report in OUT/compa
 EOF
 }
 
-mode=corpus tag=$DEFAULT_TAG sets="" runs="" quick=0 net=none cjk=0 platform="" out="" mine="$here/mine" pull=0 pulled_digest="" program=""
+mode=corpus tag=$DEFAULT_TAG sets="" runs="" quick=0 net=none cjk=0 platform="" out="" mine="$here/mine" pull=0 pulled_digest="" program="" email="" note="" yes=0
 while [ $# -gt 0 ]; do
     case "$1" in
         mine) mode=mine ;;
         corpus) mode=corpus ;;
+        share) mode=share ;;
+        --email) email=${2:?--email needs an address}; shift ;;
+        --email=*) email=${1#--email=} ;;
+        --note) note=${2:?--note needs some text}; shift ;;
+        --note=*) note=${1#--note=} ;;
+        --yes) yes=1 ;;
         --tag) tag=${2:?--tag needs a tag}; shift ;;
         --tag=*) tag=${1#--tag=} ;;
         --sets) sets=${2:?--sets needs a list}; shift ;;
@@ -83,6 +93,29 @@ if [ -n "$platform" ]; then
         linux/arm64 | linux/arm64/v8) REFERENCE=$REFERENCE_ARM64 ;;
         *) die "--platform takes linux/amd64 or linux/arm64" ;;
     esac
+fi
+
+# share: the summary of a run of your own templates, shown in full, sent only on your yes. The scorer
+# image does it (Python); this is the only time a container of this suite is given the network
+# without --network, and it sends nothing unless you say yes.
+if [ "$mode" = share ]; then
+    out=${out:-$here/out/mine}
+    [ -f "$out/report.json" ] || die "no report in $out: run ./run.sh mine first"
+    out=$(cd "$out" && pwd)
+    if ! docker image inspect "$REFERENCE" > /dev/null 2>&1; then
+        docker pull -q ${pf[@]+"${pf[@]}"} "$REFERENCE" > /dev/null || die "cannot download $REFERENCE"
+    fi
+    plat=$(docker image inspect --format '{{.Os}}/{{.Architecture}}' "$REFERENCE")
+    docker build -q --platform "$plat" --build-arg "REFERENCE=$REFERENCE" --target scorer -t "wkhtmltopdf-parity-scorer:${plat##*/}" -f "$here/harness/Dockerfile" "$here/harness" > /dev/null
+    # this suite's own repository on GitHub, for the public alternative (an issue you open yourself)
+    origin=$(git -C "$here" remote get-url origin 2> /dev/null || true)
+    repo=$(printf '%s\n' "$origin" | sed -n 's#.*github\.com[:/]\([^/]*/[^/.]*\)\(\.git\)\{0,1\}$#\1#p')
+    tty=()
+    [ -t 0 ] && [ -t 1 ] && tty=(-it)
+    exec docker run --rm ${tty[@]+"${tty[@]}"} --platform "$plat" --network bridge --user "$(id -u):$(id -g)" -e HOME=/tmp -e LANG=C.UTF-8 \
+        -e PARITY_SHARE_URL -e "PARITY_SHARE_EMAIL=$email" -e "PARITY_SHARE_NOTE=$note" -e "PARITY_SHARE_YES=$yes" -e "PARITY_SUITE_REPO=$repo" \
+        -v "$here/harness:/parity/harness:ro" -v "$out:/parity/work" \
+        --entrypoint python3 "wkhtmltopdf-parity-scorer:${plat##*/}" /parity/harness/share.py /parity/work
 fi
 
 # what to convert
@@ -259,3 +292,8 @@ docker run --rm --platform "$plat" --network none --user "$(id -u):$(id -g)" -e 
 rm -rf "${out:?}/bin"
 say ""
 say "Done in $(($(date +%s) - t0)) s. The report: $out/report.html (also report.md, report.json, scores.csv)"
+if [ "$mode" = mine ]; then
+    say ""
+    say "Questions about a difference? ./run.sh share shows a summary of this run (scores, counts and"
+    say "versions; no documents, names or paths) and sends it to us only if you say yes."
+fi

@@ -17,6 +17,10 @@ cp corpus/everyday/*.html mine/
 
 That runs eight sample documents. For yours, take the samples out of `mine/` (keep its README), put your templates there with the pictures and style sheets they load, write the options your app passes in `mine/options.txt`, and run `./run.sh mine` again. Then open `out/mine/report.html`. For each template it gives the score, what differs and where, both PDFs, and pictures of the pages that differ. A few dozen templates take under a minute once the images are downloaded (about 175 MB the first time). [What goes in `mine/`](mine/README.md).
 
+### If you want help with the differences
+
+`./run.sh share` shows you the summary of your last `./run.sh mine` and sends it to us only if you type yes. The summary holds the versions and the platform, how many templates there were, each template's scores in order of score without its name, the kinds of difference `compare` found (such as "moved" or "font"), and the names of the options you use, never their values. It never holds a template, a file name, a path or any text from your templates. Add `--email` with your address if you want an answer, and `--note` with a question. A copy of what was sent stays beside the report. We use it only to answer you and to learn which differences matter most, keep it for twelve months, and delete it when you ask.
+
 ## The scoreboard
 
 <!-- scoreboard:start (written by harness/publish.py from results/; edits here are overwritten) -->
@@ -53,6 +57,10 @@ Every score comes out the same on x86-64 and on ARM64, for all 114 documents, to
 2. **Every document through each.** [`harness/convert.sh`](harness/convert.sh) converts each document with `-q --enable-local-file-access`, or with its own command line in `corpus/options`. Each program converts one document untimed first, then the whole corpus is converted and timed three times, one document after another.
 3. **Every pair scored.** [`harness/score.py`](harness/score.py) scores each pair with the measures below, and `marqius-wkhtmltopdf compare` reports what differs in each pair and where, with both PDFs marked up.
 4. **In public.** [The workflow](.github/workflows/parity.yml) runs it all on GitHub's machines, x86-64 and ARM64: daily for each new version on Docker Hub, weekly for the latest. It files the reports under [`results/`](results/) with a link to the run's log, and rewrites the scoreboard above. GitHub keeps each log for 90 days; the reports stay in the repository.
+
+## What the suite sends
+
+Nothing on its own: there is no counter and no call home, in the runner or in marqius-wkhtmltopdf. It uses the network only to download the images from Docker Hub, when you add `--network` (for both programs), and when you run `./run.sh share` and say yes. What we can see is what GitHub and Docker Hub show any publisher: how often this repository is cloned and viewed (GitHub keeps 14 days of it), its stars and forks, the runs of its workflow in public forks, and how often our images are downloaded.
 
 ## The measures
 

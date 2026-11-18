@@ -152,6 +152,8 @@ run_all() {
 }
 
 for s in $PARITY_SETS; do jobs_of "$s"; done
+# the names of the options used, never their values (./run.sh share can tell which features a run used)
+cat /tmp/parity/jobs-*/*.args 2> /dev/null | grep -E -x -e '--?[A-Za-z][A-Za-z0-9-]*' -e 'cover' -e 'toc' | sort -u > "$W/options-used.txt"
 first_set=${PARITY_SETS%% *}
 first_doc=$(head -1 "/tmp/parity/jobs-$first_set/list" | cut -f1)
 : > "$W/times/$L.tsv"
