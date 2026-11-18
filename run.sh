@@ -30,6 +30,8 @@ Options
                       templates hold Chinese, Japanese or Korean text)
   --platform P        linux/amd64 or linux/arm64 (default: this machine's)
   --pull              download the program's image again even when it is here (latest always is)
+  --program FILE      test this marqius-wkhtmltopdf program for Linux (a build not yet on Docker Hub)
+                      instead of the one in the image
   --mine DIR          your templates from another folder than ./mine (implies mine)
   --out DIR           where the report goes (default: ./out/corpus or ./out/mine)
   -h, --help          this help
@@ -39,7 +41,7 @@ OUT/pdf/wk and OUT/pdf/mq; marqius-wkhtmltopdf compare's own report in OUT/compa
 EOF
 }
 
-mode=corpus tag=$DEFAULT_TAG sets="" runs="" quick=0 net=none cjk=0 platform="" out="" mine="$here/mine" pull=0 pulled_digest=""
+mode=corpus tag=$DEFAULT_TAG sets="" runs="" quick=0 net=none cjk=0 platform="" out="" mine="$here/mine" pull=0 pulled_digest="" program=""
 while [ $# -gt 0 ]; do
     case "$1" in
         mine) mode=mine ;;
@@ -54,6 +56,8 @@ while [ $# -gt 0 ]; do
         --network) net=bridge ;;
         --cjk) cjk=1 ;;
         --pull) pull=1 ;;
+        --program) program=${2:?--program needs a file}; shift ;;
+        --program=*) program=${1#--program=} ;;
         --platform) platform=${2:?--platform needs linux/amd64 or linux/arm64}; shift ;;
         --platform=*) platform=${1#--platform=} ;;
         --mine) mine=${2:?--mine needs a folder}; mode=mine; shift ;;
@@ -122,7 +126,7 @@ nowait=$([ "$mode" = corpus ] && [ "$quick" = 0 ] && echo 1 || echo 0)
 # counts as a pull on Docker Hub)
 image="$MARQIUS:$tag"
 say "Images: $REFERENCE"
-say "        $image"
+if [ -n "$program" ]; then say "Program: $program"; else say "        $image"; fi
 plat_of() { docker image inspect --format '{{.Os}}/{{.Architecture}}' "$1" 2> /dev/null || true; }
 digest() { docker image inspect --format '{{range .RepoDigests}}{{println .}}{{end}}' "$1" 2> /dev/null | grep -m1 "^${2}@" || true; }
 if [ -z "$(plat_of "$REFERENCE")" ]; then
@@ -132,7 +136,10 @@ fi
 plat=$(plat_of "$REFERENCE")
 arch=${plat##*/}
 # (also when the image here has lost its registry digest: the report must name the one Docker Hub gives)
-if [ "$tag" = latest ] || [ "$pull" = 1 ] || [ "$(plat_of "$image")" != "$plat" ] || [ -z "$(digest "$image" "$MARQIUS")" ]; then
+if [ -n "$program" ]; then
+    [ -f "$program" ] || die "no program $program"
+    image="a program from this machine ($program)"
+elif [ "$tag" = latest ] || [ "$pull" = 1 ] || [ "$(plat_of "$image")" != "$plat" ] || [ -z "$(digest "$image" "$MARQIUS")" ]; then
     if pulled=$(docker pull --platform "$plat" "$image" 2>&1); then
         # the digest Docker Hub gave, in case the image store keeps none
         pulled_digest=$(printf '%s\n' "$pulled" | sed -n 's/^Digest: //p' | head -1)
@@ -156,12 +163,16 @@ else
     corpus_mount=(-v "$here/corpus:/parity/corpus:ro")
 fi
 
-# the program, out of its image: the static binary at /marqius-wkhtmltopdf
-cid=$(docker create --platform "$plat" "$image")
-docker cp "$cid:/marqius-wkhtmltopdf" "$out/bin/marqius-wkhtmltopdf" > /dev/null 2>&1 \
-    || docker cp "$cid:/usr/local/bin/marqius-wkhtmltopdf" "$out/bin/marqius-wkhtmltopdf" > /dev/null 2>&1 \
-    || { docker rm "$cid" > /dev/null; die "no marqius-wkhtmltopdf program in $image"; }
-docker rm "$cid" > /dev/null
+# the program, out of its image (the static binary at /marqius-wkhtmltopdf), or the one given
+if [ -n "$program" ]; then
+    cp "$program" "$out/bin/marqius-wkhtmltopdf"
+else
+    cid=$(docker create --platform "$plat" "$image")
+    docker cp "$cid:/marqius-wkhtmltopdf" "$out/bin/marqius-wkhtmltopdf" > /dev/null 2>&1 \
+        || docker cp "$cid:/usr/local/bin/marqius-wkhtmltopdf" "$out/bin/marqius-wkhtmltopdf" > /dev/null 2>&1 \
+        || { docker rm "$cid" > /dev/null; die "no marqius-wkhtmltopdf program in $image"; }
+    docker rm "$cid" > /dev/null
+fi
 
 # the helper images, built on the reference: the scorer, and the reference with Noto CJK
 say "Building the scorer (poppler and Python on the reference system)..."
@@ -187,7 +198,7 @@ commit=$(git -C "$here" rev-parse --short HEAD 2> /dev/null || echo "")
     printf 'network\t%s\n' "$net"
     printf 'sets_list\t%s\n' "$set_list"
     printf 'marqius.image\t%s\n' "$image"
-    printf 'marqius.tag\t%s\n' "$tag"
+    printf 'marqius.tag\t%s\n' "$([ -n "$program" ] && echo local || echo "$tag")"
     printf 'marqius.version\t%s\n' "$tag"
     printf 'marqius.sha256\t%s\n' "$(sha "$out/bin/marqius-wkhtmltopdf")"
     printf 'marqius.size_mb\t%s\n' "$(ls -l "$out/bin/marqius-wkhtmltopdf" | awk '{ printf "%.1f", $5 / 1048576 }')"
@@ -195,9 +206,11 @@ commit=$(git -C "$here" rev-parse --short HEAD 2> /dev/null || echo "")
     printf 'images.reference.digest\t%s\n' "${REFERENCE#*@}"
     printf 'images.reference.size_mb\t%s\n' "$(size_mb "$REFERENCE")"
     printf 'images.marqius.name\t%s\n' "$image"
-    d=$(digest "$image" "$MARQIUS" | sed 's/.*@//')
-    printf 'images.marqius.digest\t%s\n' "${d:-$pulled_digest}"
-    printf 'images.marqius.size_mb\t%s\n' "$(size_mb "$image")"
+    if [ -z "$program" ]; then
+        d=$(digest "$image" "$MARQIUS" | sed 's/.*@//')
+        printf 'images.marqius.digest\t%s\n' "${d:-$pulled_digest}"
+        printf 'images.marqius.size_mb\t%s\n' "$(size_mb "$image")"
+    fi
     printf 'images.scorer.name\t%s\n' "wkhtmltopdf-parity-scorer (harness/Dockerfile, built here)"
     [ "$need_cjk" = 1 ] && printf 'images.cjk.name\t%s\n' "wkhtmltopdf-parity-cjk (harness/Dockerfile, built here)"
     printf 'suite.commit\t%s\n' "$commit"
