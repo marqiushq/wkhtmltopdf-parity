@@ -3,7 +3,7 @@ print	67-unicode	The page declares no character set. wkhtmltopdf reads it as Lat
 print	70-visibility	wkhtmltopdf turns the half-transparent line into a picture, so its words cannot be read back from the PDF; marqius-wkhtmltopdf keeps them as text. The pages look the same.
 print	61-svg-inline	A real difference: wkhtmltopdf paints the SVG linear gradient red to blue; marqius-wkhtmltopdf fills the box flat grey.
 print	69-borders	wkhtmltopdf draws the rounded box as a picture, marqius-wkhtmltopdf as shapes. The pages look the same.
-print	71-forms	Form fields: wkhtmltopdf draws the drop-down arrow as a picture, which marqius-wkhtmltopdf leaves out, and marqius-wkhtmltopdf sets the Send button's label at 7.8 pt where wkhtmltopdf uses 9.6 pt.
+print	71-forms	Form fields: wkhtmltopdf draws the drop-down arrow as a picture, which marqius-wkhtmltopdf leaves out; a ticked box shows a filled square where wkhtmltopdf draws a tick; marqius-wkhtmltopdf sets the Send button's label at 7.8 pt where wkhtmltopdf uses 9.6 pt; and the lines under the fields sit up to 2.4 pt higher.
 print	42-inline-format	The first line's words stand up to 1.4 pt along the line from where wkhtmltopdf puts them (subscript and superscript). The pages look the same.
 everyday	certificate	wkhtmltopdf writes the letter-spaced title as single letters (it reads back as C E RT IFIC AT E); marqius-wkhtmltopdf keeps the word whole. The lines below the title sit 1.2 pt higher. The pages look the same.
 everyday	statement	The pages look the same. The customer's name block is read back in another order, which the text measure counts.

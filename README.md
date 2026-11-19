@@ -29,12 +29,13 @@ No results yet: the first run of the workflow writes them here.
 
 ## What works differently today
 
-These are what the runs above found in marqius-wkhtmltopdf 0.12.3. Each has a document in the corpus, so the scoreboard shows when one changes.
+These are what the runs above found in marqius-wkhtmltopdf 0.12.4. Each has a document in the corpus, so the scoreboard shows when one changes.
 
 - **Scripts that change the page.** marqius-wkhtmltopdf runs `document.write`, but the page's DOM is missing: `document.getElementById`, `querySelector` and `createElement` are undefined, so whatever a script builds with them is missing from the PDF (`options/javascript`). wkhtmltopdf's header and footer variables work, both as text (`[page] of [topage]`) and through the usual script in an HTML header or footer.
 - **Arabic and Hebrew.** The letters of each word come out in reverse order, Arabic letters are not joined, and right-to-left tables are not mirrored (`international/invoice-ar` and `notice-he`).
 - **Bold where the named font lacks the script.** For Hindi and Thai, marqius-wkhtmltopdf falls back to a regular face for bold text (`international/letter-hi` and `receipt-th`).
 - **SVG gradients** are painted flat grey (`print/61-svg-inline`).
+- **Form fields** are drawn more plainly: a drop-down list has no arrow, a ticked box shows a filled square where wkhtmltopdf draws a tick, and a button's label is smaller (`print/71-forms`).
 - **Some long pages sit lower.** In the options set's report (12 px Arial, a line height of 1.45, headings and tables), each line sits a little lower, by about 9 pt at the foot of an A4 page; the page breaks stayed the same (the `options` documents built on `report.html`). Plain paragraphs do not move (`print/76-long-paragraphs`).
 - **Fonts in OpenType CFF form are embedded almost whole.** TrueType fonts such as Arial are cut down to the letters a page uses, but CFF fonts are not, so a PDF with Chinese, Japanese or Korean text (Noto CJK) is 13 to 27 MB, against under 40 KB from wkhtmltopdf, and takes about half a second, slower than wkhtmltopdf. Hindi and Thai pages, which fall back to FreeFont, come to 0.5 to 1.1 MB (`international`).
 - **Files are larger in general.** The 86 published documents come to about 1.8 times wkhtmltopdf's size.
