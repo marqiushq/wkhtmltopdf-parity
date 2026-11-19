@@ -29,7 +29,7 @@ No results yet: the first run of the workflow writes them here.
 
 ## What works differently today
 
-These are what the runs above found in marqius-wkhtmltopdf 0.12.4. Each has a document in the corpus, so the scoreboard shows when one changes.
+These are what the runs above found in marqius-wkhtmltopdf 0.12.6. Each has a document in the corpus, so the scoreboard shows when one changes.
 
 - **Scripts that change the page.** marqius-wkhtmltopdf runs `document.write`, but the page's DOM is missing: `document.getElementById`, `querySelector` and `createElement` are undefined, so whatever a script builds with them is missing from the PDF (`options/javascript`). wkhtmltopdf's header and footer variables work, both as text (`[page] of [topage]`) and through the usual script in an HTML header or footer.
 - **Arabic and Hebrew.** The letters of each word come out in reverse order, Arabic letters are not joined, and right-to-left tables are not mirrored (`international/invoice-ar` and `notice-he`).
