@@ -1,0 +1,31 @@
+marqius compare: pdf/wk/print against pdf/mq/print
+78 pairs compared in 0.5 s (164 a second on 4 cores)
+
+  same              0
+  appearance only   17
+  content differs   5
+  file differs      56   (the pages are the same; the kind of PDF or its description is not)
+
+  by level: blocking 5, review 73, cosmetic 0
+  NO-GO: 5 documents with blocking differences
+
+The 78 documents that differ, by cause (29 causes in all; a document may have several):
+   1. review         78 documents   pdf type: version 1.4 → 1.7
+   2. cosmetic       42 documents   metadata: language none → en
+   3. cosmetic        5 documents   moved 3 pt to the right
+   4. blocking        4 documents   picture missing
+   5. cosmetic        4 documents   moved 1 pt up
+   6. cosmetic        3 documents   font: arial → timesnewroman
+   7. cosmetic        2 documents   moved 2.5 pt to the right
+   8. cosmetic        2 documents   rules or tints differ near 40,20
+   9. cosmetic        2 documents   words spaced differently along the line
+  10. blocking        1 document    added: "Half opacity."
+  11. blocking        1 document    text: "cafÃ© naÃ¯ve ZÃ¼rich Ã…ngstrÃ¶m faÃ§ade." → "café naïve Zürich Ångström façade."
+  12. blocking        1 document    text: "Î±Î²Î³Î´Îµ Î‘Î’Î“Î”." → "αβγδε ΑΒΓΔ."
+      … 17 more in causes.csv
+  the first 1 cause explains 30 of the 78 documents that differ
+  the first 3 causes explain 59 of the 78 documents that differ
+  the first 5 causes explain 63 of the 78 documents that differ
+  the first 10 causes explain 68 of the 78 documents that differ
+
+In compare/print: summary.csv (a line for each pair), causes.csv, summary.json, and for each pair pairs/<name>.json, <name>.old-marked.pdf and <name>.new-marked.pdf, <name>.page-N.png.

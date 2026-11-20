@@ -47,6 +47,13 @@ On GitHub Actions, ARM64, 4 CPUs: the same parity in every set, 31× faster ([re
 | [0.12.8](results/0.12.8/linux-amd64/report.md) | 2026-11-20 | 0.9909 | 0.9926 | 0.9924 | 0.9361 | 0.8193 | 34× |
 | [0.12.7](results/0.12.7/linux-amd64/report.md) | 2026-11-20 | 0.9908 | 0.9925 | 0.9924 | 0.9354 | 0.7599 | 35× |
 | [0.12.6](results/0.12.6/linux-amd64/report.md) | 2026-11-20 | 0.9902 | 0.9920 | 0.9919 | 0.8611 | 0.7073 | 38× |
+| [0.12.5](results/0.12.5/linux-amd64/report.md) | 2026-11-20 | 0.9902 | 0.9920 | 0.9919 | 0.8436 | 0.7073 | 38× |
+| [0.12.4](results/0.12.4/linux-amd64/report.md) | 2026-11-20 | 0.9902 | 0.9920 | 0.9919 | 0.8611 | 0.7073 | 28× |
+| [0.12.3](results/0.12.3/linux-amd64/report.md) | 2026-11-20 | 0.9902 | 0.9921 | 0.9919 | 0.8611 | 0.7073 | 32× |
+| [0.12.2](results/0.12.2/linux-amd64/report.md) | 2026-11-20 | 0.9902 | 0.9921 | 0.9919 | 0.8611 | 0.7073 | 34× |
+| [0.12.1](results/0.12.1/linux-amd64/report.md) | 2026-11-20 | 0.9902 | 0.9921 | 0.9919 | 0.8611 | 0.7073 | 38× |
+| [0.12.0](results/0.12.0/linux-amd64/report.md) | 2026-11-20 | 0.9902 | 0.9921 | 0.9919 | 0.8611 | 0.7073 | 34× |
+| [0.11.0](results/0.11.0/linux-amd64/report.md) | 2026-11-20 | 0.9902 | 0.9921 | 0.9919 | 0.8611 | 0.6034 | 36× |
 
 <details>
 <summary><b>The 23 documents below 0.99 or with different content, and why; 5 of them come out better from marqius-wkhtmltopdf</b></summary>

@@ -1,0 +1,25 @@
+marqius-wkhtmltopdf compare: pdf/wk/everyday against pdf/mq/everyday
+8 pairs compared in 0.1 s (105 a second on 4 cores)
+
+  same              0
+  appearance only   4
+  content differs   1
+  file differs      3   (the pages are the same; the kind of PDF or its description is not)
+
+  by level: blocking 1, review 7, cosmetic 0
+  NO-GO: 1 document with blocking differences
+
+The 8 documents that differ, by cause (8 causes in all; a document may have several):
+   1. review          8 documents   pdf type: version 1.4 → 1.7
+   2. blocking        1 document    added: "Mr"
+   3. blocking        1 document    missing: "Mr"
+   4. cosmetic        1 document    letters divided into words differently
+   5. cosmetic        1 document    moved 1 pt to the left
+   6. cosmetic        1 document    moved 1 pt up
+   7. cosmetic        1 document    moved 2 pt to the right
+   8. cosmetic        1 document    words spaced differently along the line
+  the first 1 cause explains 3 of the 8 documents that differ
+  the first 3 causes explain 4 of the 8 documents that differ
+  the first 5 causes explain 5 of the 8 documents that differ
+
+In compare/everyday: summary.csv (a line for each pair), causes.csv, summary.json, and for each pair pairs/<name>.json, <name>.old-marked.pdf and <name>.new-marked.pdf, <name>.page-N.png.

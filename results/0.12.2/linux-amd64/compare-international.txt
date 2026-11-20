@@ -1,0 +1,26 @@
+marqius-wkhtmltopdf compare: pdf/wk/international against pdf/mq/international
+10 pairs compared in 0.3 s (33 a second on 4 cores)
+
+  same              0
+  appearance only   3
+  content differs   7
+
+  by level: blocking 7, review 3, cosmetic 0
+  NO-GO: 7 documents with blocking differences
+
+The 10 documents that differ, by cause (80 causes in all; a document may have several):
+   1. review         10 documents   pdf type: version 1.4 → 1.7
+   2. review          3 documents   letters with no meaning given
+   3. cosmetic        3 documents   moved 1 pt down
+   4. cosmetic        2 documents   lines break at other words
+   5. cosmetic        2 documents   metadata: language none → en
+   6. blocking        1 document    added: "पय� हमास� स�पक �"
+   7. blocking        1 document    missing: "े िलए क ृ पया हमसे संपक"
+   8. blocking        1 document    text: "# ﻞ ﯿ ﺻ ﻮ ﺘ ﻟ ا ﻢ ﻫ ر د" → "المجموع الفرعي"
+   9. blocking        1 document    text: "###-#### ﻢ ﻗ ر ة ر ﻮ ﺗ ﺎ ﻓ #### ﺮ ﺒ ﻤ ﻓ ﻮ ﻧ" → "فاتورة رقم ####-### التاريخ:"
+  10. blocking        1 document    text: "##:## 계산대" → "##:## 계산대"
+  11. blocking        1 document    text: "%# ﺔ ﻓ ﺎ ﻀ ﻤ ﻟ ا ﺔ ﻤ ﯿ ﻘ ﻟ ا ﺔ ﺒ ﯾ ﺮ ﺿ ﻢ ﻫ ر د" → "درهم المبلغ المستحق"
+  12. blocking        1 document    text: ", ן ו ש א ר ם ו י מ ל ח ה ##:##–##:## י ש י מ ח – ן ו ש א ר ##:##–##:## י ש י ש " → "בדצמבר ####, שעות הפתיחה של הסניף ישתנו כך: ראשון–חמישי ##:##–##:## שישי ##:##–#"
+      … 68 more in causes.csv
+
+In compare/international: summary.csv (a line for each pair), causes.csv, summary.json, and for each pair pairs/<name>.json, <name>.old-marked.pdf and <name>.new-marked.pdf, <name>.page-N.png.

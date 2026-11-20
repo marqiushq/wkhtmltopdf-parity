@@ -1,0 +1,27 @@
+marqius compare: pdf/wk/options against pdf/mq/options
+19 pairs compared in 0.3 s (69 a second on 4 cores)
+
+  same              0
+  appearance only   14
+  content differs   4
+  file differs      1   (the pages are the same; the kind of PDF or its description is not)
+
+  by level: blocking 4, review 15, cosmetic 0
+  NO-GO: 4 documents with blocking differences
+
+The 19 documents that differ, by cause (166 causes in all; a document may have several):
+   1. review         19 documents   pdf type: version 1.4 → 1.7
+   2. cosmetic       17 documents   metadata: language none → en
+   3. cosmetic       11 documents   moved 1 pt down
+   4. cosmetic       11 documents   moved 3.5 pt down
+   5. cosmetic       10 documents   moved 2 pt down
+   6. cosmetic       10 documents   moved 5.5 pt down
+   7. cosmetic        9 documents   moved 0.5 pt to the left, 7.5 pt down
+   8. cosmetic        9 documents   moved 4.5 pt down
+   9. cosmetic        9 documents   moved 6.5 pt down
+  10. cosmetic        9 documents   moved 9 pt down
+  11. cosmetic        8 documents   moved 0.5 pt to the left, 4 pt down
+  12. cosmetic        8 documents   moved 0.5 pt to the left, 4.5 pt down
+      … 154 more in causes.csv
+
+In compare/options: summary.csv (a line for each pair), causes.csv, summary.json, and for each pair pairs/<name>.json, <name>.old-marked.pdf and <name>.new-marked.pdf, <name>.page-N.png.

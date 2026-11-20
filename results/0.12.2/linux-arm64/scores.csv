@@ -1,0 +1,116 @@
+set,name,score,text,geom,pages_wk,pages_mq,overlay,verdict,level,first,fonts_same,size_wk,size_mq,status_wk,status_mq,ms_wk,ms_mq,better
+print,01-basic,0.9971,1.0,0.990333,1,1,1.0,file differs,review,"the file is PDF 1.7, was PDF 1.4",True,15072,27389,0,0,240,9,False
+print,02-headings,0.997193,1.0,0.990643,1,1,1.0,file differs,review,"the file is PDF 1.7, was PDF 1.4",True,17092,29601,0,0,240,9,False
+print,03-inline,0.999236,1.0,0.997454,1,1,0.998682,file differs,review,"the file is PDF 1.7, was PDF 1.4",True,29674,46507,0,0,250,9,False
+print,04-css,0.999713,1.0,0.999045,1,1,1.0,file differs,review,"the file is PDF 1.7, was PDF 1.4",True,13957,24780,0,0,240,0,False
+print,05-ul,0.999887,1.0,0.999624,1,1,0.964881,file differs,review,"the file is PDF 1.7, was PDF 1.4",True,9235,18378,0,0,230,0,False
+print,06-ol,0.9949,1.0,0.983001,1,1,0.972504,appearance only,review,"the file is PDF 1.7, was PDF 1.4",True,8181,15047,0,0,230,9,False
+print,07-pre,0.999883,1.0,0.999609,1,1,1.0,file differs,review,"the file is PDF 1.7, was PDF 1.4",True,12218,21260,0,0,230,9,False
+print,08-blockquote,0.999901,1.0,0.999669,1,1,1.0,file differs,review,"the file is PDF 1.7, was PDF 1.4",True,9188,18550,0,0,230,9,False
+print,09-hr,0.999889,1.0,0.999632,1,1,0.434829,appearance only,review,"the file is PDF 1.7, was PDF 1.4",True,7794,14359,0,0,230,0,False
+print,10-align,0.999285,1.0,0.997615,1,1,0.996154,file differs,review,"the file is PDF 1.7, was PDF 1.4",True,7644,13614,0,0,230,9,False
+print,11-pagination,0.998226,1.0,0.994086,2,2,1.0,file differs,review,"the file is PDF 1.7, was PDF 1.4",True,20770,36658,0,0,250,9,False
+print,12-nested-lists,0.999892,1.0,0.999639,1,1,0.88998,appearance only,review,"the file is PDF 1.7, was PDF 1.4",True,7761,13850,0,0,230,9,False
+print,13-longword,0.999857,1.0,0.999522,1,1,0.999531,file differs,review,"the file is PDF 1.7, was PDF 1.4",True,9861,20279,0,0,230,0,False
+print,14-links,0.999777,1.0,0.999256,1,1,1.0,file differs,review,"the file is PDF 1.7, was PDF 1.4",True,8887,16791,0,0,239,0,False
+print,15-table,0.999883,1.0,0.999609,1,1,1.0,file differs,review,"the file is PDF 1.7, was PDF 1.4",True,12961,22536,0,0,240,9,False
+print,16-br,0.999877,1.0,0.999589,1,1,1.0,file differs,review,"the file is PDF 1.7, was PDF 1.4",True,7163,12639,0,0,230,9,False
+print,17-fontsize,0.99893,1.0,0.996434,1,1,1.0,file differs,review,"the file is PDF 1.7, was PDF 1.4",True,8776,16550,0,0,240,9,False
+print,18-margins,0.999902,1.0,0.999673,1,1,1.0,file differs,review,"the file is PDF 1.7, was PDF 1.4",True,7960,14684,0,0,230,0,False
+print,19-empty,0.999876,1.0,0.999588,1,1,1.0,file differs,review,"the file is PDF 1.7, was PDF 1.4",True,7331,13093,0,0,229,9,False
+print,20-whitespace,0.997955,1.0,0.993183,1,1,0.996241,file differs,review,"the file is PDF 1.7, was PDF 1.4",True,9178,18517,0,0,230,9,False
+print,21-img,0.999893,1.0,0.999642,1,1,1.0,file differs,review,"the file is PDF 1.7, was PDF 1.4",True,8695,15686,0,0,250,9,False
+print,22-links,0.999206,1.0,0.997355,1,1,0.998807,file differs,review,"the file is PDF 1.7, was PDF 1.4",True,8856,16344,0,0,230,9,False
+print,23-page-a4,0.999877,1.0,0.99959,1,1,1.0,file differs,review,"the file is PDF 1.7, was PDF 1.4",True,9553,19991,0,0,240,0,False
+print,24-page-custom,0.999875,1.0,0.999583,1,1,1.0,file differs,review,"the file is PDF 1.7, was PDF 1.4",True,7992,15201,0,0,229,9,False
+print,25-inline-mixed,0.999248,1.0,0.997494,1,1,0.999043,file differs,review,"the file is PDF 1.7, was PDF 1.4",True,24680,41438,0,0,250,9,False
+print,26-heading-sizes,0.999838,1.0,0.99946,1,1,1.0,file differs,review,"the file is PDF 1.7, was PDF 1.4",True,14263,24843,0,0,240,9,False
+print,27-longtable,0.999869,1.0,0.999565,1,1,1.0,appearance only,review,"the file is PDF 1.7, was PDF 1.4",True,16747,32656,0,0,250,9,False
+print,28-nested-blockquote,0.999886,1.0,0.999619,1,1,1.0,file differs,review,"the file is PDF 1.7, was PDF 1.4",True,9883,20721,0,0,230,0,False
+print,29-flex,0.999888,1.0,0.999627,1,1,1.0,file differs,review,"the file is PDF 1.7, was PDF 1.4",True,7947,14598,0,0,240,0,False
+print,30-grid,0.999894,1.0,0.999648,1,1,1.0,file differs,review,"the file is PDF 1.7, was PDF 1.4",True,7339,12869,0,0,229,9,False
+print,31-footnote,0.998696,1.0,0.995654,1,1,0.999491,file differs,review,"the file is PDF 1.7, was PDF 1.4",True,9259,18167,0,0,240,9,False
+print,32-layout-mixed,0.999874,1.0,0.999579,1,1,1.0,file differs,review,"the file is PDF 1.7, was PDF 1.4",True,9795,20456,0,0,230,0,False
+print,33-grid-fragmented,0.999889,1.0,0.999629,1,1,0.999833,file differs,review,"the file is PDF 1.7, was PDF 1.4",True,11093,22419,0,0,240,0,False
+print,34-flex-justify,0.999877,1.0,0.99959,1,1,1.0,file differs,review,"the file is PDF 1.7, was PDF 1.4",True,8678,16552,0,0,240,9,False
+print,35-toc-pages,0.995834,1.0,0.986115,2,2,1.0,appearance only,review,"the file is PDF 1.7, was PDF 1.4",True,18851,32045,0,0,240,9,False
+print,36-svg,0.996913,1.0,0.989709,1,1,1.0,appearance only,review,"the file is PDF 1.7, was PDF 1.4",False,18542,24997,0,0,250,9,False
+print,37-headings-scaled,0.997691,1.0,0.992305,1,1,1.0,file differs,review,"the file is PDF 1.7, was PDF 1.4",True,14520,24678,0,0,240,9,False
+print,38-font-keywords,0.998541,1.0,0.995138,1,1,1.0,file differs,review,"the file is PDF 1.7, was PDF 1.4",True,9727,18360,0,0,250,9,False
+print,39-dl,0.999895,1.0,0.99965,1,1,1.0,file differs,review,"the file is PDF 1.7, was PDF 1.4",True,9518,18979,0,0,230,0,False
+print,40-list-types,0.99392,1.0,0.979735,1,1,0.909502,appearance only,review,"the file is PDF 1.7, was PDF 1.4",True,8980,17294,0,0,240,9,False
+print,41-white-space,0.999895,1.0,0.99965,1,1,1.0,file differs,review,"the file is PDF 1.7, was PDF 1.4",True,15293,28912,0,0,240,9,False
+print,42-inline-format,0.988787,0.986928,0.984409,1,1,0.998056,appearance only,review,"the file is PDF 1.7, was PDF 1.4",True,21281,37243,0,0,250,9,False
+print,43-selectors,0.99989,1.0,0.999634,1,1,0.977437,file differs,review,"the file is PDF 1.7, was PDF 1.4",True,16573,30466,0,0,239,9,False
+print,44-generated,0.999469,1.0,0.998229,1,1,1.0,file differs,review,"the file is PDF 1.7, was PDF 1.4",True,16955,30907,0,0,240,9,False
+print,45-counters,0.994986,1.0,0.983285,1,1,1.0,appearance only,review,"the file is PDF 1.7, was PDF 1.4",True,15263,23617,0,0,240,9,False
+print,46-table-spans,0.996477,1.0,0.988258,1,1,0.955959,appearance only,review,"the file is PDF 1.7, was PDF 1.4",True,15172,26440,0,0,240,9,False
+print,47-table-borders,0.997664,1.0,0.992213,1,1,1.0,file differs,review,"the file is PDF 1.7, was PDF 1.4",True,16341,31244,0,0,240,9,False
+print,48-table-widths,0.998964,1.0,0.996547,1,1,0.99886,file differs,review,"the file is PDF 1.7, was PDF 1.4",True,17386,34913,0,0,240,9,False
+print,49-floats,0.999894,1.0,0.999648,1,1,0.99991,file differs,review,"the file is PDF 1.7, was PDF 1.4",True,10758,22212,0,0,240,0,False
+print,50-inline-block,0.997953,1.0,0.993178,1,1,0.996717,file differs,review,"the file is PDF 1.7, was PDF 1.4",True,9518,19039,0,0,230,9,False
+print,51-box-model,0.999873,1.0,0.999577,1,1,1.0,file differs,review,"the file is PDF 1.7, was PDF 1.4",True,9840,20756,0,0,230,9,False
+print,52-sizing,0.99989,1.0,0.999633,1,1,1.0,file differs,review,"the file is PDF 1.7, was PDF 1.4",True,11577,24722,0,0,239,9,False
+print,53-text-props,0.997661,1.0,0.992204,1,1,0.995082,appearance only,review,"the file is PDF 1.7, was PDF 1.4",True,11938,25942,0,0,240,0,False
+print,54-justify-hyphens,0.999504,1.0,0.998346,1,1,0.998873,file differs,review,"the file is PDF 1.7, was PDF 1.4",True,11002,21966,0,0,230,0,False
+print,55-page-sizes,0.999895,1.0,0.999649,1,1,1.0,file differs,review,"the file is PDF 1.7, was PDF 1.4",True,10688,22412,0,0,230,9,False
+print,56-margin-boxes,0.996578,1.0,0.988592,2,2,1.0,appearance only,review,"the file is PDF 1.7, was PDF 1.4",True,19862,34486,0,0,250,9,False
+print,57-breaks,0.99988,1.0,0.999601,2,2,1.0,file differs,review,"the file is PDF 1.7, was PDF 1.4",True,16914,31796,0,0,240,9,False
+print,58-footnotes,0.99974,1.0,0.999133,1,1,0.999836,file differs,review,"the file is PDF 1.7, was PDF 1.4",True,13152,25224,0,0,240,0,False
+print,59-toc-leaders,0.994265,1.0,0.980885,2,2,1.0,appearance only,review,"the file is PDF 1.7, was PDF 1.4",True,24023,40548,0,0,259,9,False
+print,60-images,0.998952,1.0,0.996506,1,1,1.0,appearance only,review,"the file is PDF 1.7, was PDF 1.4",False,16303,23951,0,0,250,9,False
+print,61-svg-inline,0.997077,1.0,0.990255,1,1,1.0,content differs,blocking,a picture on page 1 is gone,False,15162,16370,0,0,240,9,False
+print,62-position,0.998217,1.0,0.994056,1,1,0.980884,appearance only,review,"the file is PDF 1.7, was PDF 1.4",True,10478,21976,0,0,230,9,False
+print,63-columns,0.999892,1.0,0.999639,1,1,1.0,file differs,review,"the file is PDF 1.7, was PDF 1.4",True,16872,32607,0,0,240,9,False
+print,64-flex-advanced,0.999884,1.0,0.999612,1,1,1.0,file differs,review,"the file is PDF 1.7, was PDF 1.4",True,10070,20617,0,0,230,9,False
+print,65-grid-advanced,0.999914,1.0,0.999712,1,1,1.0,file differs,review,"the file is PDF 1.7, was PDF 1.4",True,7331,13051,0,0,240,0,False
+print,66-list-inside,0.997808,1.0,0.992695,1,1,0.99088,appearance only,review,"the file is PDF 1.7, was PDF 1.4",True,10380,21602,0,0,229,9,False
+print,67-unicode,0.669409,0.70283,0.393313,1,1,0.794707,content differs,blocking,"""â€œdoubleâ€​ â€˜singleâ€™ Â«guillemetsÂ»."" is now ""“double” ‘single’ «guillemets».""",False,18808,33696,0,0,240,9,True
+print,68-overflow-wrap,0.999779,1.0,0.999263,1,1,0.99921,file differs,review,"the file is PDF 1.7, was PDF 1.4",True,9881,20421,0,0,230,9,False
+print,69-borders,0.999877,1.0,0.999591,1,1,0.965815,content differs,blocking,a picture on page 1 is gone,True,9777,15858,0,0,240,9,False
+print,70-visibility,0.819622,0.810811,0.714055,1,1,1.0,content differs,blocking,a picture on page 1 is gone,True,8862,16892,0,0,240,9,True
+print,71-forms,0.992337,1.0,0.974455,1,1,0.781824,content differs,blocking,a picture on page 1 is gone,True,11084,18554,0,0,239,9,False
+print,72-cascade,0.999893,1.0,0.999642,1,1,1.0,file differs,review,"the file is PDF 1.7, was PDF 1.4",True,10183,20630,0,0,240,9,False
+print,73-vars-calc,0.999871,1.0,0.999568,1,1,1.0,file differs,review,"the file is PDF 1.7, was PDF 1.4",True,9633,19479,0,0,230,0,False
+print,74-media,0.999278,1.0,0.997594,1,1,1.0,file differs,review,"the file is PDF 1.7, was PDF 1.4",True,9096,17785,0,0,240,0,False
+print,75-nested-lists-mixed,0.996158,1.0,0.987192,1,1,0.948231,appearance only,review,"the file is PDF 1.7, was PDF 1.4",True,9972,19675,0,0,239,9,False
+print,76-long-paragraphs,0.999653,1.0,0.998843,3,3,0.999851,file differs,review,"the file is PDF 1.7, was PDF 1.4",True,24062,25174,0,0,259,9,False
+print,77-links-outline,0.997196,1.0,0.990653,1,1,1.0,file differs,review,"the file is PDF 1.7, was PDF 1.4",True,16842,29819,0,0,240,9,False
+print,78-trim-bleed,0.997076,1.0,0.990252,1,1,1.0,file differs,review,"the file is PDF 1.7, was PDF 1.4",True,16348,31191,0,0,240,9,False
+everyday,certificate,0.952912,0.98998,0.859741,1,1,0.97642,appearance only,review,"the file is PDF 1.7, was PDF 1.4",True,26457,49244,0,0,250,9,False
+everyday,columns,0.995256,1.0,0.984185,1,1,0.99941,appearance only,review,"the file is PDF 1.7, was PDF 1.4",True,17611,23673,0,0,240,9,False
+everyday,invoice,0.998744,1.0,0.995815,1,1,0.999598,appearance only,review,"the file is PDF 1.7, was PDF 1.4",True,21406,39244,0,0,240,9,False
+everyday,label,0.998436,1.0,0.994786,1,1,1.0,appearance only,review,"the file is PDF 1.7, was PDF 1.4",True,18461,34033,0,0,240,9,False
+everyday,letter,0.999709,1.0,0.999028,1,1,1.0,file differs,review,"the file is PDF 1.7, was PDF 1.4",True,18471,26759,0,0,239,0,False
+everyday,receipt,0.999607,1.0,0.998692,1,1,0.99146,file differs,review,"the file is PDF 1.7, was PDF 1.4",True,16452,32673,0,0,240,0,False
+everyday,report,0.998443,1.0,0.994812,1,1,0.998749,file differs,review,"the file is PDF 1.7, was PDF 1.4",True,23432,41744,0,0,250,9,False
+everyday,statement,0.97817,0.97318,0.971933,1,1,0.999191,content differs,blocking,"""Mr"" is new",True,18959,33636,0,0,240,9,False
+options,a5-portrait,0.986143,1.0,0.95381,2,2,0.759103,appearance only,review,"the file is PDF 1.7, was PDF 1.4",True,29621,46501,0,0,250,9,False
+options,cover-toc,0.882356,0.847458,0.862091,4,4,0.887489,appearance only,review,"the file is PDF 1.7, was PDF 1.4",True,42794,58585,0,0,680,10,False
+options,default-header,0.978337,1.0,0.92779,2,2,0.619171,appearance only,review,"the file is PDF 1.7, was PDF 1.4",True,29703,46605,0,0,250,9,False
+options,encoding,0.999897,1.0,0.999656,1,1,1.0,file differs,review,"the file is PDF 1.7, was PDF 1.4",True,18756,33358,0,0,240,9,False
+options,grayscale,0.870477,0.830136,0.851362,2,2,0.480276,appearance only,review,"the file is PDF 1.7, was PDF 1.4",True,29392,46252,0,0,259,9,False
+options,html-header-footer,0.941703,0.964224,0.865302,2,2,0.534139,appearance only,review,"the file is PDF 1.7, was PDF 1.4",True,30748,47534,0,0,459,10,False
+options,javascript,0.33317,0.238908,0.045721,1,1,0.13633,content differs,blocking,"""£672.50"" is gone",False,18615,14956,0,0,240,9,False
+options,landscape-letter,0.935661,0.923155,0.913611,1,1,0.999298,appearance only,review,"the file is PDF 1.7, was PDF 1.4",True,18553,25635,0,0,240,9,False
+options,long-statement,0.97117,0.958064,0.973792,3,3,0.999238,appearance only,review,"the file is PDF 1.7, was PDF 1.4",True,33578,44585,0,0,279,9,False
+options,lowquality,0.870477,0.830136,0.851362,2,2,0.480186,appearance only,review,"the file is PDF 1.7, was PDF 1.4",True,29445,46360,0,0,250,9,False
+options,no-charset,0.630669,0.761523,0.166359,1,1,0.890017,content differs,blocking,"""Â· KrakÃ³w Â· Ã˜resund."" is now ""· Kraków · Øresund.""",True,19587,33358,0,0,240,9,True
+options,no-margins,0.999552,1.0,0.998505,1,1,1.0,appearance only,review,"the file is PDF 1.7, was PDF 1.4",True,17366,30525,0,0,250,9,False
+options,outline,0.870477,0.830136,0.851362,2,2,0.480186,appearance only,review,"the file is PDF 1.7, was PDF 1.4",True,28777,45686,0,0,250,9,False
+options,page-offset,0.954702,0.999382,0.850036,2,2,0.481573,content differs,blocking,"""5"" is gone",True,29509,46433,0,0,259,9,False
+options,print-media,0.987181,1.0,0.957271,1,1,0.937637,appearance only,review,"the file is PDF 1.7, was PDF 1.4",True,18696,33379,0,0,240,9,False
+options,script-file,0.35009,0.248,0.086966,1,1,0.258783,content differs,blocking,"""5"" is gone",False,17497,14821,0,0,240,9,False
+options,text-headers,0.97885,1.0,0.929501,2,2,0.632134,appearance only,review,"the file is PDF 1.7, was PDF 1.4",True,30011,46964,0,0,259,9,False
+options,user-style-sheet,0.85733,0.830136,0.807539,2,2,0.428937,appearance only,review,"the file is PDF 1.7, was PDF 1.4",True,32682,58394,0,0,250,9,False
+options,zoom,0.962797,1.0,0.87599,2,2,0.566421,appearance only,review,"the file is PDF 1.7, was PDF 1.4",True,29533,46464,0,0,259,9,False
+international,european,0.994728,1.0,0.982427,1,1,1.0,appearance only,review,"the file is PDF 1.7, was PDF 1.4",False,23236,27140,0,0,250,9,False
+international,greek-russian,0.952132,1.0,0.84044,1,1,0.12,appearance only,review,"the file is PDF 1.7, was PDF 1.4",True,24018,44376,0,0,250,0,False
+international,invoice-ar,0.247699,0.095397,0.0,1,1,0.288188,content differs,blocking,"""ل ﻼ ﺧ ﻊ ﻓ ﺪ ﻟ ا ﻰ ﺟ ﺮ ﯾ"" is now ""يومً�ا مًع ذكر رقم الفاتورة. شكر�ا لتعامًلكم مًعنا.""",True,24219,37028,0,0,250,0,False
+international,invoice-zh,0.857762,0.923358,0.653609,1,1,0.56533,content differs,blocking,"""北⻛办公⽤品有限公司"" is now ""北风办公用品有限公司""",True,28716,27380007,0,0,259,439,False
+international,letter-hi,0.465936,0.443709,0.14694,1,1,0.734105,content differs,blocking,"""सादर, ग�ाहक सेवा टीम"" is now ""स�दर, ग्�र�हक स�वं� टो�मा""",False,39912,552413,0,0,269,30,False
+international,letter-ja,0.854631,0.942238,0.611706,1,1,0.992816,content differs,blocking,"""品名：トナーカートリッジ（黒、⼤容量） 数量：4本"" is now ""品名：トナーカートリッジ（黒、大容量） 数量：4本""",False,38688,13428136,0,0,269,409,False
+international,mixed-scripts,0.987374,0.995181,0.965944,1,1,0.999865,appearance only,review,"the file is PDF 1.7, was PDF 1.4",False,28260,13446086,0,0,259,410,False
+international,notice-he,0.246317,0.090667,0.003278,1,1,0.257754,content differs,blocking,"""ר ת א ב ו ע צ ו ב ש ת ו נ מ ז ה , ה כ ר ב ב ת ו ח ו ק ל ה ת ו ר י ש ת ו ו צ"" is now ""עם מספר הזמנה כגון INV-2026-118 יישלחו כרגיל. לשאלות ניתן לפנות אלינו בכל עת. תודה על ההבנה. בברכה, צוות שירות הלקוחות""",True,17457,26359,0,0,240,0,False
+international,receipt-ko,0.999524,1.0,0.998414,1,1,0.99907,content differs,blocking,"""08:42 계산대"" is now ""08:42 계산대""",True,13928,27377411,0,0,250,430,False
+international,receipt-th,0.466898,0.444444,0.148921,1,1,0.983508,content differs,blocking,"""ขอบคุณที ่ ใช บริการ ้"" is now ""ขอบค�ณท��ใช้�บร็�การ็""",False,29440,1149447,0,0,259,50,False
