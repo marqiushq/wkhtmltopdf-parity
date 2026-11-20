@@ -84,20 +84,19 @@ On GitHub Actions, ARM64, 4 CPUs: the same parity in every set, 30× faster ([re
 
 ## What works differently today
 
-These are what the runs above found in marqius-wkhtmltopdf 0.12.7. Each has a document in the corpus, so the scoreboard shows when one changes.
+These are what the runs above found in marqius-wkhtmltopdf 0.12.8. Each has a document in the corpus, so the scoreboard shows when one changes.
 
 - **Script files.** marqius-wkhtmltopdf runs the scripts written in a page, with the page's DOM, as wkhtmltopdf does (`options/javascript`), but not a script the page loads from a file (`<script src>`), so whatever that script builds is missing (`options/script-file`). wkhtmltopdf's header and footer variables work, both as text (`[page] of [topage]`) and through the usual script in an HTML header or footer.
-- **Arabic and Hebrew.** The letters of each word come out in reverse order, Arabic letters are not joined, and right-to-left tables are not mirrored (`international/invoice-ar` and `notice-he`).
+- **Arabic and Hebrew** pages look the same from 0.12.8. Copied or searched, marqius-wkhtmltopdf's text gives back most of their words as written, where wkhtmltopdf's breaks them into separate letters or letter shapes (`international/invoice-ar` and `notice-he`).
 - **A few joined Hindi letters** are drawn in another form (`international/letter-hi`).
-- **Text inside an SVG picture** that asks for Helvetica comes out in Times New Roman, where wkhtmltopdf uses Arial (`print/61-svg-inline`). Text in the page itself gets Arial from both.
 - **Form fields** are drawn more plainly: a drop-down list has no arrow, a ticked box shows a filled square where wkhtmltopdf draws a tick, and a button's label is smaller (`print/71-forms`).
 - **A table row at a page break.** On A5 paper, wkhtmltopdf moves a table row to the next page where marqius-wkhtmltopdf still fits it at the foot of the page, so the next page starts a row later (`options/a5-portrait`). Every other page break in the corpus is the same.
 - **Zoom** scales text a little differently: at `--zoom 1.25` a 21 pt title comes out 20.7 pt, and words stand up to 3.5 pt along their lines from where wkhtmltopdf puts them (`options/zoom`).
-- **Files are larger in general.** The 86 published documents come to about 1.8 times wkhtmltopdf's size.
+- **Files are smaller in general.** The 86 published documents come to about two thirds of wkhtmltopdf's size. Pages set in the FreeFont fallback fonts are larger: here the Hindi and Thai pages (`international/letter-hi` and `receipt-th`).
 - **Pages that do not name their character set.** wkhtmltopdf prints their accented and non-Latin letters garbled; marqius-wkhtmltopdf prints them as written. With `--encoding utf-8` the two agree (`print/67-unicode`, `options/no-charset` and `options/encoding`).
-- **Every file** is PDF 1.7 rather than 1.4, and names the page's language when the page gives one.
+- **The PDF version** is 1.4, as wkhtmltopdf's, unless a file needs a later one (1.5 for the Arabic, Hindi and Thai pages here), and every file names the page's language when the page gives one.
 
-0.12.7 closed four that 0.12.6 had: scripts get the page's DOM, bold Hindi and Thai keep their bold face, the lines of long pages with a set line height no longer drift lower, and fonts in OpenType CFF form, such as Noto CJK, are cut down to the letters a page uses. A one-page Chinese invoice is now 26 KB, where 0.12.6 made 27 MB and wkhtmltopdf makes 29 KB.
+0.12.8 closed four more: Arabic and Hebrew pages look as wkhtmltopdf's do, text in SVG pictures gets the font it asks for, columns floated side by side and horizontal rules match wkhtmltopdf's, and files are less than half their old size, now smaller than wkhtmltopdf's. 0.12.7 closed four that 0.12.6 had: scripts get the page's DOM, bold Hindi and Thai keep their bold face, the lines of long pages with a set line height no longer drift lower, and fonts in OpenType CFF form, such as Noto CJK, are cut down to the letters a page uses. A one-page Chinese invoice is now 26 KB, where 0.12.6 made 27 MB and wkhtmltopdf makes 29 KB.
 
 ## Rerun everything
 
