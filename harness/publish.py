@@ -34,8 +34,8 @@ MISS = 0.99  # documents below this are listed one by one, with the reason
 # to how it is decided; nothing is shown beside the others
 BADGE = "[![marqius better](.github/better.svg)](#the-measures)"
 BADGE_ABOUT = ("marks a document where every difference goes marqius-wkhtmltopdf's way: its PDF has the page's own words where "
-               "wkhtmltopdf's has garbled letters, look-alike characters or a picture of the words, and nothing else on the page looks "
-               "different. Its score is lower only because the score measures how alike the two PDFs are. Each run decides it again, "
+               "wkhtmltopdf's has garbled letters, look-alike characters, words split into letters or a picture of the words, and nothing "
+               "else on the page looks different. Its score is lower only because the score measures how alike the two PDFs are. Each run decides it again, "
                "from the page itself.")
 
 

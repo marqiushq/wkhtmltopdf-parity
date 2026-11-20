@@ -124,11 +124,11 @@ DPI, INK, NEAR = 72, 160, 2
 INK_BITS = bytes.maketrans(bytes(range(256)), bytes(ord("1") if v < INK else ord("0") for v in range(256)))
 
 
-def bitmaps(pdf, tmp):
+def bitmaps(pdf, tmp, dpi=DPI):
     """each page as a list of rows, each row an integer whose set bits are the ink (the leftmost dot
     the highest bit), and each page's width in dots"""
     base = Path(tmp) / Path(pdf).stem
-    subprocess.run(["pdftoppm", "-r", str(DPI), "-gray", str(pdf), str(base)], capture_output=True, timeout=300)
+    subprocess.run(["pdftoppm", "-r", str(dpi), "-gray", str(pdf), str(base)], capture_output=True, timeout=300)
     pages_, widths = [], []
     for f in sorted(Path(tmp).glob(base.name + "-*.pgm"), key=lambda x: int(x.stem.rsplit("-", 1)[1])):
         data = f.read_bytes()
@@ -150,24 +150,24 @@ def bitmaps(pdf, tmp):
     return pages_, widths
 
 
-def grow(rows):
-    """ink spread by NEAR dots in every direction"""
+def grow(rows, near=NEAR):
+    """ink spread by near dots in every direction"""
     wide = []
     for r in rows:
         x = r
-        for k in range(1, NEAR + 1):
+        for k in range(1, near + 1):
             x |= (r << k) | (r >> k)
         wide.append(x)
     out = []
     for y in range(len(wide)):
         x = 0
-        for yy in range(max(0, y - NEAR), min(len(wide), y + NEAR + 1)):
+        for yy in range(max(0, y - near), min(len(wide), y + near + 1)):
             x |= wide[yy]
         out.append(x)
     return out
 
 
-def drawn(rp, mp):
+def drawn(rp, mp, dpi=DPI):
     """both PDFs' pages as ink, each with its pages' widths (bitmaps); None when a PDF is missing"""
     import tempfile
     if not pdf_ok(rp) or not pdf_ok(mp):
@@ -176,7 +176,7 @@ def drawn(rp, mp):
         ta, tb = Path(t) / "a", Path(t) / "b"
         ta.mkdir()
         tb.mkdir()
-        return bitmaps(rp, ta), bitmaps(mp, tb)
+        return bitmaps(rp, ta, dpi), bitmaps(mp, tb, dpi)
 
 
 def overlay_of(both):
@@ -214,21 +214,32 @@ def overlay_of(both):
 #                    shapes
 #   unreadable       letters drawn with no text behind them, in wkhtmltopdf's PDF only, which
 #                    marqius-wkhtmltopdf draws the same
+#   spacing          the same letters, divided into words differently: a win when marqius-wkhtmltopdf's
+#                    words are the page's own and some of wkhtmltopdf's are not (it splits words into
+#                    letters, as it does with Arabic, Hebrew and letter-spaced titles) and the two look
+#                    the same there; otherwise it neither wins nor loses
 #
-# compare's findings about the files (PDF 1.7, the page's language) are left aside. Of its findings
-# about the look, only words divided differently, and lines that stand where they stood (within
-# NEAR points), may stand. Anything else (a word missing, a font, a size, a colour, a page break, a
+# compare's findings about the files (the PDF version, the page's language) are left aside. Of its
+# findings about the look, words divided differently and lines that stand where they stood (the
+# same there) may stand. Anything else (a word missing, a font, a size, a colour, a page break, a
 # picture added, letters with no text behind them in marqius-wkhtmltopdf's PDF, a warning from
 # marqius-wkhtmltopdf) means no mark. "The page's own words" are the text of the HTML files the
-# document's command line names, read as a browser reads them, compared without white space or case,
-# with a few letters of the words around them, as the PDF has them. "The same there" means that,
-# inside the boxes compare gives for the difference, the ink of each page lies within NEAR points of
-# the other's, and the two pages, drawn in colour, hold as much ink there, of the same colour (so a
-# gradient painted grey, a bold word set regular or a half-transparent line set solid is not the same).
-SAME_THERE = 0.98  # share of the ink there with ink from the other page within NEAR points
+# document's command line names, read as a browser reads them, compared without white space or case:
+# with a few letters of the words around them, as the PDF has them, or, for a run of LONE letters
+# or more, word for word (poppler moves a colon or a figure within a right-to-left line, so the
+# letters around a piece are not always where the page has them). "The same there" means that,
+# inside the boxes compare gives for the difference, drawn at LOOK_DPI, the ink of each page lies
+# within LOOK_NEAR points of the other's (fine enough to tell a letter drawn in another shape, as a
+# Hindi र written out in full), and the two pages, drawn in colour, hold as much ink there, of the
+# same colour (so a gradient painted grey, a bold word set regular or a half-transparent line set
+# solid is not the same).
+LOOK_DPI = 144  # the pages are drawn at this many dots an inch to judge where each difference is
+LOOK_NEAR = 1  # points: how far apart ink may be there and still count as the same
+SAME_THERE = 0.98  # share of the ink there with ink from the other page within LOOK_NEAR points
 SAME_INK = 0.85  # the lesser page's ink there (the sum of each dot's darkness) against the greater's
 SAME_COLOUR = 24  # largest difference, in any of red, green and blue (0 to 255), between the ink's mean colours there
 CONTEXT = 6  # letters either side of a word that must be the page's own too
+LONE = 6  # letters a run of the page's own words needs to be judged without the letters around it
 FINE_LOOK = {"moved", "reflow"}  # compare's findings about the look that may stand if the two are the same there
 
 
@@ -294,9 +305,21 @@ def plain(s):
     return "".join(c for c in s if unicodedata.category(c) not in ("Zs", "Zl", "Zp", "Cc", "Cf"))
 
 
+def tokens(s):
+    """the words of a text, for judging them: split at white space, case folded, without punctuation or
+    symbols, those with a letter (words() is the parity measure's own, with positions)"""
+    out = []
+    for t in unicodedata.normalize("NFC", s).casefold().split():
+        w = unicodedata.normalize("NFC", "".join(c for c in t if unicodedata.category(c)[0] in "LMN"))
+        if any(unicodedata.category(c)[0] == "L" for c in w):
+            out.append(w)
+    return out
+
+
 def own_text(corpus, s, n):
-    """the page's own text, plain: the HTML files the document's command line names (the page, its
-    header and footer, a cover), or the set's page of that name; '' when there is none"""
+    """the page's own text: (plain, the set of its words), from the HTML files the document's command
+    line names (the page, its header and footer, a cover), or the set's page of that name; ('', set())
+    when there is none"""
     d = corpus / s
     cmd = d / f"{n}.cmd"
     if cmd.exists():
@@ -314,7 +337,8 @@ def own_text(corpus, s, n):
         args += [f"{n}{e}" for e in (".html", ".htm") if (d / f"{n}{e}").exists()][:1]
     enc = args[args.index("--encoding") + 1] if "--encoding" in args[:-1] else None
     files = [d / a for a in args if re.search(r"\.(x?html?|xml)$", a, re.I) and (d / a).is_file()]
-    return plain(" ".join(page_text(f.read_bytes(), enc) for f in files))
+    text = " ".join(page_text(f.read_bytes(), enc) for f in files)
+    return plain(text), frozenset(tokens(text))
 
 
 def cut(s):
@@ -333,43 +357,60 @@ def misread(s):
     return "".join(out)
 
 
-def page_own(piece, pdf_text, own):
+def page_own(piece, pdf_text, own, own_words):
     """True when piece is the page's own words: with CONTEXT letters before or after it, as the PDF's
-    text has them, it is in the page's own text (a piece of 12 letters or more may stand alone when
-    the PDF's text does not have it as compare read it)"""
+    text has them, it is in the page's own text; or it holds LONE letters or more, it is in the page's
+    own text, and each of its words is one of the page's words (compare may cut a piece within a word:
+    its first word may end one of the page's words, its last begin one)"""
     p = plain(cut(piece))
     if not p or not own:
         return False
     i = pdf_text.find(p)
-    if i < 0:
-        return len(p) >= 12 and p in own
     while i >= 0:
         j = i + len(p)
         if any(c in own for c in (pdf_text[max(0, i - CONTEXT):j + CONTEXT], pdf_text[max(0, i - CONTEXT):j], pdf_text[i:j + CONTEXT])
-               if len(c) > len(p) or len(p) >= 12):
+               if len(c) > len(p)):
             return True
         i = pdf_text.find(p, i + 1)
-    return False
+    ws = tokens(cut(piece))
+    if not ws or sum(1 for c in p if unicodedata.category(c)[0] == "L") < LONE or p not in own:
+        return False
+    whole = lambda w: w in own_words
+    ends = lambda w: whole(w) or any(o.endswith(w) for o in own_words)
+    begins = lambda w: whole(w) or any(o.startswith(w) for o in own_words)
+    if len(ws) == 1:
+        return ends(ws[0]) or begins(ws[0])
+    return ends(ws[0]) and begins(ws[-1]) and all(whole(w) for w in ws[1:-1])
 
 
-def look_there(ink, places, pad=2):
-    """inside the boxes compare gives (page, box in points from the top left), the share of ink with
-    ink from the other PDF within NEAR points, and how much ink each PDF has there"""
-    (A, wa), (B, wb) = ink
+def split_by_wk(was, now, own_words):
+    """True when wkhtmltopdf's text divides the page's own words where marqius-wkhtmltopdf's keeps them:
+    each of marqius-wkhtmltopdf's words is one of the page's words, and some of wkhtmltopdf's are not"""
+    wn, ww = tokens(cut(now)), tokens(cut(was))
+    return bool(wn) and all(w in own_words for w in wn) and any(w not in own_words for w in ww)
+
+
+def look_there(fine, places, pad=2):
+    """inside the boxes compare gives (page, box in points from the top left), on the pages drawn at
+    LOOK_DPI (fine, as drawn() gives them), the share of ink with ink from the other PDF within
+    LOOK_NEAR points, and how much ink each PDF has there"""
+    (A, wa), (B, wb) = fine
+    k = LOOK_DPI / 72
+    near = max(1, round(LOOK_NEAR * k))
     ia = ib = ma = mb = 0
     for pl in places:
-        k = int(pl.get("page", 0)) - 1
-        if k < 0 or k >= len(A) or k >= len(B) or wa[k] != wb[k]:
+        pg = int(pl.get("page", 0)) - 1
+        if pg < 0 or pg >= len(A) or pg >= len(B) or wa[pg] != wb[pg]:
             return 0.0, 0, 0
-        a, b, w = A[k], B[k], wa[k]
+        a, b, w = A[pg], B[pg], wa[pg]
         x0, y0, x1, y1 = pl["box"]
-        X0, X1 = max(0, int(x0) - pad), min(w - 1, int(x1) + pad)
-        Y0, Y1 = max(0, int(y0) - pad), min(len(a), len(b), int(y1) + pad + 1)
+        X0, X1 = max(0, int((x0 - pad) * k)), min(w - 1, int((x1 + pad) * k))
+        Y0, Y1 = max(0, int((y0 - pad) * k)), min(len(a), len(b), int((y1 + pad) * k) + 1)
         if X1 < X0 or Y1 <= Y0:
             continue
         mask = ((1 << (X1 - X0 + 1)) - 1) << (w - 1 - X1)
-        lo, hi = max(0, Y0 - NEAR), min(len(a), len(b), Y1 + NEAR)
-        ga, gb = grow(a[lo:hi]), grow(b[lo:hi])
+        lo, hi = max(0, Y0 - near), min(len(a), len(b), Y1 + near)
+        ga, gb = grow(a[lo:hi], near), grow(b[lo:hi], near)
         for y in range(Y0, Y1):
             ra, rb = a[y] & mask, b[y] & mask
             ia += ra.bit_count()
@@ -429,14 +470,18 @@ def tone_there(pdf, places, cache, pad=2):
     return dark, ((red / dark, green / dark, blue / dark) if dark else (255.0, 255.0, 255.0))
 
 
-def better_than_wk(diffs, own, text_wk, text_mq, ink, rp, mp):
+def better_than_wk(diffs, own, own_words, text_wk, text_mq, rp, mp):
     """True when every difference compare found (diffs, from its pair file) goes marqius-wkhtmltopdf's
-    way and nothing else looks different (see above); text_wk and text_mq are the PDFs' text, plain;
-    ink is both PDFs' pages as drawn() gives them, rp and mp the PDFs"""
-    cache = {}
+    way and nothing else looks different (see above); own and own_words are the page's own text, as
+    own_text() gives them, text_wk and text_mq the PDFs' text, plain, rp and mp the PDFs"""
+    cache, fine = {}, []
 
     def same_there(places, wk_drew=False, mq_drew=False):
-        share, ia, ib = look_there(ink, places)
+        if not fine:
+            fine.append(drawn(rp, mp, LOOK_DPI))
+        if not fine[0]:
+            return False
+        share, ia, ib = look_there(fine[0], places)
         if not places or share < SAME_THERE or (wk_drew and not ia) or (mq_drew and not ib):
             return False
         tw, tm = tone_there(rp, places, cache), tone_there(mp, places, cache)
@@ -454,19 +499,23 @@ def better_than_wk(diffs, own, text_wk, text_mq, ink, rp, mp):
         if of == "file":
             continue
         if of == "appearance":
-            if kind == "spacing" or (kind in FINE_LOOK and same_there(old + new)):
+            if kind == "spacing":
+                if split_by_wk(x.get("was"), x.get("now"), own_words) and same_there(old + new):
+                    wins += 1
+                continue
+            if kind in FINE_LOOK and same_there(old + new):
                 continue
             return False
         if kind == "text":
             was, now = cut(x.get("was")), cut(x.get("now"))
-            if not page_own(now, text_mq, own):
+            if not page_own(now, text_mq, own, own_words):
                 return False
             if plain(was) and plain(was) == plain(misread(now)) != plain(now):
                 pass  # wkhtmltopdf read the page's UTF-8 as Windows-1252
             elif not plain(was) or plain(was) in own or not same_there(old + new, wk_drew=True, mq_drew=True):
                 return False
         elif kind == "added":
-            if not page_own(x.get("now"), text_mq, own) or not same_there(new, wk_drew=True, mq_drew=True):
+            if not page_own(x.get("now"), text_mq, own, own_words) or not same_there(new, wk_drew=True, mq_drew=True):
                 return False
         elif kind == "picture-missing":
             if not same_there(old, wk_drew=True, mq_drew=True):
@@ -483,7 +532,7 @@ def better_than_wk(diffs, own, text_wk, text_mq, ink, rp, mp):
 def judge(rp, mp, pages_wk, pages_mq, ink, pair, own, err_mq):
     """the mark for one document: better_than_wk, once both PDFs are there with as many pages,
     compare has listed every difference, and marqius-wkhtmltopdf gave no warning"""
-    if not ink or not own or pages_wk != pages_mq:
+    if not ink or not own[0] or pages_wk != pages_mq:
         return False
     if Path(err_mq).exists() and Path(err_mq).read_text(errors="replace").strip():
         return False
@@ -491,9 +540,9 @@ def judge(rp, mp, pages_wk, pages_mq, ink, pair, own, err_mq):
         j = json.loads(Path(pair).read_text(encoding="utf-8"))
     except (OSError, ValueError):
         return False
-    if j.get("verdict") != "content differs" or any((j.get("left_out") or {}).values()):
+    if j.get("verdict") not in ("content differs", "appearance only") or any((j.get("left_out") or {}).values()):
         return False
-    return better_than_wk(j.get("differences", []), own, plain(pdftotext(rp)), plain(pdftotext(mp)), ink, rp, mp)
+    return better_than_wk(j.get("differences", []), own[0], own[1], plain(pdftotext(rp)), plain(pdftotext(mp)), rp, mp)
 
 
 MISS = 0.99  # a document below this, or with content that differs, is listed with its pictures
@@ -809,7 +858,7 @@ def console(r):
 
 BETTER = "marqius better"
 BETTER_ABOUT = ("*marqius better* marks a document where every difference goes marqius-wkhtmltopdf's way: its PDF has the page's own words "
-                "where wkhtmltopdf's has garbled letters, look-alike characters or a picture of the words, and nothing else on the page looks different. "
+                "where wkhtmltopdf's has garbled letters, look-alike characters, words split into letters or a picture of the words, and nothing else on the page looks different. "
                 "Its score is lower only because the score measures how alike the two PDFs are.")
 
 
