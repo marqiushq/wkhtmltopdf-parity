@@ -1,5 +1,5 @@
 marqius-wkhtmltopdf compare: pdf/wk/everyday against pdf/mq/everyday
-8 pairs compared in 0.0 s (201 a second on 4 cores)
+8 pairs compared in 0.0 s (171 a second on 4 cores)
 
   same              3
   appearance only   4
