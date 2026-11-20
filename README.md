@@ -24,27 +24,27 @@ That runs eight sample documents. For yours, take the samples out of `mine/` (ke
 ## The scoreboard
 
 <!-- scoreboard:start (written by harness/publish.py from results/; edits here are overwritten) -->
-**marqius-wkhtmltopdf 0.12.8** beside **wkhtmltopdf 0.12.6**, checked 20 November 2026, 04:48 UTC on GitHub Actions, x86-64, 4 CPUs: [the run's log](https://github.com/marqiushq/wkhtmltopdf-parity/actions/runs/44676765796) · [full report](results/0.12.8/linux-amd64/report.md) · [every document](results/0.12.8/linux-amd64/scores.csv)
+**marqius-wkhtmltopdf 0.12.8** beside **wkhtmltopdf 0.12.6**, checked 20 November 2026, 05:24 UTC on GitHub Actions, x86-64, 4 CPUs: [the run's log](https://github.com/marqiushq/wkhtmltopdf-parity/actions/runs/44680823270) · [full report](results/0.12.8/linux-amd64/report.md) · [every document](results/0.12.8/linux-amd64/scores.csv)
 
 | What was converted | Documents | Parity | Overlay | Same pages | Appearance only | Content differs | Speed |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| Business documents (`everyday`) | 8 | 0.9909 | 0.996 | 3 | 4 | 1 | 36× |
-| CSS features, one to a page (`print`) | 78 | 0.9926 | 0.987 | 61 | 12 | 5 | 38× |
-| **The 86 published documents together** | **86** | **0.9924** | 0.988 | 64 | 16 | 6 | **38×** |
-| wkhtmltopdf's own options (`options`) | 19 | 0.9361 | 0.919 | 2 | 15 | 2 | 26× |
-| Languages and scripts (`international`) | 10 | 0.8193 | 0.994 | 1 | 3 | 6 | 21× |
+| Business documents (`everyday`) | 8 | 0.9909 | 0.996 | 3 | 4 | 1 | -15690987052× |
+| CSS features, one to a page (`print`) | 78 | 0.9926 | 0.987 | 61 | 12 | 5 | 40× |
+| **The 86 published documents together** | **86** | **0.9924** | 0.988 | 64 | 16 | 6 | **-1619825498×** |
+| wkhtmltopdf's own options (`options`) | 19 | 0.9361 | 0.919 | 2 | 15 | 2 | 25× |
+| Languages and scripts (`international`) | 10 | 0.8193 | 0.994 | 1 | 3 | 6 | 6397719479× |
 
-Speed is the time to convert the published documents one after another, wkhtmltopdf's divided by marqius-wkhtmltopdf's: 19.7 s against 0.53 s (median of 3 runs); 5× with wkhtmltopdf's 200 ms script wait turned off for both.
+Speed is the time to convert the published documents one after another, wkhtmltopdf's divided by marqius-wkhtmltopdf's: 19797.8 s against 498.71 s (median of 2 runs); 4× with wkhtmltopdf's 200 ms script wait turned off for both.
 
 Sizes: the 86 PDFs come to 1.1 MB from wkhtmltopdf and 0.8 MB from marqius-wkhtmltopdf. The `marqius/wkhtmltopdf` image is 26 MB unpacked; the image wkhtmltopdf runs in here, with its fonts, 330 MB.
 
-On GitHub Actions, ARM64, 4 CPUs: the same parity in every set, 30× faster ([report](results/0.12.8/linux-arm64/report.md)).
+On GitHub Actions, ARM64, 4 CPUs: the same parity in every set, 29× faster ([report](results/0.12.8/linux-arm64/report.md)).
 
 #### Every version
 
 | Version | Checked | Business documents | CSS features | Published 86 | Options | Languages | Speed |
 |---|---|---:|---:|---:|---:|---:|---:|
-| [0.12.8](results/0.12.8/linux-amd64/report.md) | 2026-11-20 | 0.9909 | 0.9926 | 0.9924 | 0.9361 | 0.8193 | 38× |
+| [0.12.8](results/0.12.8/linux-amd64/report.md) | 2026-11-20 | 0.9909 | 0.9926 | 0.9924 | 0.9361 | 0.8193 | -1619825498× |
 | [0.12.7](results/0.12.7/linux-amd64/report.md) | 2026-11-20 | 0.9908 | 0.9925 | 0.9924 | 0.9354 | 0.7599 | 35× |
 | [0.12.6](results/0.12.6/linux-amd64/report.md) | 2026-11-20 | 0.9902 | 0.9920 | 0.9919 | 0.8611 | 0.7073 | 38× |
 
@@ -56,8 +56,8 @@ On GitHub Actions, ARM64, 4 CPUs: the same parity in every set, 30× faster ([re
 | Document | Parity | Overlay | Why | Pages |
 |---|---:|---:|---|---|
 | `options/script-file` | 0.3501 | 0.259 | A real difference: marqius-wkhtmltopdf runs scripts written in the page, but not one the page loads from a file (&lt;script src&gt;), so the delivery note's number, lines and parcel count, which script-file.js writes, are missing. | [1](results/0.12.8/linux-amd64/pictures/options--script-file.page-1.png) |
-| `international/invoice-ar` | 0.4318 | 0.998 | A real difference: marqius-wkhtmltopdf draws Arabic letters unjoined and in reverse order within each word, and does not mirror the right-to-left table. Arabic is not supported yet. | [1](results/0.12.8/linux-amd64/pictures/international--invoice-ar.page-1.png) |
-| `international/notice-he` | 0.6071 | 1.000 | A real difference: marqius-wkhtmltopdf draws the letters of each Hebrew word in reverse order and does not mirror the right-to-left table. Hebrew is not supported yet. | [1](results/0.12.8/linux-amd64/pictures/international--notice-he.page-1.png) |
+| `international/invoice-ar` | 0.4318 | 0.998 | From 0.12.8 the pages look the same. Copied or searched, marqius-wkhtmltopdf's text gives back 48 of the invoice's 56 words as written, wkhtmltopdf's 2: it stores the Arabic as separate letter shapes, which is most of the text measure's loss. Up to 0.12.7, marqius-wkhtmltopdf drew Arabic letters unjoined and in reverse order, and did not mirror the right-to-left table. | [1](results/0.12.8/linux-amd64/pictures/international--invoice-ar.page-1.png) |
+| `international/notice-he` | 0.6071 | 1.000 | From 0.12.8 the pages look the same. Copied or searched, marqius-wkhtmltopdf's text gives back 43 of the notice's 48 words as written, wkhtmltopdf's 28: it splits many Hebrew words into single letters, which is the text measure's loss. Up to 0.12.7, marqius-wkhtmltopdf drew the letters of each Hebrew word in reverse order and did not mirror the right-to-left table. | [1](results/0.12.8/linux-amd64/pictures/international--notice-he.page-1.png) |
 | `options/no-charset`<br>[![marqius better](.github/better.svg)](#the-measures) | 0.6307 | 0.890 | An invoice that does not name its character set: wkhtmltopdf garbles every accented letter and the euro sign (SociÃ©tÃ© for Société, â‚¬ for €); marqius-wkhtmltopdf prints them as written. With --encoding utf-8 both agree (options/encoding). | [1](results/0.12.8/linux-amd64/pictures/options--no-charset.page-1.png) |
 | `print/67-unicode`<br>[![marqius better](.github/better.svg)](#the-measures) | 0.6694 | 0.795 | The page does not name its character set. wkhtmltopdf assumes an old Western one, so every Greek, Cyrillic and accented letter, maths sign and curly quote comes out garbled (Î±Î²Î³ for αβγ, cafÃ© for café); marqius-wkhtmltopdf prints them as written. Name the character set in the page, or pass --encoding utf-8, and both agree (options/encoding). | [1](results/0.12.8/linux-amd64/pictures/print--67-unicode.page-1.png) |
 | `international/receipt-th`<br>[![marqius better](.github/better.svg)](#the-measures) | 0.6769 | 1.000 | The pages look the same. Copied or searched, marqius-wkhtmltopdf's text comes back as clean Thai from 0.12.7; wkhtmltopdf's has its tone and vowel marks split off. Up to 0.12.6, the bold heading came out regular, and neither PDF gave back clean Thai. | [1](results/0.12.8/linux-amd64/pictures/international--receipt-th.page-1.png) |
@@ -76,7 +76,7 @@ On GitHub Actions, ARM64, 4 CPUs: the same parity in every set, 30× faster ([re
 | `international/mixed-scripts` | 0.9890 | 1.000 | The pages look the same. wkhtmltopdf sets all the Chinese, Japanese and Korean words in Noto Sans CJK HK, marqius-wkhtmltopdf in Noto Sans CJK JP. | [1](results/0.12.8/linux-amd64/pictures/international--mixed-scripts.page-1.png) |
 | `print/71-forms` | 0.9892 | 0.682 | Form fields: wkhtmltopdf draws the drop-down arrow as a picture, which marqius-wkhtmltopdf leaves out; a ticked box shows a filled square where wkhtmltopdf draws a tick; marqius-wkhtmltopdf sets the Send button's label at 7.8 pt where wkhtmltopdf uses 9.6 pt; and the lines under the fields sit up to 2.4 pt higher. | [1](results/0.12.8/linux-amd64/pictures/print--71-forms.page-1.png) |
 | `international/receipt-ko` | 0.9995 | 0.999 | The pages look the same. The wide space after the time reads back as a different space character in the two PDFs. | [1](results/0.12.8/linux-amd64/pictures/international--receipt-ko.page-1.png) |
-| `print/61-svg-inline` | 0.9995 | 1.000 | A real difference: the label inside the SVG picture asks for Helvetica, and marqius-wkhtmltopdf sets it in Times New Roman where wkhtmltopdf uses Arial. Both paint the gradient red to blue; compare's picture of this page shows marqius-wkhtmltopdf's box flat grey because compare does not draw gradients. | [1](results/0.12.8/linux-amd64/pictures/print--61-svg-inline.page-1.png) |
+| `print/61-svg-inline` | 0.9995 | 1.000 | From 0.12.8 the pages look the same: both paint the gradient red to blue, wkhtmltopdf as a picture and marqius-wkhtmltopdf as a gradient, and both set the label in Arial. Compare's picture of this page shows marqius-wkhtmltopdf's box flat grey because compare does not draw gradients. Up to 0.12.7, the label, which asks for Helvetica, came out in Times New Roman. | [1](results/0.12.8/linux-amd64/pictures/print--61-svg-inline.page-1.png) |
 | `print/69-borders` | 0.9999 | 0.966 | wkhtmltopdf draws the rounded box as a picture, marqius-wkhtmltopdf as shapes. The pages look the same. | [1](results/0.12.8/linux-amd64/pictures/print--69-borders.page-1.png) |
 
 </details>
