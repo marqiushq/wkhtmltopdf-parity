@@ -1,0 +1,31 @@
+marqius-wkhtmltopdf compare: pdf/wk/print against pdf/mq/print
+78 pairs compared in 0.4 s (222 a second on 4 cores)
+
+  same              33
+  appearance only   12
+  content differs   5
+  file differs      28   (the pages are the same; the kind of PDF or its description is not)
+
+  by level: blocking 5, review 0, cosmetic 40
+  NO-GO: 5 documents with blocking differences
+
+The 45 documents that differ, by cause (25 causes in all; a document may have several):
+   1. cosmetic       42 documents   metadata: language none → en
+   2. blocking        4 documents   picture missing
+   3. cosmetic        4 documents   moved 3 pt to the right
+   4. cosmetic        3 documents   words spaced differently along the line
+   5. cosmetic        2 documents   rules or tints differ near 40,20
+   6. blocking        1 document    added: "Half opacity."
+   7. blocking        1 document    text: "cafÃ© naÃ¯ve ZÃ¼rich Ã…ngstrÃ¶m faÃ§ade." → "café naïve Zürich Ångström façade."
+   8. blocking        1 document    text: "Î±Î²Î³Î´Îµ Î‘Î’Î“Î”." → "αβγδε ΑΒΓΔ."
+   9. blocking        1 document    text: "ÐŸÑ€Ð¸Ð²ÐµÑ‚ Ð¼Ð¸Ñ€." → "Привет мир."
+  10. blocking        1 document    text: "â‰¤ â‰¥ â‰ Â± âˆž âˆš âˆ‘ âˆ« â†’ â‡’." → "≤ ≥ ≠ ± ∞ √ ∑ ∫ → ⇒."
+  11. blocking        1 document    text: "â€œdoubleâ€​ â€˜singleâ€™ Â«guillemetsÂ»." → "“double” ‘single’ «guillemets»."
+  12. cosmetic        1 document    lines break at other words
+      … 13 more in causes.csv
+  the first 1 cause explains 28 of the 45 documents that differ
+  the first 3 causes explain 31 of the 45 documents that differ
+  the first 5 causes explain 34 of the 45 documents that differ
+  the first 10 causes explain 35 of the 45 documents that differ
+
+In compare/print: summary.csv (a line for each pair), causes.csv, summary.json, and for each pair pairs/<name>.json, <name>.old-marked.pdf and <name>.new-marked.pdf, <name>.page-N.png.
