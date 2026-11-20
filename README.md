@@ -15,7 +15,7 @@ cp corpus/everyday/*.html mine/
 ./run.sh mine
 ```
 
-That runs eight sample documents. For yours, take the samples out of `mine/` (keep its README), put your templates there with the pictures and style sheets they load, write the options your app passes in `mine/options.txt`, and run `./run.sh mine` again. Then open `out/mine/report.html`. For each template it gives the score, what differs and where, both PDFs, and pictures of the pages that differ. A few dozen templates take under a minute once the images are downloaded (about 175 MB the first time). [What goes in `mine/`](mine/README.md).
+That runs eight sample documents. For yours, take the samples out of `mine/` (keep its README), put your templates there with the pictures and style sheets they load, write the options your app passes in `mine/options.txt`, and run `./run.sh mine` again. Then open `out/mine/report.html`. For each template it gives the score, what differs and where, both PDFs, and pictures of the pages that differ. It also marks the templates that come out better from marqius-wkhtmltopdf than from wkhtmltopdf. A few dozen templates take under a minute once the images are downloaded (about 175 MB the first time). [What goes in `mine/`](mine/README.md).
 
 ### If you want help with the differences
 
@@ -87,12 +87,12 @@ These are what the runs above found in marqius-wkhtmltopdf 0.12.7. Each has a do
 - **Script files.** marqius-wkhtmltopdf runs the scripts written in a page, with the page's DOM, as wkhtmltopdf does (`options/javascript`), but not a script the page loads from a file (`<script src>`), so whatever that script builds is missing (`options/script-file`). wkhtmltopdf's header and footer variables work, both as text (`[page] of [topage]`) and through the usual script in an HTML header or footer.
 - **Arabic and Hebrew.** The letters of each word come out in reverse order, Arabic letters are not joined, and right-to-left tables are not mirrored (`international/invoice-ar` and `notice-he`).
 - **A few joined Hindi letters** are drawn in another form (`international/letter-hi`).
-- **SVG gradients** are painted flat grey (`print/61-svg-inline`).
+- **Text inside an SVG picture** that asks for Helvetica comes out in Times New Roman, where wkhtmltopdf uses Arial (`print/61-svg-inline`). Text in the page itself gets Arial from both.
 - **Form fields** are drawn more plainly: a drop-down list has no arrow, a ticked box shows a filled square where wkhtmltopdf draws a tick, and a button's label is smaller (`print/71-forms`).
 - **A table row at a page break.** On A5 paper, wkhtmltopdf moves a table row to the next page where marqius-wkhtmltopdf still fits it at the foot of the page, so the next page starts a row later (`options/a5-portrait`). Every other page break in the corpus is the same.
 - **Zoom** scales text a little differently: at `--zoom 1.25` a 21 pt title comes out 20.7 pt, and words stand up to 3.5 pt along their lines from where wkhtmltopdf puts them (`options/zoom`).
 - **Files are larger in general.** The 86 published documents come to about 1.8 times wkhtmltopdf's size.
-- **Pages that declare no character set.** wkhtmltopdf reads them as Latin-1 and prints garbled letters; marqius-wkhtmltopdf reads them as UTF-8. With `--encoding utf-8` the two agree (`print/67-unicode`, `options/no-charset` and `options/encoding`).
+- **Pages that do not name their character set.** wkhtmltopdf prints their accented and non-Latin letters garbled; marqius-wkhtmltopdf prints them as written. With `--encoding utf-8` the two agree (`print/67-unicode`, `options/no-charset` and `options/encoding`).
 - **Every file** is PDF 1.7 rather than 1.4, and names the page's language when the page gives one.
 
 0.12.7 closed four that 0.12.6 had: scripts get the page's DOM, bold Hindi and Thai keep their bold face, the lines of long pages with a set line height no longer drift lower, and fonts in OpenType CFF form, such as Noto CJK, are cut down to the letters a page uses. A one-page Chinese invoice is now 26 KB, where 0.12.6 made 27 MB and wkhtmltopdf makes 29 KB.
@@ -123,6 +123,7 @@ Nothing on its own: there is no counter and no call home, in the runner or in ma
 - **Parity** is the marqius engine's own measure, copied unchanged into `harness/score.py`, so the published figures can be checked: 50% text (how much of the text agrees, in reading order), 30% word positions (each word beside its twin: full marks when they coincide, nothing at 60 points apart) and 20% page count. A set's parity is the mean of its documents'. It reads the text inside the PDFs, so it counts some differences you cannot see, such as a line read back in another order or text that wkhtmltopdf turned into a picture. It also misses some that you can see, such as a colour.
 - **Overlay** lays one page on the other at 72 dots an inch and gives the share of ink with ink from the other page within 2 points. It catches what the text cannot: pictures, rules, letters drawn in another order. It is strict on purpose: a column 3 points lower counts as different.
 - **`compare`'s verdict** for each pair: *same pages* (the files themselves may still differ, as PDF 1.4 and 1.7 do), *appearance only* (something moved, or changed size or colour) or *content differs* (words, numbers or pictures). Its notes say what differs and where.
+- **Better than wkhtmltopdf**, the green mark beside a document, means every difference goes marqius-wkhtmltopdf's way: its PDF has the page's own words where wkhtmltopdf's has garbled letters, look-alike characters or a picture of the words, and the rest of the page looks the same, in place, colour and weight. Each run decides it again from the page itself ([`harness/score.py`](harness/score.py)). One difference of any other kind, such as a missing word or another font, and there is no mark.
 - **Speed** is the time to convert a set one document after another, wkhtmltopdf's divided by marqius-wkhtmltopdf's, the median of three runs, with wkhtmltopdf's default settings. Each program has converted one document beforehand, as a running server would have.
 
 ## The corpus

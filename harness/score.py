@@ -17,7 +17,8 @@ the figures published for marqius-wkhtmltopdf can be checked. For each document:
 
 A set's parity is the mean of its documents' scores. Beside the measure, the report gives the
 program's own document-by-document comparison (marqius-wkhtmltopdf compare), the fonts each PDF
-names, file sizes, exit statuses and times.
+names, file sizes, exit statuses and times, and marks the documents that come out better from
+marqius-wkhtmltopdf than from wkhtmltopdf (better_than_wk, below).
 
     python3 score.py WORK CORPUS META      (in the scorer container; no network is needed)
 
@@ -34,7 +35,9 @@ import re
 import statistics
 import subprocess
 import sys
+import unicodedata
 from concurrent.futures import ProcessPoolExecutor
+from html.parser import HTMLParser
 from pathlib import Path
 
 # ---------------------------------------------------------------------------------------------
@@ -122,10 +125,11 @@ INK_BITS = bytes.maketrans(bytes(range(256)), bytes(ord("1") if v < INK else ord
 
 
 def bitmaps(pdf, tmp):
-    """each page as a list of rows, each row an integer whose set bits are the ink"""
+    """each page as a list of rows, each row an integer whose set bits are the ink (the leftmost dot
+    the highest bit), and each page's width in dots"""
     base = Path(tmp) / Path(pdf).stem
     subprocess.run(["pdftoppm", "-r", str(DPI), "-gray", str(pdf), str(base)], capture_output=True, timeout=300)
-    pages_ = []
+    pages_, widths = [], []
     for f in sorted(Path(tmp).glob(base.name + "-*.pgm"), key=lambda x: int(x.stem.rsplit("-", 1)[1])):
         data = f.read_bytes()
         # P5 header: magic, width, height, maxval, each separated by white space
@@ -141,8 +145,9 @@ def bitmaps(pdf, tmp):
         w, h = int(fields[1]), int(fields[2])
         px = data[i + 1:]
         pages_.append([int(px[y * w:(y + 1) * w].translate(INK_BITS), 2) for y in range(h)])
+        widths.append(w)
         f.unlink()
-    return pages_
+    return pages_, widths
 
 
 def grow(rows):
@@ -162,15 +167,23 @@ def grow(rows):
     return out
 
 
-def overlay_of(rp, mp):
+def drawn(rp, mp):
+    """both PDFs' pages as ink, each with its pages' widths (bitmaps); None when a PDF is missing"""
     import tempfile
     if not pdf_ok(rp) or not pdf_ok(mp):
-        return 0.0
+        return None
     with tempfile.TemporaryDirectory() as t:
         ta, tb = Path(t) / "a", Path(t) / "b"
         ta.mkdir()
         tb.mkdir()
-        A, B = bitmaps(rp, ta), bitmaps(mp, tb)
+        return bitmaps(rp, ta), bitmaps(mp, tb)
+
+
+def overlay_of(both):
+    """the overlay of the two PDFs' pages, as drawn() gives them"""
+    if not both:
+        return 0.0
+    (A, _), (B, _) = both
     ink = matched = 0
     for k in range(max(len(A), len(B))):
         a = A[k] if k < len(A) else []
@@ -183,6 +196,304 @@ def overlay_of(rp, mp):
             n = min(len(a), len(b))
             matched += sum((a[y] & gb[y]).bit_count() for y in range(n)) + sum((b[y] & ga[y]).bit_count() for y in range(n))
     return 1.0 if ink == 0 else matched / ink
+
+
+# ---------------------------------------------------------------------------------------------
+# Better than wkhtmltopdf: a document where every difference compare finds goes marqius-wkhtmltopdf's
+# way, judged against the page itself, and nothing else on the page looks different. It is decided
+# again on every run, so the mark goes as soon as it stops being true. A difference goes
+# marqius-wkhtmltopdf's way when it is one of these:
+#
+#   text             marqius-wkhtmltopdf's words are the page's own and wkhtmltopdf's are not, and
+#                    either the two look the same there (wkhtmltopdf's text behind the letters is
+#                    wrong: look-alike characters, marks split off) or wkhtmltopdf's are the page's
+#                    own words misread as Windows-1252 (a page that names no character set)
+#   added            words that only marqius-wkhtmltopdf's PDF holds as text, which are the page's
+#                    own and which wkhtmltopdf drew in the same place all the same (as a picture)
+#   picture-missing  a picture of wkhtmltopdf's that marqius-wkhtmltopdf draws the same, as text or
+#                    shapes
+#   unreadable       letters drawn with no text behind them, in wkhtmltopdf's PDF only, which
+#                    marqius-wkhtmltopdf draws the same
+#
+# compare's findings about the files (PDF 1.7, the page's language) are left aside. Of its findings
+# about the look, only words divided differently, and lines that stand where they stood (within
+# NEAR points), may stand. Anything else (a word missing, a font, a size, a colour, a page break, a
+# picture added, letters with no text behind them in marqius-wkhtmltopdf's PDF, a warning from
+# marqius-wkhtmltopdf) means no mark. "The page's own words" are the text of the HTML files the
+# document's command line names, read as a browser reads them, compared without white space or case,
+# with a few letters of the words around them, as the PDF has them. "The same there" means that,
+# inside the boxes compare gives for the difference, the ink of each page lies within NEAR points of
+# the other's, and the two pages, drawn in colour, hold as much ink there, of the same colour (so a
+# gradient painted grey, a bold word set regular or a half-transparent line set solid is not the same).
+SAME_THERE = 0.98  # share of the ink there with ink from the other page within NEAR points
+SAME_INK = 0.85  # the lesser page's ink there (the sum of each dot's darkness) against the greater's
+SAME_COLOUR = 24  # largest difference, in any of red, green and blue (0 to 255), between the ink's mean colours there
+CONTEXT = 6  # letters either side of a word that must be the page's own too
+FINE_LOOK = {"moved", "reflow"}  # compare's findings about the look that may stand if the two are the same there
+
+
+class PageText(HTMLParser):
+    """the text an HTML file shows: its text, and the values of its fields, without scripts and style sheets"""
+    SKIP = {"script", "style", "noscript", "template"}
+
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.parts, self.skip = [], 0
+
+    def handle_starttag(self, tag, attrs):
+        if tag in self.SKIP:
+            self.skip += 1
+        elif tag == "input":
+            self.parts += [v for k, v in attrs if k in ("value", "placeholder") and v]
+
+    def handle_endtag(self, tag):
+        if tag in self.SKIP and self.skip:
+            self.skip -= 1
+
+    def handle_data(self, data):
+        if not self.skip:
+            self.parts.append(data)
+
+
+WINDOWS_1252 = {"iso-8859-1", "iso8859-1", "latin1", "latin-1", "l1", "us-ascii", "ascii", "windows-1252", "cp1252"}
+
+
+def page_text(raw, encoding=None):
+    """an HTML file's text, read as a browser reads it: by its byte-order mark, else the character set it
+    names, else the one given on the command line (--encoding), else UTF-8 when the bytes are UTF-8,
+    else Windows-1252"""
+    if raw.startswith(b"\xef\xbb\xbf"):
+        enc = "utf-8-sig"
+    elif raw[:2] in (b"\xff\xfe", b"\xfe\xff"):
+        enc = "utf-16"
+    else:
+        m = re.search(rb"""<meta[^>]*?charset\s*=\s*["']?\s*([A-Za-z0-9._:-]+)""", raw[:4096], re.I) or \
+            re.search(rb"""<\?xml[^>]*?encoding\s*=\s*["']([A-Za-z0-9._:-]+)""", raw[:4096], re.I)
+        enc = (m.group(1).decode("ascii") if m else encoding or "").lower()
+        if enc in WINDOWS_1252:
+            enc = "cp1252"
+        if not enc:
+            try:
+                raw.decode("utf-8")
+                enc = "utf-8"
+            except UnicodeDecodeError:
+                enc = "cp1252"
+    try:
+        text = raw.decode(enc, errors="replace")
+    except LookupError:
+        text = raw.decode("utf-8", errors="replace")
+    p = PageText()
+    p.feed(text)
+    p.close()
+    return " ".join(p.parts)
+
+
+def plain(s):
+    """text to compare: canonical Unicode, case folded, without white space, controls or invisible marks"""
+    s = unicodedata.normalize("NFC", unicodedata.normalize("NFC", s).casefold())
+    return "".join(c for c in s if unicodedata.category(c) not in ("Zs", "Zl", "Zp", "Cc", "Cf"))
+
+
+def own_text(corpus, s, n):
+    """the page's own text, plain: the HTML files the document's command line names (the page, its
+    header and footer, a cover), or the set's page of that name; '' when there is none"""
+    d = corpus / s
+    cmd = d / f"{n}.cmd"
+    if cmd.exists():
+        # one argument a line; lines starting with # are notes (as convert.sh reads them)
+        args = [a.strip() for a in cmd.read_text(encoding="utf-8").splitlines() if a.strip() and not a.startswith("#")]
+    else:
+        args = []
+        opts = d / "options.txt"  # mine/options.txt: options for every document of the set
+        if opts.exists():
+            import shlex
+            try:
+                args = shlex.split("\n".join(x for x in opts.read_text(encoding="utf-8").splitlines() if not x.startswith("#")))
+            except ValueError:
+                args = []
+        args += [f"{n}{e}" for e in (".html", ".htm") if (d / f"{n}{e}").exists()][:1]
+    enc = args[args.index("--encoding") + 1] if "--encoding" in args[:-1] else None
+    files = [d / a for a in args if re.search(r"\.(x?html?|xml)$", a, re.I) and (d / a).is_file()]
+    return plain(" ".join(page_text(f.read_bytes(), enc) for f in files))
+
+
+def cut(s):
+    """compare's text without its note that it shortened it ('… (20 words)')"""
+    return re.sub(r"\s*…\s*\(\d+ words?\)\s*$", "", re.sub(r"^\s*…\s*", "", s or ""))
+
+
+def misread(s):
+    """s as a program shows it that takes UTF-8 for Windows-1252: é as Ã©"""
+    out = []
+    for b in s.encode("utf-8"):
+        try:
+            out.append(bytes([b]).decode("cp1252"))
+        except UnicodeDecodeError:
+            out.append(chr(b))
+    return "".join(out)
+
+
+def page_own(piece, pdf_text, own):
+    """True when piece is the page's own words: with CONTEXT letters before or after it, as the PDF's
+    text has them, it is in the page's own text (a piece of 12 letters or more may stand alone when
+    the PDF's text does not have it as compare read it)"""
+    p = plain(cut(piece))
+    if not p or not own:
+        return False
+    i = pdf_text.find(p)
+    if i < 0:
+        return len(p) >= 12 and p in own
+    while i >= 0:
+        j = i + len(p)
+        if any(c in own for c in (pdf_text[max(0, i - CONTEXT):j + CONTEXT], pdf_text[max(0, i - CONTEXT):j], pdf_text[i:j + CONTEXT])
+               if len(c) > len(p) or len(p) >= 12):
+            return True
+        i = pdf_text.find(p, i + 1)
+    return False
+
+
+def look_there(ink, places, pad=2):
+    """inside the boxes compare gives (page, box in points from the top left), the share of ink with
+    ink from the other PDF within NEAR points, and how much ink each PDF has there"""
+    (A, wa), (B, wb) = ink
+    ia = ib = ma = mb = 0
+    for pl in places:
+        k = int(pl.get("page", 0)) - 1
+        if k < 0 or k >= len(A) or k >= len(B) or wa[k] != wb[k]:
+            return 0.0, 0, 0
+        a, b, w = A[k], B[k], wa[k]
+        x0, y0, x1, y1 = pl["box"]
+        X0, X1 = max(0, int(x0) - pad), min(w - 1, int(x1) + pad)
+        Y0, Y1 = max(0, int(y0) - pad), min(len(a), len(b), int(y1) + pad + 1)
+        if X1 < X0 or Y1 <= Y0:
+            continue
+        mask = ((1 << (X1 - X0 + 1)) - 1) << (w - 1 - X1)
+        lo, hi = max(0, Y0 - NEAR), min(len(a), len(b), Y1 + NEAR)
+        ga, gb = grow(a[lo:hi]), grow(b[lo:hi])
+        for y in range(Y0, Y1):
+            ra, rb = a[y] & mask, b[y] & mask
+            ia += ra.bit_count()
+            ib += rb.bit_count()
+            ma += (ra & gb[y - lo]).bit_count()
+            mb += (rb & ga[y - lo]).bit_count()
+    return ((ma + mb) / (ia + ib) if ia + ib else 1.0), ia, ib
+
+
+def in_colour(pdf, page):
+    """one page of a PDF drawn in colour at DPI: (width, height, red-green-blue bytes), or None"""
+    import tempfile
+    with tempfile.TemporaryDirectory() as t:
+        subprocess.run(["pdftoppm", "-r", str(DPI), "-f", str(page), "-l", str(page), str(pdf), str(Path(t) / "p")],
+                       capture_output=True, timeout=120)
+        f = next(Path(t).glob("p-*.ppm"), None)
+        if not f:
+            return None
+        data = f.read_bytes()
+    # P6 header: magic, width, height, maxval, each separated by white space
+    fields, i = [], 0
+    while len(fields) < 4:
+        while data[i:i + 1].isspace():
+            i += 1
+        j = i
+        while not data[j:j + 1].isspace():
+            j += 1
+        fields.append(data[i:j])
+        i = j
+    return int(fields[1]), int(fields[2]), data[i + 1:]
+
+
+def tone_there(pdf, places, cache, pad=2):
+    """inside the boxes, on a PDF's pages drawn in colour: how much ink there is (the sum of each dot's
+    darkness, 0 to 255) and the ink's mean colour, each dot weighed by its darkness; None when a page
+    cannot be drawn"""
+    dark = red = green = blue = 0
+    for pl in places:
+        key = (pdf, int(pl.get("page", 0)))
+        if key not in cache:
+            cache[key] = in_colour(*key) if key[1] > 0 else None
+        if not cache[key]:
+            return None
+        w, h, px = cache[key]
+        x0, y0, x1, y1 = pl["box"]
+        X0, X1 = max(0, int(x0) - pad), min(w - 1, int(x1) + pad)
+        for y in range(max(0, int(y0) - pad), min(h - 1, int(y1) + pad) + 1):
+            row = px[(y * w + X0) * 3:(y * w + X1 + 1) * 3]
+            for k in range(0, len(row) - 2, 3):
+                r, g, b = row[k], row[k + 1], row[k + 2]
+                d = 255 - (299 * r + 587 * g + 114 * b) // 1000
+                if d > 0:
+                    dark += d
+                    red += d * r
+                    green += d * g
+                    blue += d * b
+    return dark, ((red / dark, green / dark, blue / dark) if dark else (255.0, 255.0, 255.0))
+
+
+def better_than_wk(diffs, own, text_wk, text_mq, ink, rp, mp):
+    """True when every difference compare found (diffs, from its pair file) goes marqius-wkhtmltopdf's
+    way and nothing else looks different (see above); text_wk and text_mq are the PDFs' text, plain;
+    ink is both PDFs' pages as drawn() gives them, rp and mp the PDFs"""
+    cache = {}
+
+    def same_there(places, wk_drew=False, mq_drew=False):
+        share, ia, ib = look_there(ink, places)
+        if not places or share < SAME_THERE or (wk_drew and not ia) or (mq_drew and not ib):
+            return False
+        tw, tm = tone_there(rp, places, cache), tone_there(mp, places, cache)
+        if not tw or not tm:
+            return False
+        (dw, cw), (dm, cm) = tw, tm
+        if not max(dw, dm):
+            return True
+        return min(dw, dm) / max(dw, dm) >= SAME_INK and max(abs(a - b) for a, b in zip(cw, cm)) <= SAME_COLOUR
+
+    wins = 0
+    for x in diffs:
+        of, kind = x.get("of"), x.get("kind")
+        old, new = x.get("old") or [], x.get("new") or []
+        if of == "file":
+            continue
+        if of == "appearance":
+            if kind == "spacing" or (kind in FINE_LOOK and same_there(old + new)):
+                continue
+            return False
+        if kind == "text":
+            was, now = cut(x.get("was")), cut(x.get("now"))
+            if not page_own(now, text_mq, own):
+                return False
+            if plain(was) and plain(was) == plain(misread(now)) != plain(now):
+                pass  # wkhtmltopdf read the page's UTF-8 as Windows-1252
+            elif not plain(was) or plain(was) in own or not same_there(old + new, wk_drew=True, mq_drew=True):
+                return False
+        elif kind == "added":
+            if not page_own(x.get("now"), text_mq, own) or not same_there(new, wk_drew=True, mq_drew=True):
+                return False
+        elif kind == "picture-missing":
+            if not same_there(old, wk_drew=True, mq_drew=True):
+                return False
+        elif kind == "unreadable":
+            if new or not same_there(old, wk_drew=True, mq_drew=True):
+                return False
+        else:
+            return False
+        wins += 1
+    return wins > 0
+
+
+def judge(rp, mp, pages_wk, pages_mq, ink, pair, own, err_mq):
+    """the mark for one document: better_than_wk, once both PDFs are there with as many pages,
+    compare has listed every difference, and marqius-wkhtmltopdf gave no warning"""
+    if not ink or not own or pages_wk != pages_mq:
+        return False
+    if Path(err_mq).exists() and Path(err_mq).read_text(errors="replace").strip():
+        return False
+    try:
+        j = json.loads(Path(pair).read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return False
+    if j.get("verdict") != "content differs" or any((j.get("left_out") or {}).values()):
+        return False
+    return better_than_wk(j.get("differences", []), own, plain(pdftotext(rp)), plain(pdftotext(mp)), ink, rp, mp)
 
 
 MISS = 0.99  # a document below this, or with content that differs, is listed with its pictures
@@ -224,13 +535,15 @@ def fonts_of(p):
 
 
 def one(job):
-    s, n, rp, mp = job
+    s, n, rp, mp, pair, own, err_mq = job
     sc, text, geom, pr, pm = score_pair(rp, mp)
-    return dict(set=s, name=n, score=sc, text=text, geom=geom, pages_wk=pr, pages_mq=pm, overlay=overlay_of(rp, mp),
+    ink = drawn(rp, mp)
+    return dict(set=s, name=n, score=sc, text=text, geom=geom, pages_wk=pr, pages_mq=pm, overlay=overlay_of(ink),
                 fonts_wk=fonts_of(rp), fonts_mq=fonts_of(mp),
                 size_wk=Path(rp).stat().st_size if pdf_ok(rp) else 0,
                 size_mq=Path(mp).stat().st_size if pdf_ok(mp) else 0,
-                made_wk=pdf_ok(rp), made_mq=pdf_ok(mp))
+                made_wk=pdf_ok(rp), made_mq=pdf_ok(mp),
+                better=judge(rp, mp, pr, pm, ink, pair, own, err_mq))
 
 
 def read_meta(p):
@@ -297,7 +610,8 @@ def main():
             if row[1] == "1" and row[2] == s and row[3] not in names:
                 names.append(row[3])
         for n in sorted(set(names)):
-            jobs.append((s, n, str(d_wk / f"{n}.pdf"), str(d_mq / f"{n}.pdf")))
+            jobs.append((s, n, str(d_wk / f"{n}.pdf"), str(d_mq / f"{n}.pdf"), str(work / "compare" / s / "pairs" / f"{n}.json"),
+                         own_text(corpus, s, n), str(work / "logs" / "mq" / s / f"{n}.err")))
     with ProcessPoolExecutor() as ex:
         docs = list(ex.map(one, jobs))
 
@@ -421,7 +735,7 @@ def main():
     (work / "report.json").write_text(json.dumps(report, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
     with (work / "scores.csv").open("w", newline="", encoding="utf-8") as f:
         cols = ["set", "name", "score", "text", "geom", "pages_wk", "pages_mq", "overlay", "verdict", "level", "first", "fonts_same",
-                "size_wk", "size_mq", "status_wk", "status_mq", "ms_wk", "ms_mq"]
+                "size_wk", "size_mq", "status_wk", "status_mq", "ms_wk", "ms_mq", "better"]
         w = csv.writer(f)
         w.writerow(cols)
         for d in docs:
@@ -484,8 +798,19 @@ def console(r):
         for d in low:
             if d["score"] >= 0.99:
                 break
-            out.append(f"    {d['set']}/{d['name']}: {d['score']:.4f} (overlay {d['overlay']:.3f})  {why(d)[:80]}")
+            out.append(f"    {d['set']}/{d['name']}: {d['score']:.4f} (overlay {d['overlay']:.3f})" + (f", {BETTER.lower()}" if d.get("better") else "")
+                       + f"  {why(d)[:80]}")
+    nb = sum(1 for d in r["documents"] if d.get("better"))
+    if nb:
+        out.append("")
+        out.append(f"  {BETTER}: {nb} document{'s' if nb > 1 else ''} ({', '.join(d['set'] + '/' + d['name'] for d in r['documents'] if d.get('better'))})")
     return "\n".join(out)
+
+
+BETTER = "Better than wkhtmltopdf"
+BETTER_ABOUT = ("*Better than wkhtmltopdf* marks a document where every difference goes marqius-wkhtmltopdf's way: its PDF has the page's own words "
+                "where wkhtmltopdf's has garbled letters, look-alike characters or a picture of the words, and nothing else on the page looks different. "
+                "Its score is lower only because the score measures how alike the two PDFs are.")
 
 
 def markdown(r):
@@ -509,6 +834,8 @@ def markdown(r):
           "The verdicts are `marqius-wkhtmltopdf compare`'s: *same pages* counts the pairs whose pages are the same "
           "(the files themselves may differ, as PDF 1.4 against 1.7 does), *appearance only* those where something moved "
           "or changed size or colour, *content differs* those where words, numbers or pictures differ.", ""]
+    if any(d.get("better") for d in r["documents"]):
+        L += [BETTER_ABOUT, ""]
     for s, x in r["sets"].items():
         L += [f"## {x['title']} (`{s}`)", "",
               "| Document | Score | Text | Positions | Pages | Overlay | compare | First difference | Fonts | Size wk / mq | Time wk / mq |",
@@ -518,7 +845,8 @@ def markdown(r):
             first = why(d).replace("|", "\\|")
             if d["note"]:
                 first += f" — *{d['note']}*"
-            L.append(f"| {d['name']} | {d['score']:.4f} | {d['text']:.3f} | {d['geom']:.3f} | {d['pages_wk']}/{d['pages_mq']} | {d['overlay']:.3f} | "
+            name = d["name"] + (f"<br>**{BETTER}**" if d.get("better") else "")
+            L.append(f"| {name} | {d['score']:.4f} | {d['text']:.3f} | {d['geom']:.3f} | {d['pages_wk']}/{d['pages_mq']} | {d['overlay']:.3f} | "
                      f"{verdict_word(d['verdict'])} | {first} | {fonts} | {kb(d['size_wk'])} / {kb(d['size_mq'])} | "
                      f"{ms_text(d['ms_wk'])} / {ms_text(d['ms_mq'])} |")
         L.append("")
@@ -580,8 +908,9 @@ def html_report(r):
                 first += f"<br><i>{esc(d['note'])}</i>"
             pic_links = [f'<a href="compare/{esc(s)}/pairs/{esc(p)}">page {esc(p.rsplit(".page-", 1)[-1].replace(".png", ""))}</a>'
                          for p in d.get("pictures", [])]
-            cls = "bad" if d["score"] < 0.9 else "warn" if d["score"] < 0.98 else ""
-            trs.append(f"<tr class='{cls}'><td>{esc(d['name'])}</td><td><b>{d['score']:.4f}</b></td><td>{d['text']:.3f}</td><td>{d['geom']:.3f}</td>"
+            cls = "good" if d.get("better") else "bad" if d["score"] < 0.9 else "warn" if d["score"] < 0.98 else ""
+            badge = f"<br><span class='better'>{BETTER}</span>" if d.get("better") else ""
+            trs.append(f"<tr class='{cls}'><td>{esc(d['name'])}{badge}</td><td><b>{d['score']:.4f}</b></td><td>{d['text']:.3f}</td><td>{d['geom']:.3f}</td>"
                        f"<td>{d['pages_wk']}/{d['pages_mq']}</td><td>{d['overlay']:.3f}</td><td>{esc(verdict_word(d['verdict']))}</td><td>{first}</td>"
                        f"<td>{'same' if d['fonts_same'] else 'differ: ' + esc(', '.join(sorted(set(d['fonts_wk']) ^ set(d['fonts_mq']))))}</td>"
                        f"<td>{kb(d['size_wk'])} / {kb(d['size_mq'])}</td><td>{ms_text(d['ms_wk'])} / {ms_text(d['ms_mq'])}</td>"
@@ -591,6 +920,8 @@ def html_report(r):
                      "<table><tr><th>Document</th><th>Score</th><th>Text</th><th>Positions</th><th>Pages wk/mq</th><th>Overlay</th><th>compare</th><th>First difference</th>"
                      "<th>Fonts</th><th>Size wk / mq</th><th>Time wk / mq</th><th>Pages that differ</th><th>PDFs</th></tr>" + "".join(trs) + "</table>")
     sysl = "".join(f"<li>{esc(re.sub(r'[*`]', '', x))}</li>" for x in system_lines(r))
+    better_about = (f"<p class='muted'><span class='better'>{BETTER}</span> {esc(BETTER_ABOUT.replace('*' + BETTER + '*', '').strip())} "
+                    "Its row is green.</p>") if any(d.get("better") for d in r["documents"]) else ""
     head = ""
     if h:
         head = (f"<p class='big'>Published documents ({esc(' and '.join(h['sets']))}, {h['documents']}): parity <b>{h['parity']:.4f}</b>"
@@ -599,11 +930,13 @@ def html_report(r):
 <html lang="en"><head><meta charset="utf-8"><title>wkhtmltopdf parity report</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-:root {{ --fg: #1c2430; --muted: #5b6676; --line: #d9dee5; --bg: #fff; --head: #f3f5f8; --bad: #fde8e8; --warn: #fff6dc; --link: #1f5fbf }}
-@media (prefers-color-scheme: dark) {{ :root {{ --fg: #e6e9ee; --muted: #9aa4b2; --line: #333b47; --bg: #14181e; --head: #1d232b; --bad: #3a1f22; --warn: #34301d; --link: #7fb0ff }} }}
+:root {{ --fg: #1c2430; --muted: #5b6676; --line: #d9dee5; --bg: #fff; --head: #f3f5f8; --bad: #fde8e8; --warn: #fff6dc; --good: #e9f6ec; --better: #1a7f37; --link: #1f5fbf }}
+@media (prefers-color-scheme: dark) {{ :root {{ --fg: #e6e9ee; --muted: #9aa4b2; --line: #333b47; --bg: #14181e; --head: #1d232b; --bad: #3a1f22; --warn: #34301d; --good: #17301f; --better: #238636; --link: #7fb0ff }} }}
 body {{ font: 14px/1.45 system-ui, -apple-system, Segoe UI, Roboto, sans-serif; color: var(--fg); background: var(--bg); margin: 24px auto; max-width: 1400px; padding: 0 16px }}
 table {{ border-collapse: collapse; width: 100%; margin: 8px 0 24px; font-size: 13px }} th, td {{ border-bottom: 1px solid var(--line); padding: 5px 8px; text-align: left; vertical-align: top }}
-th {{ background: var(--head); position: sticky; top: 0 }} tr.bad td {{ background: var(--bad) }} tr.warn td {{ background: var(--warn) }}
+th {{ background: var(--head); position: sticky; top: 0 }} tr.bad td {{ background: var(--bad) }} tr.warn td {{ background: var(--warn) }} tr.good td {{ background: var(--good) }}
+.better {{ display: inline-block; margin-top: 3px; padding: 1px 8px 1px 7px; border-radius: 4px; background: var(--better); color: #fff; font-size: 11px; font-weight: 600; white-space: nowrap }}
+.better::before {{ content: "✓ " }}
 .big {{ font-size: 18px }} .muted {{ color: var(--muted) }} a {{ color: var(--link) }} code {{ font-size: 12px }}
 </style></head><body>
 <h1>wkhtmltopdf parity report</h1>
@@ -611,6 +944,7 @@ th {{ background: var(--head); position: sticky; top: 0 }} tr.bad td {{ backgrou
 {head}
 <table><tr><th>Set</th><th>Documents</th><th>Parity</th><th>Lowest</th><th>Overlay</th><th>Same pages</th><th>Appearance only</th><th>Content differs</th><th>Fonts differ</th><th>Speed</th></tr>{''.join(rows)}</table>
 <p class="muted">Parity: 50% text, 30% word positions, 20% page count (the marqius engine's measure, read from the text in the PDFs). Overlay: one page laid on the other; the share of ink, at 72 dots an inch, with ink from the other page within 2 points. Verdicts: <code>marqius-wkhtmltopdf compare</code>; its full report, with both PDFs marked where they differ, is in <a href="compare/">compare/</a>. Rows in yellow score below 0.98, in red below 0.90.</p>
+{better_about}
 {''.join(parts)}
 <h2>What ran</h2><ul>{sysl}</ul>
 </body></html>

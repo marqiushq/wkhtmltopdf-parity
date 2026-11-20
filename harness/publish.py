@@ -12,7 +12,8 @@ downloads: one folder for each run). For each run:
                                  parity of each set, the speed, the run's log
 
 Then the part of README.md between the scoreboard markers is written again from results/:
-the latest version's scores, every version's, and every document below 0.99 with the reason.
+the latest version's scores, every version's, and every document below 0.99 with the reason,
+marked where it comes out better from marqius-wkhtmltopdf (score.py decides that).
 Only the standard library is used.
 """
 import argparse
@@ -29,6 +30,13 @@ HISTORY_COLS = ["when", "version", "tag", "platform", "digest", "print", "everyd
                 "international", "speed", "nowait_speed", "suite", "run"]
 CANONICAL = "linux-amd64"  # the platform the scoreboard leads with: most servers, and the published figures'
 MISS = 0.99  # documents below this are listed one by one, with the reason
+# the mark beside a document that comes out better from marqius-wkhtmltopdf (score.py, better_than_wk), linked
+# to how it is decided; nothing is shown beside the others
+BADGE = "[![Better than wkhtmltopdf](.github/better.svg)](#the-measures)"
+BADGE_ABOUT = ("marks a document where every difference goes marqius-wkhtmltopdf's way: its PDF has the page's own words where "
+               "wkhtmltopdf's has garbled letters, look-alike characters or a picture of the words, and nothing else on the page looks "
+               "different. Its score is lower only because the score measures how alike the two PDFs are. Each run decides it again, "
+               "from the page itself.")
 
 
 def platform_dir(p):
@@ -178,8 +186,12 @@ def scoreboard(results, readme_dir):
     if not misses:
         L.append(f"Every document scores {MISS} or more, and none differs in content.")
     else:
-        L += ["<details>", f"<summary><b>The {len(misses)} documents below {MISS} or with different content, and why</b></summary>", "",
-              "| Document | Parity | Overlay | Why | Pages |", "|---|---:|---:|---|---|"]
+        better = sum(1 for d in misses if d.get("better"))
+        L += ["<details>", f"<summary><b>The {len(misses)} documents below {MISS} or with different content, and why"
+              + (f"; {better} of them come out better from marqius-wkhtmltopdf" if better else "") + "</b></summary>", ""]
+        if better:
+            L += [f"{BADGE} {BADGE_ABOUT}", ""]
+        L += ["| Document | Parity | Overlay | Why | Pages |", "|---|---:|---:|---|---|"]
         for d in misses:
             pics = " ".join(f"[{p.rsplit('.page-', 1)[-1].replace('.png', '')}]({rel(folder / 'pictures' / (d['set'] + '--' + p))})"
                             for p in d.get("pictures", []) if (folder / "pictures" / f"{d['set']}--{p}").exists())
@@ -189,8 +201,9 @@ def scoreboard(results, readme_dir):
                 why = "compare: " + ("; ".join(found) or d.get("first", ""))
                 if len(why) > 160:
                     why = why[:157].rstrip() + "…"
-            why = why.replace("|", "\\|")
-            L.append(f"| `{d['set']}/{d['name']}` | {d['score']:.4f} | {d.get('overlay', 0):.3f} | {why} | {pics} |")
+            why = why.replace("|", "\\|").replace("<", "&lt;").replace(">", "&gt;")  # (<script src>) is text, not a tag
+            mark = f"<br>{BADGE}" if d.get("better") else ""
+            L.append(f"| `{d['set']}/{d['name']}`{mark} | {d['score']:.4f} | {d.get('overlay', 0):.3f} | {why} | {pics} |")
         L += ["", "</details>"]
     return "\n".join(L)
 
