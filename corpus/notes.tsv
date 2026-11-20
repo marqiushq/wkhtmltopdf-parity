@@ -24,3 +24,4 @@ international	letter-ja	0.12.8	0.8569	0.996	The pages look the same. wkhtmltopdf
 international	mixed-scripts	0.12.8	0.9890	1.000	The pages look the same. wkhtmltopdf sets all the Chinese, Japanese and Korean words in Noto Sans CJK HK, marqius-wkhtmltopdf in Noto Sans CJK JP.
 international	receipt-ko	0.12.8	0.9995	0.999	The pages look the same. The wide space after the time reads back as a different space character in the two PDFs.
 options	script-file	0.12.8	0.3501	0.259	A real difference: marqius-wkhtmltopdf runs scripts written in the page, but not one the page loads from a file (<script src>), so the delivery note's number, lines and parcel count, which script-file.js writes, are missing.
+options	script-file	0.12.10	0.9997	1.000	The pages are the same: the script file runs, as in wkhtmltopdf, and writes the delivery note's number, lines and parcel count. The files differ only in that marqius-wkhtmltopdf's names its language (en), where wkhtmltopdf's names none.

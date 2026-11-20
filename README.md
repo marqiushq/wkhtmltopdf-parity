@@ -107,7 +107,7 @@ What marqius-wkhtmltopdf **0.12.9**, the version on the scoreboard, has yet to m
 
 Other points, each with a document in the corpus, so the scoreboard shows when one changes:
 
-- **Scripts written in the page** run with the page's DOM, as wkhtmltopdf runs them (`options/javascript`). wkhtmltopdf's header and footer variables work, both as text (`[page] of [topage]`) and through the usual script in an HTML header or footer.
+- **Scripts**, written in the page or loaded from a file, run with the page's DOM, as wkhtmltopdf runs them (`options/javascript` and `options/script-file`). wkhtmltopdf's header and footer variables work, both as text (`[page] of [topage]`) and through the usual script in an HTML header or footer.
 - **Arabic and Hebrew** pages look the same. Copied or searched, marqius-wkhtmltopdf's text gives back most of their words as written, where wkhtmltopdf's breaks them into separate letters or letter shapes (`international/invoice-ar` and `notice-he`).
 - **Files are smaller in general.** The 86 published documents come to about two thirds of wkhtmltopdf's size. Pages set in the FreeFont fallback fonts are larger: here the Hindi and Thai pages (`international/letter-hi` and `receipt-th`).
 - **Pages that do not name their character set.** wkhtmltopdf prints their accented and non-Latin letters garbled; marqius-wkhtmltopdf prints them as written. With `--encoding utf-8` the two agree (`print/67-unicode`, `options/no-charset` and `options/encoding`).
