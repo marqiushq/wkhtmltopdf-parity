@@ -26,9 +26,11 @@ RUNS=${PARITY_RUNS:-3}
 mkdir -p "$W/times" "$W/env" "$W/logs" /tmp/parity
 
 # a clock in microseconds (BusyBox's adjtimex reads the system clock without changing it), or
-# /proc/uptime's hundredths where adjtimex is refused
+# /proc/uptime's hundredths where adjtimex is refused. Once a time daemon has set the kernel's
+# NANO status (8192), tv_usec holds nanoseconds: they are brought back to microseconds
 now_us() {
-    busybox adjtimex 2> /dev/null | awk '/tv_sec/ { s = $2 } /tv_usec/ { u = $2 } END { if (s) printf "%d%06d\n", s, u }'
+    busybox adjtimex 2> /dev/null | awk '/status:/ { n = int($2) % 16384 >= 8192 } /tv_sec/ { s = $2 } /tv_usec/ { u = $2 }
+        END { if (s) printf "%d%06d\n", s, n ? int(u / 1000) : u }'
 }
 [ -n "$(now_us)" ] || now_us() { awk '{ printf "%d\n", $1 * 1000000 }' /proc/uptime; }
 # per document, as the published compare lane timed it: /proc/uptime before and after
@@ -147,7 +149,13 @@ run_all() {
         _t0=$(now_us)
         convert_set "$_p" "$_who" "$_run" "$_set" "$_extra"
         _t1=$(now_us)
-        printf '%s\t%s\t%s\t%s\n' "$_who" "$_run" "$_set" "$((_t1 - _t0))" >> "$W/times/$L-sets.tsv"
+        _us=$((${_t1:-0} - ${_t0:-0}))
+        # a time outside 0 < t < 3600 s is a clock that misread, never a run: it is dropped
+        if [ -n "$_t0" ] && [ -n "$_t1" ] && [ "$_us" -gt 0 ] && [ "$_us" -lt 3600000000 ]; then
+            printf '%s\t%s\t%s\t%s\n' "$_who" "$_run" "$_set" "$_us" >> "$W/times/$L-sets.tsv"
+        else
+            echo "convert.sh: $_who, run $_run, $_set: the clock read ${_t0:-nothing} then ${_t1:-nothing}; that time is dropped" >&2
+        fi
     done
 }
 
