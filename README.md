@@ -45,7 +45,7 @@ On GitHub Actions, ARM64, 4 CPUs: the same parity in every set, 28× faster ([re
 | Version | Checked | Business documents | CSS features | Published 86 | Options | Languages | Speed |
 |---|---|---:|---:|---:|---:|---:|---:|
 | [0.12.7](results/0.12.7/linux-amd64/report.md) | 2026-11-20 | 0.9908 | 0.9925 | 0.9924 | 0.9354 | 0.7599 | 36× |
-| [0.12.6](results/0.12.6/linux-amd64/report.md) | 2026-11-19 | 0.9902 | 0.9920 | 0.9919 | 0.8895 | 0.7073 | 38× |
+| [0.12.6](results/0.12.6/linux-amd64/report.md) | 2026-11-20 | 0.9902 | 0.9920 | 0.9919 | 0.8611 | 0.7073 | 38× |
 
 <details>
 <summary><b>The 24 documents below 0.99 or with different content, and why</b></summary>
