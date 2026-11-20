@@ -92,7 +92,12 @@ def main():
         if not sys.stdin.isatty():
             print("\nNothing was sent. To send it, run ./run.sh share --yes (or run it in a terminal and answer yes).")
             return 0
-        if input("\nSend it? Type yes to send, anything else to stop: ").strip().lower() != "yes":
+        try:
+            answer = input("\nSend it? Type yes to send, anything else to stop: ")
+        except (EOFError, KeyboardInterrupt):  # Ctrl-D or Ctrl-C at the prompt: a no
+            answer = ""
+            print()
+        if answer.strip().lower() != "yes":
             print("Nothing was sent.")
             return 0
     req = urllib.request.Request(URL, data=body.encode("utf-8"), method="POST",
