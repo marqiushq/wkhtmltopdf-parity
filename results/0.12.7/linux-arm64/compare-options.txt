@@ -1,0 +1,30 @@
+marqius-wkhtmltopdf compare: pdf/wk/options against pdf/mq/options
+19 pairs compared in 0.3 s (72 a second on 4 cores)
+
+  same              0
+  appearance only   16
+  content differs   2
+  file differs      1   (the pages are the same; the kind of PDF or its description is not)
+
+  by level: blocking 2, review 17, cosmetic 0
+  NO-GO: 2 documents with blocking differences
+
+The 19 documents that differ, by cause (79 causes in all; a document may have several):
+   1. review         19 documents   pdf type: version 1.4 → 1.7
+   2. cosmetic       17 documents   metadata: language none → en
+   3. cosmetic       12 documents   moved 1 pt to the right
+   4. cosmetic        9 documents   moved 2 pt to the right
+   5. cosmetic        2 documents   lines break at other words
+   6. cosmetic        2 documents   metadata: language none → fr
+   7. cosmetic        2 documents   moved 2.5 pt down
+   8. cosmetic        2 documents   moved 6 pt down
+   9. cosmetic        2 documents   size: 8 → 8.3 pt
+  10. blocking        1 document    missing: "#"
+  11. blocking        1 document    missing: "A# copier paper, box of # reams ## ## Toner cartridge, black # # Archive boxes, "
+  12. blocking        1 document    missing: "DN-####-#### For Acme Trading Ltd: # lines, one toner cartridge to follow."
+      … 67 more in causes.csv
+  the first 3 causes explain 1 of the 19 documents that differ
+  the first 5 causes explain 5 of the 19 documents that differ
+  the first 10 causes explain 6 of the 19 documents that differ
+
+In compare/options: summary.csv (a line for each pair), causes.csv, summary.json, and for each pair pairs/<name>.json, <name>.old-marked.pdf and <name>.new-marked.pdf, <name>.page-N.png.
