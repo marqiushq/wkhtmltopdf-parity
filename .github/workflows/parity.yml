@@ -6,8 +6,10 @@
 #   by hand        Actions > Parity > Run workflow, with the tags to test (or none: as the schedule)
 #   on a change    to the corpus or the harness: latest, to show the change keeps working; a pull
 #                  request is tested the same way, and nothing is filed for it
+#   on an issue    a tracking issue (label "known gap") opened, closed or changed: nothing is run;
+#                  the README's list of open differences is written again from the issues
 #
-# Each tag runs on x86-64 and on ARM64. Only the publish job can write to the repository.
+# Each tag runs on x86-64 and on ARM64. Only the publish and gaps jobs can write to the repository.
 name: Parity
 
 on:
@@ -28,12 +30,15 @@ on:
     paths: ["corpus/**", "harness/**", "run.sh", ".github/workflows/parity.yml"]
   pull_request:
     paths: ["corpus/**", "harness/**", "run.sh", ".github/workflows/parity.yml"]
+  issues:
+    types: [opened, edited, closed, reopened, labeled, unlabeled, deleted]
 
 permissions:
   contents: read
 
 jobs:
   plan:
+    if: github.event_name != 'issues'
     runs-on: ubuntu-24.04
     outputs:
       tags: ${{ steps.pick.outputs.tags }}
@@ -104,6 +109,7 @@ jobs:
     runs-on: ubuntu-24.04
     permissions:
       contents: write
+      issues: read
     concurrency:
       group: publish
       cancel-in-progress: false
@@ -119,19 +125,55 @@ jobs:
           path: artifacts
       - name: File the results, write the scoreboard and commit
         env:
+          GH_TOKEN: ${{ github.token }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           # if main moves while this files (a push, another run), file again on top of it
           for try in 1 2 3; do
-            python3 harness/publish.py artifacts
+            # the tracking issues as they are now (if GitHub cannot say, the last list kept in results/)
+            gh api "repos/$GITHUB_REPOSITORY/issues?labels=known%20gap&state=all&per_page=100" > "$RUNNER_TEMP/issues.json" || rm -f "$RUNNER_TEMP/issues.json"
+            python3 harness/publish.py artifacts --issues "$RUNNER_TEMP/issues.json"
             git add results README.md
             if git diff --cached --quiet; then echo "nothing new"; exit 0; fi
             versions=$(git diff --cached --name-only -- 'results/*/*/report.json' | cut -d/ -f2 | sort -u | tr '\n' ' ')
             git commit -q -m "Results for ${versions:-the suite}" -m "From $RUN_URL"
             if git push -q origin HEAD:main; then exit 0; fi
             echo "main moved while filing; filing again on top of it"
+            git fetch -q origin main && git reset -q --hard origin/main
+          done
+          exit 1
+
+  # a tracking issue opened, closed or changed: the README's list of open differences, written again
+  gaps:
+    if: github.event_name == 'issues'
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+      issues: read
+    concurrency:
+      group: gaps
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+      - name: Write the list of open differences and commit
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          for try in 1 2 3; do
+            gh api "repos/$GITHUB_REPOSITORY/issues?labels=known%20gap&state=all&per_page=100" > "$RUNNER_TEMP/issues.json"
+            python3 harness/publish.py --issues "$RUNNER_TEMP/issues.json"
+            git add results/known-gaps.tsv README.md
+            if git diff --cached --quiet; then echo "nothing new"; exit 0; fi
+            git commit -q -m "Open differences from the tracking issues" -m "From $RUN_URL"
+            if git push -q origin HEAD:main; then exit 0; fi
+            echo "main moved while writing; writing again on top of it"
             git fetch -q origin main && git reset -q --hard origin/main
           done
           exit 1

@@ -40,6 +40,8 @@ from concurrent.futures import ProcessPoolExecutor
 from html.parser import HTMLParser
 from pathlib import Path
 
+import notes as notes_file  # corpus/notes.tsv: why a document differs, tied to the result it explains
+
 # ---------------------------------------------------------------------------------------------
 # The engine's measure: parity.py (marqius, tests' parity harness), unchanged. WEIGHTS, run,
 # pdftotext, pages, words and geom_score are copied from it; score_pair is how the published
@@ -646,7 +648,7 @@ def main():
     meta = read_meta(meta_file)
     sets_info = {r[0]: dict(image=r[1], published=r[2] == "yes", title=r[3], about=r[4])
                  for r in read_tsv(corpus / "sets.tsv")[1:]} if (corpus / "sets.tsv").exists() else {}
-    notes = {(r[0], r[1]): r[2] for r in read_tsv(corpus / "notes.tsv")[1:]} if (corpus / "notes.tsv").exists() else {}
+    notes = notes_file.read(corpus / "notes.tsv")
     sets = meta["sets"]
 
     # every pair, scored on every core
@@ -690,7 +692,10 @@ def main():
         d["first"] = v.get("first", "")
         d["differences"] = int(v["differences"]) if v.get("differences", "").isdigit() else None
         d["fonts_same"] = d["fonts_wk"] == d["fonts_mq"]
-        d["note"] = notes.get(k, "")
+        # the note written for this result; one written for another result is listed to check again
+        d["note"], others = notes_file.pick(notes, d)
+        if others:
+            d["note_due"] = notes_file.due_text(d, others)
         # every difference compare found, the content ones first, then appearance, then the file's
         pj = work / "compare" / d["set"] / "pairs" / f"{d['name']}.json"
         diffs = []
@@ -853,6 +858,11 @@ def console(r):
     if nb:
         out.append("")
         out.append(f"  {BETTER}: {nb} document{'s' if nb > 1 else ''} ({', '.join(d['set'] + '/' + d['name'] for d in r['documents'] if d.get('better'))})")
+    due = [d["note_due"] for d in r["documents"] if d.get("note_due")]
+    if due:
+        out.append("")
+        out.append("  notes to check again: the result is not the one the note was written for, so compare's finding is shown")
+        out += [f"    {x}" for x in due]
     return "\n".join(out)
 
 
