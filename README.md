@@ -90,18 +90,20 @@ On GitHub Actions, ARM64, 4 CPUs: the same parity in every set, 32× faster ([re
 
 ## What works differently today
 
-These are what the runs above found in marqius-wkhtmltopdf 0.12.6. Each has a document in the corpus, so the scoreboard shows when one changes.
+These are what the runs above found in marqius-wkhtmltopdf 0.12.7. Each has a document in the corpus, so the scoreboard shows when one changes.
 
-- **Scripts that change the page.** marqius-wkhtmltopdf runs `document.write`, but the page's DOM is missing: `document.getElementById`, `querySelector` and `createElement` are undefined, so whatever a script builds with them is missing from the PDF (`options/javascript`). wkhtmltopdf's header and footer variables work, both as text (`[page] of [topage]`) and through the usual script in an HTML header or footer.
+- **Script files.** marqius-wkhtmltopdf runs the scripts written in a page, with the page's DOM, as wkhtmltopdf does (`options/javascript`), but not a script the page loads from a file (`<script src>`), so whatever that script builds is missing (`options/script-file`). wkhtmltopdf's header and footer variables work, both as text (`[page] of [topage]`) and through the usual script in an HTML header or footer.
 - **Arabic and Hebrew.** The letters of each word come out in reverse order, Arabic letters are not joined, and right-to-left tables are not mirrored (`international/invoice-ar` and `notice-he`).
-- **Bold where the named font lacks the script.** For Hindi and Thai, marqius-wkhtmltopdf falls back to a regular face for bold text (`international/letter-hi` and `receipt-th`).
+- **A few joined Hindi letters** are drawn in another form (`international/letter-hi`).
 - **SVG gradients** are painted flat grey (`print/61-svg-inline`).
 - **Form fields** are drawn more plainly: a drop-down list has no arrow, a ticked box shows a filled square where wkhtmltopdf draws a tick, and a button's label is smaller (`print/71-forms`).
-- **Some long pages sit lower.** In the options set's report (12 px Arial, a line height of 1.45, headings and tables), each line sits a little lower, by about 9 pt at the foot of an A4 page; the page breaks stayed the same (the `options` documents built on `report.html`). Plain paragraphs do not move (`print/76-long-paragraphs`).
-- **Fonts in OpenType CFF form are embedded almost whole.** TrueType fonts such as Arial are cut down to the letters a page uses, but CFF fonts are not, so a PDF with Chinese, Japanese or Korean text (Noto CJK) is 13 to 27 MB, against under 40 KB from wkhtmltopdf, and takes about half a second, slower than wkhtmltopdf. Hindi and Thai pages, which fall back to FreeFont, come to 0.5 to 1.1 MB (`international`).
+- **A table row at a page break.** On A5 paper, wkhtmltopdf moves a table row to the next page where marqius-wkhtmltopdf still fits it at the foot of the page, so the next page starts a row later (`options/a5-portrait`). Every other page break in the corpus is the same.
+- **Zoom** scales text a little differently: at `--zoom 1.25` a 21 pt title comes out 20.7 pt, and words stand up to 3.5 pt along their lines from where wkhtmltopdf puts them (`options/zoom`).
 - **Files are larger in general.** The 86 published documents come to about 1.8 times wkhtmltopdf's size.
 - **Pages that declare no character set.** wkhtmltopdf reads them as Latin-1 and prints garbled letters; marqius-wkhtmltopdf reads them as UTF-8. With `--encoding utf-8` the two agree (`print/67-unicode`, `options/no-charset` and `options/encoding`).
 - **Every file** is PDF 1.7 rather than 1.4, and names the page's language when the page gives one.
+
+0.12.7 closed four that 0.12.6 had: scripts get the page's DOM, bold Hindi and Thai keep their bold face, the lines of long pages with a set line height no longer drift lower, and fonts in OpenType CFF form, such as Noto CJK, are cut down to the letters a page uses. A one-page Chinese invoice is now 26 KB, where 0.12.6 made 27 MB and wkhtmltopdf makes 29 KB.
 
 ## Rerun everything
 
@@ -109,9 +111,9 @@ These are what the runs above found in marqius-wkhtmltopdf 0.12.6. Each has a do
 ./run.sh
 ```
 
-This converts the four sets (114 documents) with both programs three times, once more with wkhtmltopdf's 200 ms script wait turned off, and scores every pair. It takes about two minutes on a laptop once the images are downloaded, and the report lands in `out/corpus/`. `./run.sh --tag 0.12.2` tests an earlier version, and `./run.sh --help` lists everything else.
+This converts the four sets (115 documents) with both programs three times, once more with wkhtmltopdf's 200 ms script wait turned off, and scores every pair. It takes about two minutes on a laptop once the images are downloaded, and the report lands in `out/corpus/`. `./run.sh --tag 0.12.2` tests an earlier version, and `./run.sh --help` lists everything else.
 
-Every score comes out the same on x86-64 and on ARM64, for all 114 documents, to six decimal places.
+Every score comes out the same on x86-64 and on ARM64, for all 115 documents, to six decimal places.
 
 ## How it works
 
@@ -137,7 +139,7 @@ Nothing on its own: there is no counter and no call home, in the runner or in ma
 |---|---:|---|
 | [`everyday`](corpus/everyday) | 8 | An invoice, a statement, a letter, a receipt, a shipping label, a certificate, a report and a product sheet |
 | [`print`](corpus/print) | 78 | Short pages, each on one part of HTML and CSS: text, lists, tables, floats, flexbox, grid, positioning, columns, images, SVG, forms, page rules |
-| [`options`](corpus/options) | 18 | wkhtmltopdf's own command-line features: text and HTML headers and footers, a cover and a table of contents, bookmarks, paper sizes, margins, zoom, print media, a page built by a script, a 150-row statement over three pages |
+| [`options`](corpus/options) | 19 | wkhtmltopdf's own command-line features: text and HTML headers and footers, a cover and a table of contents, bookmarks, paper sizes, margins, zoom, print media, a page built by a script, a page whose script comes from a file, a 150-row statement over three pages |
 | [`international`](corpus/international) | 10 | Chinese, Japanese, Korean, Arabic, Hebrew, Hindi, Thai, Greek, Russian and accented Latin, some mixed on one line; run with Noto CJK added for both programs |
 
 The `everyday` and `print` sets are the 86 documents behind the parity figures marqius.com states. They come from the marqius engine's own tests, unchanged apart from four details that could have pointed at a real company or number. [`corpus/PROVENANCE.tsv`](corpus/PROVENANCE.tsv) gives each file's origin, any change and its checksum, and [`corpus/notes.tsv`](corpus/notes.tsv) the reason for each document that differs. Every person, company, address and number is invented. The telephone numbers come from the ranges Ofcom keeps for drama, and the bank details are placeholders.

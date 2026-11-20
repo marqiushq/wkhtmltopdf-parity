@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>Delivery note built by a script file</title>
+<style>
+body { font-family: Arial, sans-serif; font-size: 12px }
+table { width: 100%; border-collapse: collapse } th, td { border-bottom: 1px solid #ccc; padding: 6px; text-align: left }
+td.n, th.n { text-align: right } tfoot td { font-weight: bold; border-top: 2px solid #333 }
+</style>
+<script src="script-file.js"></script>
+</head><body>
+<h1>Delivery note <span id="number"></span></h1>
+<p id="intro"></p>
+<table><thead><tr><th>Item</th><th class="n">Ordered</th><th class="n">Sent</th></tr></thead>
+<tbody id="lines"></tbody><tfoot><tr><td colspan="2">Parcels</td><td class="n" id="parcels"></td></tr></tfoot></table>
+<script>fillDeliveryNote();</script>
+</body></html>

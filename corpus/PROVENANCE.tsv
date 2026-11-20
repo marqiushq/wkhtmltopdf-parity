@@ -41,6 +41,9 @@ options/page-offset.cmd	written for this suite	2026-11-18	-	no	8113f9cad481aa5cc
 options/print-media.cmd	written for this suite	2026-11-18	-	no	30773e436f7dcd3d113b7369d62d7819e1f880968d0ba446f33e492b57c39bc7
 options/print-media.html	written for this suite	2026-11-18	-	no	6fe20eb262ca9575c8f9fb63b1f5c1babc6d944c565152236b5c6689ace40e13
 options/report.html	written for this suite	2026-11-18	-	no	33023487740d9f97817695064fa5126476622be7eebac9ff41bb366ec1beef02
+options/script-file.cmd	written for this suite	2026-11-20	-	no	f3cd157a9e4db4b3f09c6f6916be65e7ea72a2c4f43c863e24ea446798797a4a
+options/script-file.html	written for this suite	2026-11-20	-	no	5e83267414b275bd482fdb5c421fab35d71c44c036014bf5ea989fe5192d4284
+options/script-file.js	written for this suite	2026-11-20	-	no	66c2471a8b7a501f1538ad39b66fb443b9465f3ec1f7baa0d925f9180937ea2e
 options/text-headers.cmd	written for this suite	2026-11-18	-	no	26cc9a289c386de7ff8837bb0008f5a02c85634ef18068bbb95be9f3261bc745
 options/user-style-sheet.cmd	written for this suite	2026-11-18	-	no	c27d97269c9a81d0d01c3b226a19401e6aebb55baf23b1bd5cc6475577c9aacf
 options/user.css	written for this suite	2026-11-18	-	no	db04c100c175f1ba5f2a2ce7a9f52352e65b0e8949529431d45d7ad4252fc374
