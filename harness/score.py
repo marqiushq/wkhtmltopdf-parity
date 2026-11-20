@@ -199,7 +199,7 @@ def overlay_of(both):
 
 
 # ---------------------------------------------------------------------------------------------
-# Better than wkhtmltopdf: a document where every difference compare finds goes marqius-wkhtmltopdf's
+# marqius better: a document where every difference compare finds goes marqius-wkhtmltopdf's
 # way, judged against the page itself, and nothing else on the page looks different. It is decided
 # again on every run, so the mark goes as soon as it stops being true. A difference goes
 # marqius-wkhtmltopdf's way when it is one of these:
@@ -807,8 +807,8 @@ def console(r):
     return "\n".join(out)
 
 
-BETTER = "Better than wkhtmltopdf"
-BETTER_ABOUT = ("*Better than wkhtmltopdf* marks a document where every difference goes marqius-wkhtmltopdf's way: its PDF has the page's own words "
+BETTER = "marqius better"
+BETTER_ABOUT = ("*marqius better* marks a document where every difference goes marqius-wkhtmltopdf's way: its PDF has the page's own words "
                 "where wkhtmltopdf's has garbled letters, look-alike characters or a picture of the words, and nothing else on the page looks different. "
                 "Its score is lower only because the score measures how alike the two PDFs are.")
 
@@ -845,7 +845,7 @@ def markdown(r):
             first = why(d).replace("|", "\\|")
             if d["note"]:
                 first += f" — *{d['note']}*"
-            name = d["name"] + (f"<br>**{BETTER}**" if d.get("better") else "")
+            name = d["name"] + (f"<br>🏅 **{BETTER}**" if d.get("better") else "")
             L.append(f"| {name} | {d['score']:.4f} | {d['text']:.3f} | {d['geom']:.3f} | {d['pages_wk']}/{d['pages_mq']} | {d['overlay']:.3f} | "
                      f"{verdict_word(d['verdict'])} | {first} | {fonts} | {kb(d['size_wk'])} / {kb(d['size_mq'])} | "
                      f"{ms_text(d['ms_wk'])} / {ms_text(d['ms_mq'])} |")
@@ -936,7 +936,7 @@ body {{ font: 14px/1.45 system-ui, -apple-system, Segoe UI, Roboto, sans-serif; 
 table {{ border-collapse: collapse; width: 100%; margin: 8px 0 24px; font-size: 13px }} th, td {{ border-bottom: 1px solid var(--line); padding: 5px 8px; text-align: left; vertical-align: top }}
 th {{ background: var(--head); position: sticky; top: 0 }} tr.bad td {{ background: var(--bad) }} tr.warn td {{ background: var(--warn) }} tr.good td {{ background: var(--good) }}
 .better {{ display: inline-block; margin-top: 3px; padding: 1px 8px 1px 7px; border-radius: 4px; background: var(--better); color: #fff; font-size: 11px; font-weight: 600; white-space: nowrap }}
-.better::before {{ content: "✓ " }}
+.better::before {{ content: "🏅 " }}
 .big {{ font-size: 18px }} .muted {{ color: var(--muted) }} a {{ color: var(--link) }} code {{ font-size: 12px }}
 </style></head><body>
 <h1>wkhtmltopdf parity report</h1>
