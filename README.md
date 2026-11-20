@@ -97,7 +97,6 @@ Each reason was written for the result beside it, and each run checks that the r
 <!-- gaps:start (written by harness/publish.py from the open tracking issues; edits here are overwritten) -->
 What marqius-wkhtmltopdf **0.12.10**, the version on the scoreboard, has yet to match. Each difference has a tracking issue, closed once the difference is gone: watch the one you care about.
 
-- [Scripts that a page loads from a file (`<script src>`) do not run](https://github.com/marqiushq/wkhtmltopdf-parity/issues/1) (`options/script-file`)
 - [With `--zoom`, text is scaled a little differently](https://github.com/marqiushq/wkhtmltopdf-parity/issues/3) (`options/zoom`)
 - [On A5 paper, a table row stays on the page where wkhtmltopdf moves it to the next](https://github.com/marqiushq/wkhtmltopdf-parity/issues/4) (`options/a5-portrait`)
 - [Form fields are drawn more plainly](https://github.com/marqiushq/wkhtmltopdf-parity/issues/5) (`print/71-forms`)

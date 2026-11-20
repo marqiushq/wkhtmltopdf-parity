@@ -1,5 +1,5 @@
 number	state	document	title	url
-1	open	options/script-file	Scripts that a page loads from a file (`<script src>`) do not run	https://github.com/marqiushq/wkhtmltopdf-parity/issues/1
+1	closed	options/script-file	Scripts that a page loads from a file (`<script src>`) do not run	https://github.com/marqiushq/wkhtmltopdf-parity/issues/1
 2	closed	international/letter-hi	Hindi: letters joined with र (ra) come out apart, with the halant showing	https://github.com/marqiushq/wkhtmltopdf-parity/issues/2
 3	open	options/zoom	With `--zoom`, text is scaled a little differently	https://github.com/marqiushq/wkhtmltopdf-parity/issues/3
 4	open	options/a5-portrait	On A5 paper, a table row stays on the page where wkhtmltopdf moves it to the next	https://github.com/marqiushq/wkhtmltopdf-parity/issues/4
