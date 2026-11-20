@@ -1,5 +1,5 @@
 marqius-wkhtmltopdf compare: pdf/wk/options against pdf/mq/options
-19 pairs compared in 0.3 s (75 a second on 4 cores)
+19 pairs compared in 0.3 s (76 a second on 4 cores)
 
   same              0
   appearance only   15

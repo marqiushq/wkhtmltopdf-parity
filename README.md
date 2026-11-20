@@ -24,27 +24,27 @@ That runs eight sample documents. For yours, take the samples out of `mine/` (ke
 ## The scoreboard
 
 <!-- scoreboard:start (written by harness/publish.py from results/; edits here are overwritten) -->
-**marqius-wkhtmltopdf 0.12.8** beside **wkhtmltopdf 0.12.6**, checked 20 November 2026, 05:51 UTC on GitHub Actions, x86-64, 4 CPUs: [the run's log](https://github.com/marqiushq/wkhtmltopdf-parity/actions/runs/44683724131) · [full report](results/0.12.8/linux-amd64/report.md) · [every document](results/0.12.8/linux-amd64/scores.csv)
+**marqius-wkhtmltopdf 0.12.8** beside **wkhtmltopdf 0.12.6**, checked 20 November 2026, 07:30 UTC on GitHub Actions, x86-64, 4 CPUs: [the run's log](https://github.com/marqiushq/wkhtmltopdf-parity/actions/runs/44695350780) · [full report](results/0.12.8/linux-amd64/report.md) · [every document](results/0.12.8/linux-amd64/scores.csv)
 
 | What was converted | Documents | Parity | Overlay | Same pages | Appearance only | Content differs | Speed |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| Business documents (`everyday`) | 8 | 0.9909 | 0.996 | 3 | 4 | 1 | 34× |
-| CSS features, one to a page (`print`) | 78 | 0.9926 | 0.987 | 61 | 12 | 5 | 39× |
-| **The 86 published documents together** | **86** | **0.9924** | 0.988 | 64 | 16 | 6 | **38×** |
-| wkhtmltopdf's own options (`options`) | 19 | 0.9361 | 0.919 | 2 | 15 | 2 | 24× |
-| Languages and scripts (`international`) | 10 | 0.8193 | 0.994 | 1 | 3 | 6 | 20× |
+| Business documents (`everyday`) | 8 | 0.9909 | 0.996 | 3 | 4 | 1 | 38× |
+| CSS features, one to a page (`print`) | 78 | 0.9926 | 0.987 | 61 | 12 | 5 | 40× |
+| **The 86 published documents together** | **86** | **0.9924** | 0.988 | 64 | 16 | 6 | **40×** |
+| wkhtmltopdf's own options (`options`) | 19 | 0.9361 | 0.919 | 2 | 15 | 2 | 27× |
+| Languages and scripts (`international`) | 10 | 0.8193 | 0.994 | 1 | 3 | 6 | 22× |
 
-Speed is the time to convert the published documents one after another, wkhtmltopdf's divided by marqius-wkhtmltopdf's: 19.8 s against 0.52 s (median of 3 runs); 4× with wkhtmltopdf's 200 ms script wait turned off for both.
+Speed is the time to convert the published documents one after another, wkhtmltopdf's divided by marqius-wkhtmltopdf's: 19.5 s against 0.49 s (median of 3 runs); 5× with wkhtmltopdf's 200 ms script wait turned off for both.
 
 Sizes: the 86 PDFs come to 1.1 MB from wkhtmltopdf and 0.8 MB from marqius-wkhtmltopdf. The `marqius/wkhtmltopdf` image is 26 MB unpacked; the image wkhtmltopdf runs in here, with its fonts, 330 MB.
 
-On GitHub Actions, ARM64, 4 CPUs: the same parity in every set, 32× faster ([report](results/0.12.8/linux-arm64/report.md)).
+On GitHub Actions, ARM64, 4 CPUs: the same parity in every set, 29× faster ([report](results/0.12.8/linux-arm64/report.md)).
 
 #### Every version
 
 | Version | Checked | Business documents | CSS features | Published 86 | Options | Languages | Speed |
 |---|---|---:|---:|---:|---:|---:|---:|
-| [0.12.8](results/0.12.8/linux-amd64/report.md) | 2026-11-20 | 0.9909 | 0.9926 | 0.9924 | 0.9361 | 0.8193 | 38× |
+| [0.12.8](results/0.12.8/linux-amd64/report.md) | 2026-11-20 | 0.9909 | 0.9926 | 0.9924 | 0.9361 | 0.8193 | 40× |
 | [0.12.7](results/0.12.7/linux-amd64/report.md) | 2026-11-20 | 0.9908 | 0.9925 | 0.9924 | 0.9354 | 0.7599 | 38× |
 | [0.12.6](results/0.12.6/linux-amd64/report.md) | 2026-11-20 | 0.9902 | 0.9920 | 0.9919 | 0.8611 | 0.7073 | 37× |
 | [0.12.5](results/0.12.5/linux-amd64/report.md) | 2026-11-20 | 0.9902 | 0.9920 | 0.9919 | 0.8436 | 0.7073 | 38× |
@@ -58,7 +58,7 @@ On GitHub Actions, ARM64, 4 CPUs: the same parity in every set, 32× faster ([re
 <details>
 <summary><b>The 23 documents below 0.99 or with different content, and why; 5 of them come out better from marqius-wkhtmltopdf</b></summary>
 
-[![marqius better](.github/better.svg)](#the-measures) marks a document where every difference goes marqius-wkhtmltopdf's way: its PDF has the page's own words where wkhtmltopdf's has garbled letters, look-alike characters or a picture of the words, and nothing else on the page looks different. Its score is lower only because the score measures how alike the two PDFs are. Each run decides it again, from the page itself.
+[![marqius better](.github/better.svg)](#the-measures) marks a document where every difference goes marqius-wkhtmltopdf's way: its PDF has the page's own words where wkhtmltopdf's has garbled letters, look-alike characters, words split into letters or a picture of the words, and nothing else on the page looks different. Its score is lower only because the score measures how alike the two PDFs are. Each run decides it again, from the page itself.
 
 | Document | Parity | Overlay | Why | Pages |
 |---|---:|---:|---|---|
