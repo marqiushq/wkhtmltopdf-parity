@@ -1,5 +1,5 @@
 marqius-wkhtmltopdf compare: pdf/wk/print against pdf/mq/print
-78 pairs compared in 0.5 s (167 a second on 4 cores)
+78 pairs compared in 0.5 s (164 a second on 4 cores)
 
   same              0
   appearance only   14
