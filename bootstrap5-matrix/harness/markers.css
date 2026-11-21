@@ -1,0 +1,7 @@
+/* Loaded after the stylesheet under test, the same in both programs: print backgrounds (Chrome
+   leaves them out unless told), and the A4 page with wkhtmltopdf's margins. Nothing else. */
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+@page { size: A4; margin: 10mm 0; }
+/* Odoo's PDF body carries .container: its max-width comes from min-width media queries, which never
+   match in wkhtmltopdf (see the breakpoint pages), so both programs print it at full width. */
+body.container { max-width: none !important; }

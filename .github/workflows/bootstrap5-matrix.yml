@@ -1,0 +1,72 @@
+# The Bootstrap 5 matrix (bootstrap5-matrix/): Bootstrap 5 printed by wkhtmltopdf 0.12.6.1 as Odoo
+# ships it, page by page against Chrome, judged by marqius-wkhtmltopdf compare. Runs in public on
+# GitHub's machines and files the matrix under bootstrap5-matrix/results/ with a link back to the run,
+# signed with a GitHub attestation.
+#
+#   by hand        Actions > Bootstrap 5 matrix > Run workflow
+#   on a change    to the pages or the harness; a pull request is measured the same way, nothing is filed
+name: Bootstrap 5 matrix
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["bootstrap5-matrix/**", "!bootstrap5-matrix/results/**", ".github/workflows/bootstrap5-matrix.yml"]
+  pull_request:
+    paths: ["bootstrap5-matrix/**", "!bootstrap5-matrix/results/**", ".github/workflows/bootstrap5-matrix.yml"]
+
+permissions:
+  contents: read
+
+jobs:
+  measure:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Print every page with both programs and compare them
+        run: sh bootstrap5-matrix/run.sh "$RUNNER_TEMP/bootstrap5"
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: bootstrap5-matrix
+          path: bootstrap5-matrix/results
+
+  publish:
+    needs: measure
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+      id-token: write       # to sign the attestation of the filed matrix
+      attestations: write   # to store it
+    concurrency:
+      group: publish
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: bootstrap5-matrix
+          path: ${{ runner.temp }}/matrix
+      - uses: actions/attest-build-provenance@4d101475d8b20a2381f78447822ac1eab6504dd8 # v4.2.2
+        with:
+          subject-path: ${{ runner.temp }}/matrix/results.json
+      - name: File the matrix and commit
+        env:
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          for try in 1 2 3; do
+            rm -rf bootstrap5-matrix/results
+            cp -R "$RUNNER_TEMP/matrix" bootstrap5-matrix/results
+            printf '%s\n' "$RUN_URL" > bootstrap5-matrix/results/run.txt
+            git add -A bootstrap5-matrix/results
+            if git diff --cached --quiet; then echo "nothing new"; exit 0; fi
+            git commit -q -m "Bootstrap 5 matrix" -m "From $RUN_URL"
+            if git push -q origin HEAD:main; then exit 0; fi
+            echo "main moved while filing; filing again on top of it"
+            git fetch -q origin main && git reset -q --hard origin/main
+          done
+          exit 1

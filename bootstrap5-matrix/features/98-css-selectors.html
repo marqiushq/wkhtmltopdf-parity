@@ -1,0 +1,12 @@
+<!--
+{"group": "Your own CSS", "title": "Selectors: :is(), :where(), :not(a, b), :has()"}
+-->
+<style>
+:is(.s-is) { color: #198754; } :where(.s-where) { color: #198754; }
+.s-not p:not(.a, .b) { color: #198754; } .s-has:has(> .flag) { color: #198754; }
+</style>
+<p class="s-is">is() Paid</p><p class="s-where">where() Paid</p>
+<div class="s-not"><p class="c">not() Paid</p></div><div class="s-has"><span class="flag">has() Paid</span></div>
+<script type="text/x-checks" id="checks">
+[]
+</script>

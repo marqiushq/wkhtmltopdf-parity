@@ -1,0 +1,4 @@
+/* On the Bootstrap-alone pages: the body text set in plain CSS, as Odoo's report CSS does, because
+   Bootstrap 5 sets it through CSS variables, which wkhtmltopdf drops (the "Body text" page shows
+   that, without this file). So each other page tests one feature. */
+body { font-family: "Liberation Sans", Arial, sans-serif; font-size: 16px; line-height: 1.5; color: #212529; }

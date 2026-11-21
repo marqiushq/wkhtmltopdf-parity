@@ -1,0 +1,39 @@
+<!--
+{"group": "Control", "title": "Control: the same invoice block in plain CSS, no Bootstrap", "bare": true}
+-->
+<style>
+body { margin: 0; } /* as Bootstrap's and Odoo's own CSS have it */
+.c-title { font-family: sans-serif; font-size: 24px; line-height: 32px; font-weight: bold; margin: 0 0 12px 0; }
+.c-text { font-family: sans-serif; font-size: 14px; line-height: 20px; color: #212529; }
+.c-left { float: left; width: 50%; }
+.c-right { float: right; width: 45%; }
+.c-clear { clear: both; height: 12px; }
+.c-table { width: 100%; border-collapse: collapse; }
+.c-table th, .c-table td { padding: 6px 8px; border-bottom: 1px solid #dee2e6; text-align: left; }
+.c-num { text-align: right !important; }
+.c-tint { background-color: #f8f9fa; color: #0d6efd; padding: 8px; margin-top: 12px; }
+</style>
+<div class="c-text">
+<div class="c-title">Invoice INV/2026/00042</div>
+<div class="c-left"><strong>Invoicing address</strong><br>Azure Interior<br>4557 De Silva St<br>Fremont CA 94538</div><div class="c-right"><strong>Delivery address</strong><br>Deco Addict<br>77 Santa Barbara Rd<br>Pleasant Hill CA 94523</div><div class="c-clear"></div>
+<table class="c-table"><tr><th>Description</th><th class="c-num">Amount</th></tr>
+<tr><td>[FURN_8220] Four Person Desk</td><td class="c-num">4,700.00</td></tr>
+<tr><td>[FURN_6741] Large Meeting Table</td><td class="c-num">4,000.00</td></tr></table>
+<div class="c-tint">Please use the reference INV/2026/00042 for your payment.</div>
+</div>
+<script type="text/x-checks" id="checks">
+[
+ {
+  "n": "body font size",
+  "t": "css",
+  "sel": ".c-text",
+  "p": "font-size"
+ },
+ {
+  "n": "the program's own name for itself (user agent)",
+  "t": "js",
+  "x": "navigator.userAgent",
+  "info": true
+ }
+]
+</script>
