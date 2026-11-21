@@ -1,12 +1,23 @@
-# wkhtmltopdf parity suite
+# wkhtmltopdf parity suite: will my PDFs change if I replace wkhtmltopdf?
 
-**Will your PDFs change if you replace wkhtmltopdf with marqius-wkhtmltopdf?** This suite answers with evidence you can rerun. The same documents go through wkhtmltopdf 0.12.6 and through marqius-wkhtmltopdf, side by side on one Linux system with one set of fonts, and every pair of PDFs is compared. The numbers below come from runs whose logs you can read, and one command reruns them on your machine, with our documents or with your own templates.
+**Before you replace wkhtmltopdf, you want to know one thing: will my PDFs still come out right?** This suite answers with evidence you can run yourself. The same HTML documents go through the original wkhtmltopdf 0.12.6 and through marqius-wkhtmltopdf, its maintained replacement. Then every pair of PDFs is compared: the text, where each word sits, the number of pages and a picture of every page.
+
+**Why it matters.** wkhtmltopdf is archived, and Debian 13 and Ubuntu 26.04 no longer include it, so many teams have to replace it. A replacement is only safe if your invoices, reports and statements still come out the same. Here you can see how close the PDFs are, and exactly where they still differ, before you change anything in production.
+
+- **In public.** It runs on GitHub's machines for every release, on x86-64 and ARM64. Every result is published, including the documents where marqius-wkhtmltopdf still differs.
+- **On your own templates.** Run it on your computer in a few minutes. Nothing is uploaded.
+- **Open.** The harness is MIT licensed and the documents are public domain (CC0): use them in your own tests.
 
 > marqius-wkhtmltopdf is a paid product of Simple AI LLC, which publishes this suite. The suite and its documents are open (MIT and CC0); the program is not. We publish the misses along with the matches.
 
 ## Check your own templates
 
+It takes about five minutes.
+
+
 You need Docker and nothing else. Nothing is uploaded: the containers that read your files have no network.
+
+**1. Get the suite and try it on eight sample documents:**
 
 ```bash
 git clone https://github.com/marqiushq/wkhtmltopdf-parity.git
@@ -15,11 +26,13 @@ cp corpus/everyday/*.html mine/
 ./run.sh mine
 ```
 
-That runs eight sample documents. For yours, take the samples out of `mine/` (keep its README), put your templates there with the pictures and style sheets they load, write the options your app passes in `mine/options.txt`, and run `./run.sh mine` again. Then open `out/mine/report.html`. For each template it gives the score, what differs and where, both PDFs, and pictures of the pages that differ. It also marks the templates that come out better from marqius-wkhtmltopdf than from wkhtmltopdf. A few dozen templates take under a minute once the images are downloaded (about 175 MB the first time). [What goes in `mine/`](mine/README.md).
+**2. Put your own templates in `mine/`** instead of the samples (keep its README), with the pictures and style sheets they load.
 
-### If you want help with the differences
+**3. Write the options your app passes** in `mine/options.txt`, for example `--page-size A4 --margin-top 20mm`.
 
-`./run.sh share` shows you the summary of your last `./run.sh mine` and sends it to us only if you type yes. The summary holds the versions and the platform, how many templates there were, each template's scores in order of score without its name, the kinds of difference `compare` found (such as "moved" or "font"), and the names of the options you use, never their values. It never holds a template, a file name, a path or any text from your templates. Add `--email` with your address if you want an answer, and `--note` with a question. A copy of what was sent stays beside the report. We use it only to answer you and to learn which differences matter most, keep it for twelve months, and delete it when you ask. Our [privacy notice](https://marqius.com/privacy/#parity-shares) says the same.
+**4. Run `./run.sh mine` again** and open `out/mine/report.html`. For each template it shows a score, what differs and where, both PDFs, and pictures of the pages that differ.
+
+**Want our help with a difference?** `./run.sh share` shows you a summary of your last run and sends it to us only if you type yes. The summary holds scores, the kinds of difference found and the names of your options. It never holds a template, a file name, a path or any text from your templates.
 
 ## The scoreboard
 
@@ -93,6 +106,16 @@ Each reason was written for the result beside it, and each run checks that the r
 </details>
 <!-- scoreboard:end -->
 
+### How to read the scoreboard
+
+- **Parity** is a score from 0 to 1 for each pair of PDFs: 1 means the same text, every word in the same place, on the same number of pages. Half of the score is the text, 30% the word positions and 20% the page count.
+- **Overlay** lays one page on the other and measures how much of the ink matches. It catches what text cannot, such as pictures and lines.
+- **Same pages:** no difference was found. **Appearance only:** the words and pictures are the same, but something moved or changed size or colour. **Content differs:** some words, numbers or pictures are not the same; each case is explained in the list under the table.
+- **Speed:** how many times faster marqius-wkhtmltopdf converted the same documents, one after another.
+
+The exact definitions are under [The measures](#the-measures).
+
+
 ## What works differently today
 
 <!-- gaps:start (written by harness/publish.py from the open tracking issues; edits here are overwritten) -->
@@ -159,6 +182,23 @@ The `everyday` and `print` sets are the 86 documents behind the parity figures m
 - It is one system: Alpine 3.24 with the reference image's fonts. With other fonts, text is laid out differently, by both programs.
 - Nothing is loaded from the internet unless you add `--network`.
 - The scores summarise. For anything that matters to you, look at the pictures and the two PDFs in the report.
+
+## Questions
+
+**Can I trust a test suite published by the maker of one of the programs?**
+You don't have to. Every document, every score and the code that computes it are here, the runs and their logs are public, and `./run.sh` reproduces every figure on your own computer. Run it on your own templates, which we have never seen.
+
+**Do I need wkhtmltopdf installed?**
+No. You need Docker. The suite brings wkhtmltopdf 0.12.6 in a pinned image, and marqius-wkhtmltopdf from its official image.
+
+**Does it upload my templates or call home?**
+No. The containers that read your files have no network, and nothing is sent unless you run `./run.sh share` and type yes.
+
+**My templates load pictures or fonts from the internet. Will that work?**
+Add `--network` when you run it, so both programs can load them.
+
+**What should I do with a template that scores below 0.99?**
+Open `out/mine/report.html`, look at the pictures of the pages that differ, and decide whether the difference matters to you. If it does, `./run.sh share` sends us the summary, or write to hello@marqius.com.
 
 ## Licence
 
