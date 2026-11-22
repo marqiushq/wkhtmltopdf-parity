@@ -1,0 +1,72 @@
+# How long marqius-wkhtmltopdf takes to start, and to turn an invoice into a PDF, on GitHub's own
+# Linux machines (x86-64 and ARM64): first with the machine's own fonts, then with large font sets
+# (Noto, including Chinese, Japanese and Korean) installed. Started by hand; nothing is filed.
+name: Start-up timing
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "marqius-wkhtmltopdf version (empty: the latest)"
+        required: false
+
+permissions:
+  contents: read
+
+jobs:
+  time:
+    name: ${{ matrix.machine }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - machine: x86-64
+            runner: ubuntu-24.04
+          - machine: arm64
+            runner: ubuntu-24.04-arm
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - name: Install marqius-wkhtmltopdf with its one-line installer
+        env:
+          WANT: ${{ inputs.version }}
+        run: |
+          if [ -n "$WANT" ]; then curl -fsSL https://marqius.com/marqius-wkhtmltopdf.sh | bash -s -- --version "$WANT"
+          else curl -fsSL https://marqius.com/marqius-wkhtmltopdf.sh | bash; fi
+          marqius-wkhtmltopdf --version
+      - name: Write the test documents and the timer
+        run: |
+          python3 - <<'EOF'
+          rows = "".join(f"<tr><td>{i}</td><td>Item {i} description, standard service line</td><td class=r>{i%7+1}</td><td class=r>{(i*37)%900+50}.00</td></tr>" for i in range(1, 41))
+          head = "<!doctype html><html><head><meta charset=utf-8><style>body{font-family:Helvetica,Arial,sans-serif;font-size:11px;margin:24px}table{width:100%;border-collapse:collapse}td,th{border-bottom:1px solid #ddd;padding:5px}.r{text-align:right}</style></head><body>"
+          body = f"<h1>Invoice INV-2026-0042</h1><p>Acme Trading Ltd, 1 High Street, London</p><table><tr><th>#</th><th>Description</th><th class=r>Qty</th><th class=r>Price</th></tr>{rows}</table>"
+          open("invoice.html", "w").write(head + body + "</body></html>")
+          ja = "<p>請求書 株式会社サンプル 東京都千代田区 1-2-3 ご請求金額 148,147円</p>"
+          open("invoice-ja.html", "w").write(head + ja + body + "</body></html>")
+          EOF
+          cat > timer.py <<'EOF'
+          import os, statistics, subprocess, sys, time
+          label, out = sys.argv[1], os.environ.get("GITHUB_STEP_SUMMARY", "/dev/null")
+          def run(args):
+              s = time.perf_counter(); r = subprocess.run(["marqius-wkhtmltopdf"] + args, capture_output=True); ms = (time.perf_counter() - s) * 1000
+              if r.returncode not in (0, 1): sys.exit(f"exit {r.returncode}: {r.stderr.decode()[-500:]}")
+              return ms
+          fonts = subprocess.run("fc-list | wc -l", shell=True, capture_output=True, text=True).stdout.strip()
+          first = run(["--quiet", "invoice.html", "out.pdf"])
+          start = statistics.median(run(["--version"]) for _ in range(20))
+          inv = [run(["--quiet", "invoice.html", "out.pdf"]) for _ in range(15)]
+          ja = [run(["--quiet", "invoice-ja.html", "out-ja.pdf"]) for _ in range(15)]
+          line = (f"| {label} | {fonts} | {first:.0f} ms | {start:.0f} ms | {statistics.median(inv):.0f} ms (best {min(inv):.0f}) | "
+                  f"{statistics.median(ja):.0f} ms (best {min(ja):.0f}) |")
+          print(line)
+          with open(out, "a") as f:
+              if label.startswith("1."):
+                  f.write("| Fonts | fc-list | First invoice | Start and exit | 40-line invoice | Same with Japanese |\n|---|--:|--:|--:|--:|--:|\n")
+              f.write(line + "\n")
+          EOF
+          echo "### $(marqius-wkhtmltopdf --version 2>&1 | head -1), ${{ matrix.machine }}" >> "$GITHUB_STEP_SUMMARY"
+      - name: Time it with the machine's own fonts
+        run: python3 timer.py "1. the machine's own"
+      - name: Install large font sets (Noto, with Chinese, Japanese and Korean)
+        run: sudo apt-get update -qq && sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq fonts-noto-core fonts-noto-cjk fonts-noto-extra >/dev/null && fc-list | wc -l
+      - name: Time it again with the large font sets
+        run: python3 timer.py "2. plus Noto, Chinese, Japanese, Korean"
