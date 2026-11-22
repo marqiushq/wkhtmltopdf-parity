@@ -1,0 +1,116 @@
+set,name,score,text,geom,pages_wk,pages_mq,overlay,verdict,level,first,fonts_same,size_wk,size_mq,status_wk,status_mq,ms_wk,ms_mq,better
+print,01-basic,0.999891,1.0,0.999637,1,1,1.0,same,,,True,15072,9384,0,0,240,0,False
+print,02-headings,0.999891,1.0,0.999637,1,1,1.0,same,,,True,17092,10721,0,0,239,9,False
+print,03-inline,0.999236,1.0,0.997454,1,1,0.998682,same,,,True,29674,14763,0,0,250,9,False
+print,04-css,0.999713,1.0,0.999045,1,1,1.0,same,,,True,13957,8536,0,0,240,0,False
+print,05-ul,0.999887,1.0,0.999624,1,1,0.964881,same,,,True,9235,7083,0,0,230,0,False
+print,06-ol,0.9949,1.0,0.983001,1,1,0.972504,appearance only,cosmetic,"3 lines from ""1. Numbered one 2. Numbered two"" moved 3 pt to the right",True,8181,6116,0,0,229,10,False
+print,07-pre,0.999883,1.0,0.999609,1,1,1.0,same,,,True,12218,7808,0,0,239,0,False
+print,08-blockquote,0.999901,1.0,0.999669,1,1,1.0,same,,,True,9188,7018,0,0,230,9,False
+print,09-hr,0.999889,1.0,0.999632,1,1,1.0,same,,,True,7794,5753,0,0,230,0,False
+print,10-align,0.999285,1.0,0.997615,1,1,0.996154,same,,,True,7644,5697,0,0,229,0,False
+print,11-pagination,0.999897,1.0,0.999657,2,2,1.0,same,,,True,20770,13147,0,0,250,9,False
+print,12-nested-lists,0.999892,1.0,0.999639,1,1,0.88998,appearance only,cosmetic,"page 1 lacks rules, frames or tints in 2 places where the old page has them",True,7761,5876,0,0,229,9,False
+print,13-longword,0.999857,1.0,0.999522,1,1,0.999531,same,,,True,9861,7583,0,0,230,0,False
+print,14-links,0.999777,1.0,0.999256,1,1,1.0,same,,,True,8887,6890,0,0,230,9,False
+print,15-table,0.999883,1.0,0.999609,1,1,1.0,same,,,True,12961,7636,0,0,230,9,False
+print,16-br,0.999877,1.0,0.999589,1,1,1.0,same,,,True,7163,5280,0,0,229,0,False
+print,17-fontsize,0.99991,1.0,0.999701,1,1,1.0,same,,,True,8776,6657,0,0,240,9,False
+print,18-margins,0.999902,1.0,0.999673,1,1,1.0,same,,,True,7960,5958,0,0,229,0,False
+print,19-empty,0.999876,1.0,0.999588,1,1,1.0,same,,,True,7331,5442,0,0,229,0,False
+print,20-whitespace,0.997955,1.0,0.993183,1,1,0.996241,same,,,True,9178,6954,0,0,230,0,False
+print,21-img,0.999893,1.0,0.999642,1,1,1.0,same,,,True,8695,7092,0,0,240,0,False
+print,22-links,0.999206,1.0,0.997355,1,1,0.998807,same,,,True,8856,6798,0,0,230,9,False
+print,23-page-a4,0.999877,1.0,0.99959,1,1,1.0,same,,,True,9553,7349,0,0,230,9,False
+print,24-page-custom,0.999875,1.0,0.999583,1,1,1.0,same,,,True,7992,5974,0,0,230,0,False
+print,25-inline-mixed,0.999248,1.0,0.997494,1,1,0.999043,same,,,True,24680,13270,0,0,250,9,False
+print,26-heading-sizes,0.999838,1.0,0.99946,1,1,1.0,same,,,True,14263,8666,0,0,240,9,False
+print,27-longtable,0.999869,1.0,0.999565,1,1,1.0,appearance only,cosmetic,"the paragraph beginning ""k1"" breaks into lines differently (18 lines, now 13)",True,16747,10840,0,0,240,0,False
+print,28-nested-blockquote,0.999886,1.0,0.999619,1,1,1.0,same,,,True,9883,7596,0,0,239,9,False
+print,29-flex,0.999888,1.0,0.999627,1,1,1.0,same,,,True,7947,5804,0,0,230,0,False
+print,30-grid,0.999894,1.0,0.999648,1,1,1.0,same,,,True,7339,5282,0,0,230,0,False
+print,31-footnote,0.998696,1.0,0.995654,1,1,0.999491,same,,,True,9259,6879,0,0,230,9,False
+print,32-layout-mixed,0.999874,1.0,0.999579,1,1,1.0,same,,,True,9795,7551,0,0,230,0,False
+print,33-grid-fragmented,0.999889,1.0,0.999629,1,1,0.999833,same,,,True,11093,8314,0,0,239,0,False
+print,34-flex-justify,0.999877,1.0,0.99959,1,1,1.0,same,,,True,8678,6558,0,0,230,9,False
+print,35-toc-pages,0.999874,1.0,0.999581,2,2,1.0,same,,,True,18851,11919,0,0,240,0,False
+print,36-svg,0.999807,1.0,0.999357,1,1,1.0,same,,,True,18542,10286,0,0,240,0,False
+print,37-headings-scaled,0.99986,1.0,0.999533,1,1,1.0,file differs,cosmetic,"the language of the file is ""en"", was """"",True,14520,8811,0,0,240,9,False
+print,38-font-keywords,0.999857,1.0,0.999525,1,1,1.0,file differs,cosmetic,"the language of the file is ""en"", was """"",True,9727,7191,0,0,240,0,False
+print,39-dl,0.999895,1.0,0.99965,1,1,1.0,file differs,cosmetic,"the language of the file is ""en"", was """"",True,9518,7310,0,0,239,0,False
+print,40-list-types,0.99392,1.0,0.979735,1,1,0.909502,appearance only,cosmetic,"the language of the file is ""en"", was """"",True,8980,6869,0,0,230,9,False
+print,41-white-space,0.999895,1.0,0.99965,1,1,1.0,file differs,cosmetic,"the language of the file is ""en"", was """"",True,15293,10398,0,0,240,0,False
+print,42-inline-format,0.988787,0.986928,0.984409,1,1,0.998056,appearance only,cosmetic,"the language of the file is ""en"", was """"",True,21281,12977,0,0,240,0,False
+print,43-selectors,0.99989,1.0,0.999634,1,1,0.977437,file differs,cosmetic,"the language of the file is ""en"", was """"",True,16573,10693,0,0,239,9,False
+print,44-generated,0.999469,1.0,0.998229,1,1,1.0,file differs,cosmetic,"the language of the file is ""en"", was """"",True,16955,11179,0,0,240,9,False
+print,45-counters,0.99905,1.0,0.996833,1,1,1.0,appearance only,cosmetic,"the language of the file is ""en"", was """"",True,15263,9249,0,0,240,0,False
+print,46-table-spans,0.996332,1.0,0.987774,1,1,0.955882,appearance only,cosmetic,"the language of the file is ""en"", was """"",True,15172,8940,0,0,240,0,False
+print,47-table-borders,0.999853,1.0,0.999509,1,1,1.0,file differs,cosmetic,"the language of the file is ""en"", was """"",True,16341,10615,0,0,240,9,False
+print,48-table-widths,0.999864,1.0,0.999548,1,1,0.999622,file differs,cosmetic,"the language of the file is ""en"", was """"",True,17386,11482,0,0,240,0,False
+print,49-floats,0.999894,1.0,0.999648,1,1,0.99991,file differs,cosmetic,"the language of the file is ""en"", was """"",True,10758,8290,0,0,229,0,False
+print,50-inline-block,0.997953,1.0,0.993178,1,1,0.996717,file differs,cosmetic,"the language of the file is ""en"", was """"",True,9518,7263,0,0,230,9,False
+print,51-box-model,0.999873,1.0,0.999577,1,1,1.0,file differs,cosmetic,"the language of the file is ""en"", was """"",True,9840,7603,0,0,230,0,False
+print,52-sizing,0.99989,1.0,0.999633,1,1,1.0,file differs,cosmetic,"the language of the file is ""en"", was """"",True,11577,9027,0,0,230,9,False
+print,53-text-props,0.998409,1.0,0.994696,1,1,0.995082,appearance only,cosmetic,"the language of the file is ""en"", was """"",True,11938,9368,0,0,230,0,False
+print,54-justify-hyphens,0.999504,1.0,0.998346,1,1,0.998873,file differs,cosmetic,"the language of the file is ""en"", was """"",True,11002,8445,0,0,239,0,False
+print,55-page-sizes,0.999895,1.0,0.999649,1,1,1.0,file differs,cosmetic,"the language of the file is ""en"", was """"",True,10688,8247,0,0,230,9,False
+print,56-margin-boxes,0.999891,1.0,0.999635,2,2,1.0,file differs,cosmetic,"the language of the file is ""en"", was """"",True,19862,12396,0,0,250,9,False
+print,57-breaks,0.99988,1.0,0.999601,2,2,1.0,file differs,cosmetic,"the language of the file is ""en"", was """"",True,16914,10833,0,0,240,0,False
+print,58-footnotes,0.99974,1.0,0.999133,1,1,0.999836,file differs,cosmetic,"the language of the file is ""en"", was """"",True,13152,9507,0,0,240,0,False
+print,59-toc-leaders,0.999892,1.0,0.99964,2,2,0.999992,file differs,cosmetic,"the language of the file is ""en"", was """"",True,24023,15293,0,0,250,9,False
+print,60-images,0.999022,1.0,0.996741,1,1,1.0,appearance only,cosmetic,"the language of the file is ""en"", was """"",True,16303,11395,0,0,250,9,False
+print,61-svg-inline,0.999534,1.0,0.998447,1,1,1.0,content differs,blocking,a picture on page 1 is gone,True,15162,9762,0,0,240,9,False
+print,62-position,0.998217,1.0,0.994056,1,1,0.980884,appearance only,cosmetic,"the language of the file is ""en"", was """"",True,10478,8044,0,0,229,0,False
+print,63-columns,0.999892,1.0,0.999639,1,1,1.0,file differs,cosmetic,"the language of the file is ""en"", was """"",True,16872,10891,0,0,239,9,False
+print,64-flex-advanced,0.999884,1.0,0.999612,1,1,1.0,file differs,cosmetic,"the language of the file is ""en"", was """"",True,10070,7736,0,0,230,0,False
+print,65-grid-advanced,0.999914,1.0,0.999712,1,1,1.0,file differs,cosmetic,"the language of the file is ""en"", was """"",True,7331,5407,0,0,230,0,False
+print,66-list-inside,0.997808,1.0,0.992695,1,1,0.99088,appearance only,cosmetic,"the language of the file is ""en"", was """"",True,10380,8050,0,0,229,9,False
+print,67-unicode,0.669409,0.70283,0.393313,1,1,0.793202,content differs,blocking,"""â€œdoubleâ€​ â€˜singleâ€™ Â«guillemetsÂ»."" is now ""“double” ‘single’ «guillemets».""",False,18808,14281,0,0,239,9,True
+print,68-overflow-wrap,0.999779,1.0,0.999263,1,1,0.99921,file differs,cosmetic,"the language of the file is ""en"", was """"",True,9881,7576,0,0,230,9,False
+print,69-borders,0.999877,1.0,0.999591,1,1,0.965815,content differs,blocking,a picture on page 1 is gone,True,9777,6561,0,0,230,9,False
+print,70-visibility,0.819622,0.810811,0.714055,1,1,1.0,content differs,blocking,a picture on page 1 is gone,True,8862,6569,0,0,240,9,True
+print,71-forms,0.999757,1.0,0.999191,1,1,1.0,content differs,blocking,a picture on page 1 is gone,True,11084,7806,0,0,229,9,False
+print,72-cascade,0.999893,1.0,0.999642,1,1,1.0,file differs,cosmetic,"the language of the file is ""en"", was """"",True,10183,7789,0,0,240,9,False
+print,73-vars-calc,0.999871,1.0,0.999568,1,1,1.0,file differs,cosmetic,"the language of the file is ""en"", was """"",True,9633,7481,0,0,230,9,False
+print,74-media,0.999859,1.0,0.99953,1,1,1.0,file differs,cosmetic,"the language of the file is ""en"", was """"",True,9096,6888,0,0,230,9,False
+print,75-nested-lists-mixed,0.996158,1.0,0.987192,1,1,0.948231,appearance only,cosmetic,"the language of the file is ""en"", was """"",True,9972,7700,0,0,229,0,False
+print,76-long-paragraphs,0.999653,1.0,0.998843,3,3,0.999851,file differs,cosmetic,"the language of the file is ""en"", was """"",True,24062,11949,0,0,259,9,False
+print,77-links-outline,0.999758,1.0,0.999194,1,1,1.0,file differs,cosmetic,"the language of the file is ""en"", was """"",True,16842,10904,0,0,240,9,False
+print,78-trim-bleed,0.999891,1.0,0.999637,1,1,1.0,file differs,cosmetic,"the language of the file is ""en"", was """"",True,16348,10489,0,0,240,9,False
+everyday,certificate,0.956417,0.98998,0.871424,1,1,0.975462,appearance only,cosmetic,"the same letters, divided into words differently",True,26457,16555,0,0,250,9,False
+everyday,columns,0.995256,1.0,0.984185,1,1,0.99941,appearance only,cosmetic,"the line ""£32"" moved 1.9 pt to the right",True,17611,15069,0,0,240,0,False
+everyday,invoice,0.999393,1.0,0.997975,1,1,0.999724,appearance only,cosmetic,"the line ""Due: 17 Dec 2026"" moved 1 pt to the left",True,21406,15025,0,0,250,0,False
+everyday,label,0.998434,1.0,0.994781,1,1,1.0,appearance only,cosmetic,"the line ""Order 2026-118 Weight 14.2 kg Parcel"": the words stand up to 2 pt from where they stood along the line",True,18461,12719,0,0,239,9,False
+everyday,letter,0.999709,1.0,0.999031,1,1,1.0,same,,,True,18471,16014,0,0,240,9,False
+everyday,receipt,0.999607,1.0,0.998692,1,1,0.99146,same,,,True,16452,11648,0,0,240,0,False
+everyday,report,0.999857,1.0,0.999522,1,1,0.999026,same,,,True,23432,16868,0,0,250,9,False
+everyday,statement,0.978872,0.97318,0.974274,1,1,0.999596,content differs,blocking,"""Mr"" is new",True,18959,13071,0,0,239,9,False
+options,a5-portrait,0.954357,0.990718,0.863326,2,2,0.777921,appearance only,review,"page 2 began at ""Midlands""; page 2 now begins at ""South East""",True,29621,21343,0,0,260,9,False
+options,cover-toc,0.998477,1.0,0.994924,4,4,0.994875,appearance only,cosmetic,"the language of the file is ""en"", was """"",True,42794,28361,0,0,670,9,False
+options,default-header,0.999782,1.0,0.999272,2,2,0.999977,appearance only,cosmetic,"the language of the file is ""en"", was """"",True,29703,21413,0,0,250,9,False
+options,encoding,0.999898,1.0,0.999659,1,1,1.0,file differs,cosmetic,"the language of the file is ""fr"", was """"",True,18756,13214,0,0,240,9,False
+options,grayscale,0.999785,1.0,0.999282,2,2,0.999975,appearance only,cosmetic,"the language of the file is ""en"", was """"",True,29392,21084,0,0,250,9,False
+options,html-header-footer,0.999546,1.0,0.998485,2,2,0.999086,appearance only,cosmetic,"the language of the file is ""en"", was """"",True,30748,21863,0,0,460,30,False
+options,javascript,0.999562,1.0,0.998541,1,1,1.0,file differs,cosmetic,"the language of the file is ""en"", was """"",True,18615,12956,0,0,240,30,False
+options,landscape-letter,0.924072,0.892821,0.925539,1,1,1.0,appearance only,cosmetic,"the language of the file is ""en"", was """"",True,18553,16824,0,0,240,9,False
+options,long-statement,0.974134,0.960833,0.979057,3,3,0.999402,appearance only,cosmetic,"the language of the file is ""en"", was """"",True,33578,24170,0,0,270,9,False
+options,lowquality,0.999785,1.0,0.999282,2,2,0.999975,appearance only,cosmetic,"the language of the file is ""en"", was """"",True,29445,21190,0,0,250,9,False
+options,no-charset,0.630668,0.761523,0.166357,1,1,0.890017,content differs,blocking,"""Â· KrakÃ³w Â· Ã˜resund."" is now ""· Kraków · Øresund.""",True,19587,13214,0,0,240,9,True
+options,no-margins,0.999552,1.0,0.998505,1,1,1.0,appearance only,cosmetic,"the language of the file is ""en"", was """"",True,17366,11701,0,0,240,9,False
+options,outline,0.999785,1.0,0.999282,2,2,0.999975,appearance only,cosmetic,"the language of the file is ""en"", was """"",True,28777,20445,0,0,250,9,False
+options,page-offset,0.999755,1.0,0.999185,2,2,0.999976,appearance only,cosmetic,"the language of the file is ""en"", was """"",True,29509,21261,0,0,250,9,False
+options,print-media,0.987181,1.0,0.957271,1,1,0.937592,appearance only,cosmetic,"the language of the file is ""en"", was """"",True,18696,13037,0,0,240,9,False
+options,script-file,0.999671,1.0,0.998902,1,1,1.0,file differs,cosmetic,"the language of the file is ""en"", was """"",True,17497,11967,0,0,240,30,False
+options,text-headers,0.999706,1.0,0.999018,2,2,0.999934,appearance only,cosmetic,"the language of the file is ""en"", was """"",True,30011,21596,0,0,259,9,False
+options,user-style-sheet,0.999596,1.0,0.998652,2,2,0.999134,appearance only,cosmetic,"the language of the file is ""en"", was """"",True,32682,23562,0,0,250,9,False
+options,zoom,0.969672,1.0,0.898907,2,2,0.606254,appearance only,cosmetic,"the language of the file is ""en"", was """"",True,29533,21320,0,0,250,9,False
+international,european,0.997383,1.0,0.991276,1,1,0.999726,file differs,cosmetic,"the language of the file is ""en"", was """"",True,23236,17688,0,0,240,9,False
+international,greek-russian,0.997935,1.0,0.993118,1,1,0.999527,same,,,True,24018,17554,0,0,240,0,False
+international,invoice-ar,0.43182,0.41443,0.082017,1,1,0.997912,content differs,blocking,"""ﯾ ﻮ ﻣ ً"" is now ""يومًا مع ذكر رقم الفاتورة. شكرً""",True,24219,17903,0,0,250,0,True
+international,invoice-zh,0.881813,0.923358,0.733779,1,1,0.999853,content differs,blocking,"""北⻛办公⽤品有限公司"" is now ""北风办公用品有限公司""",True,28716,26247,0,0,250,19,True
+international,letter-hi,0.757913,0.794613,0.535355,1,1,0.998674,content differs,blocking,"""ग�ाहक"" is now ""ग्राहक""",True,39912,73076,0,0,259,9,False
+international,letter-ja,0.856918,0.942238,0.619329,1,1,0.995716,content differs,blocking,"""品名：トナーカートリッジ（黒、⼤容量） 数量：4本"" is now ""品名：トナーカートリッジ（黒、大容量） 数量：4本""",False,38688,32140,0,0,269,19,False
+international,mixed-scripts,0.989043,0.995181,0.971507,1,1,0.999865,appearance only,cosmetic,"the language of the file is ""en"", was """"",False,28260,21256,0,0,259,9,False
+international,notice-he,0.607066,0.8,0.023553,1,1,1.0,appearance only,cosmetic,"the language of the file is ""he"", was """"",True,17457,11461,0,0,240,9,True
+international,receipt-ko,0.999519,1.0,0.998396,1,1,0.99907,content differs,blocking,"""08:42 계산대"" is now ""08:42 계산대""",True,13928,12704,0,0,240,9,False
+international,receipt-th,0.676929,0.670213,0.472742,1,1,0.999743,content differs,blocking,"""ขอบคุณที ่ ใช บริการ ้"" is now ""ขอบคุณที่ใช้บริการ""",True,29440,107376,0,0,259,19,True
