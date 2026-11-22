@@ -1,0 +1,5 @@
+image	odoo@sha256:0bd79cf07f59105c5697667c2241b86447e99c6adb036200df0e4e295785bdf3
+odoo	Odoo Server 18.0-20261112
+wkhtmltopdf	wkhtmltopdf 0.12.6.1 (with patched qt)
+wkhtmltopdf_sha256	750c92708349321a502b92e5e6c16b25499318ec24d1175cc8a81b6aefa321b2
+bundles	web.report_assets_pdf.min.css, web.report_assets_common.min.css
