@@ -6,7 +6,7 @@ This folder measures, one feature per page, which Bootstrap 5 features print the
 ## The results
 
 <!-- results:start (written by harness/page.py from results/; edits here are overwritten) -->
-**wkhtmltopdf 0.12.6.1 beside Google Chrome 158.0.8127.36, one Bootstrap 5 feature to a page.** Measured on GitHub's machines ([the run](https://github.com/marqiushq/wkhtmltopdf-parity/actions/runs/44971095301)), judged by `marqius-wkhtmltopdf compare` (marqius-wkhtmltopdf 0.12.13).
+**wkhtmltopdf 0.12.6.1 beside Google Chrome 158.0.8127.36, one Bootstrap 5 feature to a page.** Measured on GitHub's machines ([the run](https://github.com/marqiushq/wkhtmltopdf-parity/actions/runs/45004427893)), judged by `marqius-wkhtmltopdf compare` (marqius-wkhtmltopdf 0.12.13).
 
 | How the pages print | Bootstrap 5.1.3 alone | Bootstrap 5.3.3 alone | Odoo 17 report CSS | Odoo 18 report CSS | Odoo 19 report CSS | Odoo 20 report CSS |
 |---|---:|---:|---:|---:|---:|---:|
