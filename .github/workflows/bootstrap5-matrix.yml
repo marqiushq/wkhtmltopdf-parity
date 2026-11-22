@@ -1,7 +1,7 @@
 # The Bootstrap 5 matrix (bootstrap5-matrix/): Bootstrap 5 printed by wkhtmltopdf 0.12.6.1 as Odoo
 # ships it, page by page against Chrome, judged by marqius-wkhtmltopdf compare. Runs in public on
 # GitHub's machines and files the matrix under bootstrap5-matrix/results/ with a link back to the run,
-# signed with a GitHub attestation.
+# signed with a GitHub attestation, and writes the matrix onto bootstrap5-matrix/README.md.
 #
 #   by hand        Actions > Bootstrap 5 matrix > Run workflow
 #   on a change    to the pages or the harness; a pull request is measured the same way, nothing is filed
@@ -25,6 +25,10 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Print every page with both programs and compare them
         run: sh bootstrap5-matrix/run.sh "$RUNNER_TEMP/bootstrap5"
+      - name: Write the matrix onto a copy of the page, as the publish job will
+        run: |
+          cp bootstrap5-matrix/README.md "$RUNNER_TEMP/README.md"
+          python3 bootstrap5-matrix/harness/page.py bootstrap5-matrix/results "$RUNNER_TEMP/README.md"
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: bootstrap5-matrix
@@ -62,7 +66,8 @@ jobs:
             rm -rf bootstrap5-matrix/results
             cp -R "$RUNNER_TEMP/matrix" bootstrap5-matrix/results
             printf '%s\n' "$RUN_URL" > bootstrap5-matrix/results/run.txt
-            git add -A bootstrap5-matrix/results
+            python3 bootstrap5-matrix/harness/page.py   # the page shows the matrix it files
+            git add -A bootstrap5-matrix/results bootstrap5-matrix/README.md
             if git diff --cached --quiet; then echo "nothing new"; exit 0; fi
             git commit -q -m "Bootstrap 5 matrix" -m "From $RUN_URL"
             if git push -q origin HEAD:main; then exit 0; fi
