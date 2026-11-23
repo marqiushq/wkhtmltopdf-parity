@@ -1,0 +1,217 @@
+# OpenMetadata's security-scan job (open-metadata/OpenMetadata, .github/workflows/security-scan.yml)
+# has stopped at "Install Ubuntu dependencies" since ubuntu-latest became Ubuntu 26.04: that step asks
+# apt for wkhtmltopdf, and Ubuntu 26.04 has no wkhtmltopdf package. This shows the error, then the fix:
+# wkhtmltopdf taken out of the apt line, and marqius-wkhtmltopdf installed under the name wkhtmltopdf.
+# Started by hand; nothing is filed.
+name: OpenMetadata security-scan fix
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  # OpenMetadata main on 23 Nov 2026; its security-scan.yml last changed on 19 Oct 2026
+  OPENMETADATA_REF: 3cdf00c82c293eed3ad2aa5dc5dd4a16eb65399c
+  # snyk-to-html's own sample Snyk results stand in for the Snyk scan, which needs OpenMetadata's token
+  SNYK_TO_HTML_REF: c3e395eaad41bb812529b4f8352e76914a838152
+
+jobs:
+  before:
+    name: Before, ubuntu-latest
+    runs-on: ubuntu-latest
+    steps:
+      - name: Runner image
+        run: |
+          echo "$ImageOS $ImageVersion"
+          grep PRETTY_NAME /etc/os-release
+
+      - name: Install Ubuntu dependencies (OpenMetadata's step, unchanged)
+        id: apt
+        continue-on-error: true
+        shell: bash
+        run: |
+          # stop relying on apt cache of GitHub runners
+          sudo apt-get update
+          sudo apt-get install -y unixodbc-dev python3-venv librdkafka-dev gcc libsasl2-dev build-essential libssl-dev libffi-dev \
+          librdkafka-dev unixodbc-dev libevent-dev wkhtmltopdf libkrb5-dev 2>&1 | tee "$RUNNER_TEMP/apt.log"
+
+      - name: It stops on wkhtmltopdf, and on nothing else
+        run: |
+          test "${{ steps.apt.outcome }}" = failure
+          grep -F "E: Package 'wkhtmltopdf' has no installation candidate" "$RUNNER_TEMP/apt.log"
+          test "$(grep -c '^E: ' "$RUNNER_TEMP/apt.log")" = 1
+
+  after:
+    name: After, ${{ matrix.runner }}
+    strategy:
+      fail-fast: false
+      matrix:
+        runner: [ubuntu-latest, ubuntu-24.04, ubuntu-22.04]
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - name: Runner image
+        run: |
+          echo "$ImageOS $ImageVersion"
+          grep PRETTY_NAME /etc/os-release
+
+      - name: OpenMetadata's Makefile and PDF script
+        uses: actions/checkout@v7
+        with:
+          repository: open-metadata/OpenMetadata
+          ref: ${{ env.OPENMETADATA_REF }}
+          sparse-checkout: |
+            Makefile
+            ingestion/Makefile
+            ingestion/pyproject.toml
+            scripts/html_to_pdf.py
+          sparse-checkout-cone-mode: false
+
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.10"
+
+      - name: Install Ubuntu dependencies (fix, part 1)
+        run: |
+          # stop relying on apt cache of GitHub runners
+          sudo apt-get update
+          sudo apt-get install -y unixodbc-dev python3-venv librdkafka-dev gcc libsasl2-dev build-essential libssl-dev libffi-dev \
+          librdkafka-dev unixodbc-dev libevent-dev libkrb5-dev
+
+      - name: Install wkhtmltopdf (fix, part 2)
+        uses: marqiushq/setup-marqius-wkhtmltopdf@v1
+        with:
+          wkhtmltopdf-names: true
+
+      - name: Sample Snyk results, in place of the Snyk scan
+        run: |
+          mkdir -p security-report
+          fixtures="https://raw.githubusercontent.com/snyk/snyk-to-html/$SNYK_TO_HTML_REF/test/fixtures"
+          curl -fsSL "$fixtures/test-report.json" -o security-report/ui-dep-scan.json
+          curl -fsSL "$fixtures/test-report-container-with-app-vulns.json" -o security-report/server-docker-scan.json
+          curl -fsSL "$fixtures/test-code-altoroj.json" -o security-report/server-code-scan.json
+          curl -fsSL "$fixtures/no-vulns.json" -o security-report/airflow-apis-code-scan.json
+
+      - name: Generate Snyk HTML/PDF (OpenMetadata's step, unchanged)
+        run: |
+          # Back up JSONs because html_to_pdf.py deletes them after PDF conversion.
+          mkdir -p /tmp/snyk-json-backup
+          cp security-report/*.json /tmp/snyk-json-backup/ 2>/dev/null || true
+          make export-snyk-pdf-report || true
+          # Restore JSONs alongside generated PDFs/HTMLs.
+          cp /tmp/snyk-json-backup/*.json security-report/ 2>/dev/null || true
+
+      - name: Every result is a PDF, and the report is merged
+        run: |
+          command -v wkhtmltopdf
+          wkhtmltopdf --version
+          ls -l security-report
+          for json in /tmp/snyk-json-backup/*.json; do
+            test -s "security-report/$(basename "$json").pdf"
+          done
+          python3 - <<'EOF'
+          import glob
+          from PyPDF2 import PdfReader
+          for path in sorted(glob.glob("security-report/*.pdf")):
+              reader = PdfReader(path)
+              text = "".join(page.extract_text() or "" for page in reader.pages)
+              assert len(reader.pages) > 0 and "Snyk" in text, path
+              line = "with" if "Prepared by Marqius" in text else "without"
+              print(f"{path}: {len(reader.pages)} pages, {line} the licence line")
+          EOF
+
+      - name: Upload the PDFs
+        uses: actions/upload-artifact@v7
+        with:
+          name: security-report-${{ matrix.runner }}
+          path: security-report/*.pdf
+          retention-days: 30
+
+  whole-job:
+    name: Whole job with the fix, ubuntu-latest (sample results in place of Snyk)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Free Disk Space (Ubuntu)
+        uses: jlumbroso/free-disk-space@main
+        with:
+          tool-cache: false
+          android: true
+          dotnet: true
+          haskell: true
+          large-packages: false
+          docker-images: true
+          swap-storage: true
+
+      - uses: actions/checkout@v7
+        with:
+          repository: open-metadata/OpenMetadata
+          ref: ${{ env.OPENMETADATA_REF }}
+
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.10"
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v5
+        with:
+          java-version: "21"
+          distribution: "temurin"
+
+      - name: Install Ubuntu dependencies (fix, part 1)
+        run: |
+          # stop relying on apt cache of GitHub runners
+          sudo apt-get update
+          sudo apt-get install -y unixodbc-dev python3-venv librdkafka-dev gcc libsasl2-dev build-essential libssl-dev libffi-dev \
+          librdkafka-dev unixodbc-dev libevent-dev libkrb5-dev
+
+      - name: Install wkhtmltopdf (fix, part 2)
+        uses: marqiushq/setup-marqius-wkhtmltopdf@v1
+        with:
+          wkhtmltopdf-names: true
+
+      - name: Install Snyk (without signing in, which needs OpenMetadata's token)
+        run: |
+          sudo make install_antlr_cli
+          sudo npm install -g snyk
+
+      - name: Install Python dependencies
+        run: |
+          python3 -m venv env
+          source env/bin/activate
+          make install_all install_apis
+
+      - name: Restore openmetadata-ui dist cache
+        uses: ./.github/actions/cache-ui-dist
+
+      - name: Maven build
+        run: mvn -DskipTests clean install
+
+      - name: Sample Snyk results, in place of the Snyk scan
+        run: |
+          rm -rf security-report
+          mkdir -p security-report
+          fixtures="https://raw.githubusercontent.com/snyk/snyk-to-html/$SNYK_TO_HTML_REF/test/fixtures"
+          curl -fsSL "$fixtures/test-report.json" -o security-report/ui-dep-scan.json
+          curl -fsSL "$fixtures/test-report-container-with-app-vulns.json" -o security-report/server-docker-scan.json
+          curl -fsSL "$fixtures/test-code-altoroj.json" -o security-report/server-code-scan.json
+          curl -fsSL "$fixtures/no-vulns.json" -o security-report/airflow-apis-code-scan.json
+
+      - name: Generate Snyk HTML/PDF (OpenMetadata's step, unchanged)
+        run: |
+          # Back up JSONs because html_to_pdf.py deletes them after PDF conversion.
+          mkdir -p /tmp/snyk-json-backup
+          cp security-report/*.json /tmp/snyk-json-backup/ 2>/dev/null || true
+          make export-snyk-pdf-report || true
+          # Restore JSONs alongside generated PDFs/HTMLs.
+          cp /tmp/snyk-json-backup/*.json security-report/ 2>/dev/null || true
+
+      - name: Every result is a PDF, and the report is merged
+        run: |
+          ls -l security-report
+          for json in /tmp/snyk-json-backup/*.json; do
+            test -s "security-report/$(basename "$json").pdf"
+          done
+          test -s security-report/security-report.pdf
