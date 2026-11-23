@@ -37,27 +37,27 @@ cp corpus/everyday/*.html mine/
 ## The scoreboard
 
 <!-- scoreboard:start (written by harness/publish.py from results/; edits here are overwritten) -->
-**marqius-wkhtmltopdf 0.12.13** beside **wkhtmltopdf 0.12.6**, checked 22 November 2026, 05:23 UTC on GitHub Actions, x86-64, 4 CPUs: [the run's log](https://github.com/marqiushq/wkhtmltopdf-parity/actions/runs/44989154202) · [full report](results/0.12.13/linux-amd64/report.md) · [every document](results/0.12.13/linux-amd64/scores.csv)
+**marqius-wkhtmltopdf 0.12.13** beside **wkhtmltopdf 0.12.6**, checked 23 November 2026, 05:40 UTC on GitHub Actions, x86-64, 4 CPUs: [the run's log](https://github.com/marqiushq/wkhtmltopdf-parity/actions/runs/45119162282) · [full report](results/0.12.13/linux-amd64/report.md) · [every document](results/0.12.13/linux-amd64/scores.csv)
 
 | What was converted | Documents | Parity | Overlay | Same pages | Appearance only | Content differs | Speed |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| Business documents (`everyday`) | 8 | 0.9909 | 0.996 | 3 | 4 | 1 | 32× |
-| CSS features, one to a page (`print`) | 78 | 0.9927 | 0.991 | 61 | 12 | 5 | 35× |
-| **The 86 published documents together** | **86** | **0.9926** | 0.992 | 64 | 16 | 6 | **35×** |
-| wkhtmltopdf's own options (`options`) | 19 | 0.9703 | 0.958 | 3 | 15 | 1 | 22× |
+| Business documents (`everyday`) | 8 | 0.9909 | 0.996 | 3 | 4 | 1 | 35× |
+| CSS features, one to a page (`print`) | 78 | 0.9927 | 0.991 | 61 | 12 | 5 | 41× |
+| **The 86 published documents together** | **86** | **0.9926** | 0.992 | 64 | 16 | 6 | **40×** |
+| wkhtmltopdf's own options (`options`) | 19 | 0.9703 | 0.958 | 3 | 15 | 1 | 24× |
 | Languages and scripts (`international`) | 10 | 0.8196 | 0.999 | 2 | 2 | 6 | 20× |
 
-Speed is the time to convert the published documents one after another, wkhtmltopdf's divided by marqius-wkhtmltopdf's: 20.2 s against 0.58 s (median of 3 runs); 5× with wkhtmltopdf's 200 ms script wait turned off for both.
+Speed is the time to convert the published documents one after another, wkhtmltopdf's divided by marqius-wkhtmltopdf's: 19.8 s against 0.49 s (median of 3 runs); 5× with wkhtmltopdf's 200 ms script wait turned off for both.
 
 Sizes: the 86 PDFs come to 1.1 MB from wkhtmltopdf and 0.8 MB from marqius-wkhtmltopdf. The `marqius/wkhtmltopdf` image is 26 MB unpacked; the image wkhtmltopdf runs in here, with its fonts, 330 MB.
 
-On GitHub Actions, ARM64, 4 CPUs: the same parity in every set, 34× faster ([report](results/0.12.13/linux-arm64/report.md)).
+On GitHub Actions, ARM64, 4 CPUs: the same parity in every set, 31× faster ([report](results/0.12.13/linux-arm64/report.md)).
 
 #### Every version
 
 | Version | Checked | Business documents | CSS features | Published 86 | Options | Languages | Speed |
 |---|---|---:|---:|---:|---:|---:|---:|
-| [0.12.13](results/0.12.13/linux-amd64/report.md) | 2026-11-22 | 0.9909 | 0.9927 | 0.9926 | 0.9703 | 0.8196 | 35× |
+| [0.12.13](results/0.12.13/linux-amd64/report.md) | 2026-11-23 | 0.9909 | 0.9927 | 0.9926 | 0.9703 | 0.8196 | 40× |
 | [0.12.12](results/0.12.12/linux-amd64/report.md) | 2026-11-22 | 0.9909 | 0.9926 | 0.9924 | 0.9703 | 0.8196 | 34× |
 | [0.12.11](results/0.12.11/linux-amd64/report.md) | 2026-11-21 | 0.9909 | 0.9926 | 0.9924 | 0.9703 | 0.8196 | 39× |
 | [0.12.10](results/0.12.10/linux-amd64/report.md) | 2026-11-20 | 0.9909 | 0.9926 | 0.9924 | 0.9703 | 0.8196 | 38× |
