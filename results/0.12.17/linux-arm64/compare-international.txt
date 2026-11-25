@@ -1,0 +1,29 @@
+marqius-wkhtmltopdf compare: pdf/wk/international against pdf/mq/international
+10 pairs compared in 0.1 s (91 a second on 4 cores)
+
+  same              1
+  appearance only   2
+  content differs   6
+  file differs      1   (the pages are the same; the kind of PDF or its description is not)
+
+  by level: blocking 6, review 0, cosmetic 3
+  NO-GO: 6 documents with blocking differences
+
+The 9 documents that differ, by cause (50 causes in all; a document may have several):
+   1. review          3 documents   pdf type: version 1.4 → 1.5
+   2. cosmetic        3 documents   letters divided into words differently
+   3. cosmetic        3 documents   lines break at other words
+   4. cosmetic        2 documents   metadata: language none → en
+   5. blocking        1 document    text: "##:## 계산대" → "##:## 계산대"
+   6. blocking        1 document    text: "إ ﻟ ﻰ : ﺷ ﺮ ﻛ ﺔ أ ﻛ ﻤ ﻲ ﻟ ﻠ ﺘ ﺠ ﺎ ر ة ، ﺷ ﺎ ر ع ا ﻟ ﻤ ﯿ ﻨ ﺎ ء" → "إلى: شركة أكمي للتجارة، شارع الميناء"
+   7. blocking        1 document    text: "ا ﻟ ﺒ ﻨ ﺪ ا ﻟ ﻜ ﻤ ﯿ ﺔ ﺳ ﻌ ﺮ ا ﻟ ﻮ ﺣ ﺪ ة ا ﻟ ﻤ ﺒ ﻠ ﻎ و ر ق ﺗ ﺼ ﻮ ﯾ ﺮ" → "البند الكمية سعر الوحدة المبلغ ورق تصوير"
+   8. blocking        1 document    text: "ا ﻟ ﺘ ﺎ ر ﯾ ﺦ :" → "التاريخ:"
+   9. blocking        1 document    text: "ا ﻟ ﺘ ﻮ ﺻ ﯿ ﻞ" → "التوصيل"
+  10. blocking        1 document    text: "د ر ﻫ ﻢ ﯾ ﺮ ﺟ ﻰ ا ﻟ ﺪ ﻓ ﻊ ﺧ ﻼ ل" → "درهم يرجى الدفع خلال"
+  11. blocking        1 document    text: "د ر ﻫ ﻢ ﺿ ﺮ ﯾ ﺒ ﺔ ا ﻟ ﻘ ﯿ ﻤ ﺔ ا ﻟ ﻤ ﻀ ﺎ ﻓ ﺔ" → "درهم ضريبة القيمة المضافة"
+  12. blocking        1 document    text: "ऑड�र सं�या" → "ऑर्डर संख्या"
+      … 38 more in causes.csv
+  the first 5 causes explain 1 of the 9 documents that differ
+  the first 10 causes explain 1 of the 9 documents that differ
+
+In compare/international: summary.csv (a line for each pair), causes.csv, summary.json, and for each pair pairs/<name>.json, <name>.old-marked.pdf and <name>.new-marked.pdf, <name>.page-N.png.

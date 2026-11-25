@@ -1,0 +1,6433 @@
+{
+ "suite": {
+  "commit": "6ab0243"
+ },
+ "when": "2026-11-25T05:30:22Z",
+ "meta": {
+  "when": "2026-11-25T05:30:22Z",
+  "platform": "linux/arm64",
+  "mode": "corpus",
+  "network": "none",
+  "sets_list": "print everyday options international ",
+  "marqius": {
+   "image": "marqius/wkhtmltopdf:0.12.17",
+   "tag": "0.12.17",
+   "version": "0.12.17",
+   "sha256": "8d8adee679dad3abe00196fe696e802f19cb59b8023df1e37d6bacee7f438767",
+   "size_mb": 18.8
+  },
+  "images": {
+   "reference": {
+    "name": "surnet/alpine-wkhtmltopdf:3.24.3-0.12.6-full",
+    "digest": "sha256:ce8cbcdfd11a8f73ba0bb5a86301e17325c93a39485cf4165e3e99a08503dca9",
+    "size_mb": 314.1
+   },
+   "marqius": {
+    "name": "marqius/wkhtmltopdf:0.12.17",
+    "digest": "sha256:dc78ad07e7bd74478cc7675a714d84a4b1e97d0fcd47b3263f3d545d481cd094",
+    "size_mb": 24.7
+   },
+   "scorer": {
+    "name": "wkhtmltopdf-parity-scorer (harness/Dockerfile, built here)"
+   },
+   "cjk": {
+    "name": "wkhtmltopdf-parity-cjk (harness/Dockerfile, built here)"
+   }
+  },
+  "suite": {
+   "commit": "6ab0243"
+  },
+  "run_url": "https://github.com/marqiushq/wkhtmltopdf-parity/actions/runs/45553954576",
+  "label": {
+   "print": "main",
+   "everyday": "main",
+   "options": "main",
+   "international": "international"
+  },
+  "sets": [
+   "print",
+   "everyday",
+   "options",
+   "international"
+  ],
+  "label_of": {
+   "print": "main",
+   "everyday": "main",
+   "options": "main",
+   "international": "international"
+  },
+  "first_label": "main"
+ },
+ "tools": {
+  "pdftotext": "pdftotext version 25.12.0",
+  "python": "3.14.10"
+ },
+ "env": {
+  "international": {
+   "label": "international",
+   "alpine": "3.24.3",
+   "machine": "aarch64",
+   "kernel": "7.0.0-1017-azure",
+   "cpus": "4",
+   "cpu": "",
+   "memory": "15.6 GB",
+   "wk_path": "/bin/wkhtmltopdf",
+   "wk_version": "wkhtmltopdf 0.12.6 (with patched qt)",
+   "mq_as_wkhtmltopdf": "wkhtmltopdf 0.12.6 (with patched qt) (compatible; marqius-wkhtmltopdf 0.12.17)",
+   "mq_version": "marqius-wkhtmltopdf 0.12.17",
+   "mq_sha256": "8d8adee679dad3abe00196fe696e802f19cb59b8023df1e37d6bacee7f438767",
+   "fontconfig": "fontconfig version 2.17.1",
+   "font_files": "116",
+   "match_sans-serif": "DejaVuSans.ttf: \"DejaVu Sans\" \"Book\"",
+   "match_serif": "DejaVuSerif.ttf: \"DejaVu Serif\" \"Book\"",
+   "match_monospace": "DejaVuSansMono.ttf: \"DejaVu Sans Mono\" \"Book\"",
+   "match_Arial": "Arial.ttf: \"Arial\" \"Regular\"",
+   "match_Helvetica": "Arial.ttf: \"Arial\" \"Regular\"",
+   "match_Times New Roman": "Times_New_Roman.ttf: \"Times New Roman\" \"Regular\"",
+   "match_Verdana": "Verdana.ttf: \"Verdana\" \"Regular\"",
+   "match_Georgia": "Georgia.ttf: \"Georgia\" \"Regular\"",
+   "match_Courier New": "Courier_New.ttf: \"Courier New\" \"Regular\""
+  },
+  "main": {
+   "label": "main",
+   "alpine": "3.24.3",
+   "machine": "aarch64",
+   "kernel": "7.0.0-1017-azure",
+   "cpus": "4",
+   "cpu": "",
+   "memory": "15.6 GB",
+   "wk_path": "/bin/wkhtmltopdf",
+   "wk_version": "wkhtmltopdf 0.12.6 (with patched qt)",
+   "mq_as_wkhtmltopdf": "wkhtmltopdf 0.12.6 (with patched qt) (compatible; marqius-wkhtmltopdf 0.12.17)",
+   "mq_version": "marqius-wkhtmltopdf 0.12.17",
+   "mq_sha256": "8d8adee679dad3abe00196fe696e802f19cb59b8023df1e37d6bacee7f438767",
+   "fontconfig": "fontconfig version 2.17.1",
+   "font_files": "112",
+   "match_sans-serif": "DejaVuSans.ttf: \"DejaVu Sans\" \"Book\"",
+   "match_serif": "DejaVuSerif.ttf: \"DejaVu Serif\" \"Book\"",
+   "match_monospace": "DejaVuSansMono.ttf: \"DejaVu Sans Mono\" \"Book\"",
+   "match_Arial": "Arial.ttf: \"Arial\" \"Regular\"",
+   "match_Helvetica": "Arial.ttf: \"Arial\" \"Regular\"",
+   "match_Times New Roman": "Times_New_Roman.ttf: \"Times New Roman\" \"Regular\"",
+   "match_Verdana": "Verdana.ttf: \"Verdana\" \"Regular\"",
+   "match_Georgia": "Georgia.ttf: \"Georgia\" \"Regular\"",
+   "match_Courier New": "Courier_New.ttf: \"Courier New\" \"Regular\""
+  }
+ },
+ "families": {
+  "international": [
+   "Andale Mono",
+   "Arial",
+   "Arial Black",
+   "Comic Sans MS",
+   "Courier New",
+   "DejaVu Math TeX Gyre",
+   "DejaVu Sans",
+   "DejaVu Sans Mono",
+   "DejaVu Sans,DejaVu Sans Condensed",
+   "DejaVu Sans,DejaVu Sans Light",
+   "DejaVu Serif",
+   "DejaVu Serif,DejaVu Serif Condensed",
+   "Droid Sans",
+   "Droid Sans Mono",
+   "Droid Serif",
+   "FreeMono",
+   "FreeSans",
+   "FreeSerif",
+   "Georgia",
+   "Impact",
+   "Liberation Mono",
+   "Liberation Sans",
+   "Liberation Sans Narrow",
+   "Liberation Serif",
+   "Noto Sans CJK HK",
+   "Noto Sans CJK JP",
+   "Noto Sans CJK KR",
+   "Noto Sans CJK SC",
+   "Noto Sans CJK TC",
+   "Noto Sans Mono CJK HK",
+   "Noto Sans Mono CJK JP",
+   "Noto Sans Mono CJK KR",
+   "Noto Sans Mono CJK SC",
+   "Noto Sans Mono CJK TC",
+   "Noto Serif CJK HK",
+   "Noto Serif CJK JP",
+   "Noto Serif CJK KR",
+   "Noto Serif CJK SC",
+   "Noto Serif CJK TC",
+   "Times New Roman",
+   "Trebuchet MS",
+   "Verdana",
+   "Webdings"
+  ],
+  "main": [
+   "Andale Mono",
+   "Arial",
+   "Arial Black",
+   "Comic Sans MS",
+   "Courier New",
+   "DejaVu Math TeX Gyre",
+   "DejaVu Sans",
+   "DejaVu Sans Mono",
+   "DejaVu Sans,DejaVu Sans Condensed",
+   "DejaVu Sans,DejaVu Sans Light",
+   "DejaVu Serif",
+   "DejaVu Serif,DejaVu Serif Condensed",
+   "Droid Sans",
+   "Droid Sans Mono",
+   "Droid Serif",
+   "FreeMono",
+   "FreeSans",
+   "FreeSerif",
+   "Georgia",
+   "Impact",
+   "Liberation Mono",
+   "Liberation Sans",
+   "Liberation Sans Narrow",
+   "Liberation Serif",
+   "Times New Roman",
+   "Trebuchet MS",
+   "Verdana",
+   "Webdings"
+  ]
+ },
+ "headline": {
+  "sets": [
+   "print",
+   "everyday"
+  ],
+  "documents": 86,
+  "parity": 0.992577,
+  "overlay": 0.99173,
+  "bytes_wk": 1151550,
+  "bytes_mq": 790713,
+  "by_set": {
+   "print": 0.992745,
+   "everyday": 0.990943
+  },
+  "speed": 33.49,
+  "speed_runs": [
+   33.21,
+   33.49,
+   33.56
+  ],
+  "seconds_wk": 20.482,
+  "seconds_mq": 0.612,
+  "nowait_speed": 5.29
+ },
+ "sets": {
+  "print": {
+   "title": "CSS features, one to a page",
+   "published": true,
+   "image": "reference",
+   "documents": 78,
+   "parity": 0.992745,
+   "lowest": 0.669409,
+   "overlay": 0.991335,
+   "overlay_lowest": 0.793202,
+   "at_least_099": 75,
+   "below_090": 2,
+   "verdicts": {
+    "same pages": 61,
+    "appearance only": 12,
+    "content differs": 5
+   },
+   "pdfs_wk": 78,
+   "pdfs_mq": 78,
+   "fonts_differ": 1,
+   "bytes_wk": 990301,
+   "bytes_mq": 673744,
+   "seconds_wk": [
+    18.509,
+    18.538,
+    18.546
+   ],
+   "seconds_mq": [
+    0.546,
+    0.553,
+    0.55
+   ],
+   "speed": 33.69,
+   "nowait": {
+    "seconds_wk": 2.801,
+    "seconds_mq": 0.535,
+    "speed": 5.24
+   }
+  },
+  "everyday": {
+   "title": "Business documents",
+   "published": true,
+   "image": "reference",
+   "documents": 8,
+   "parity": 0.990943,
+   "lowest": 0.956417,
+   "overlay": 0.995585,
+   "overlay_lowest": 0.975462,
+   "at_least_099": 6,
+   "below_090": 0,
+   "verdicts": {
+    "appearance only": 4,
+    "same pages": 3,
+    "content differs": 1
+   },
+   "pdfs_wk": 8,
+   "pdfs_mq": 8,
+   "fonts_differ": 0,
+   "bytes_wk": 161249,
+   "bytes_mq": 116969,
+   "seconds_wk": [
+    1.95,
+    1.944,
+    1.95
+   ],
+   "seconds_mq": [
+    0.063,
+    0.064,
+    0.062
+   ],
+   "speed": 30.9,
+   "nowait": {
+    "seconds_wk": 0.343,
+    "seconds_mq": 0.059,
+    "speed": 5.78
+   }
+  },
+  "options": {
+   "title": "wkhtmltopdf's own options",
+   "published": false,
+   "image": "reference",
+   "documents": 19,
+   "parity": 0.970262,
+   "lowest": 0.630668,
+   "overlay": 0.95811,
+   "overlay_lowest": 0.606254,
+   "at_least_099": 13,
+   "below_090": 1,
+   "verdicts": {
+    "appearance only": 15,
+    "same pages": 3,
+    "content differs": 1
+   },
+   "pdfs_wk": 19,
+   "pdfs_mq": 19,
+   "fonts_differ": 0,
+   "bytes_wk": 504863,
+   "bytes_mq": 360521,
+   "seconds_wk": [
+    5.392,
+    5.383,
+    5.387
+   ],
+   "seconds_mq": [
+    0.251,
+    0.242,
+    0.247
+   ],
+   "speed": 21.8
+  },
+  "international": {
+   "title": "Languages and scripts",
+   "published": false,
+   "image": "cjk",
+   "documents": 10,
+   "parity": 0.819634,
+   "lowest": 0.43182,
+   "overlay": 0.999009,
+   "overlay_lowest": 0.995716,
+   "at_least_099": 3,
+   "below_090": 6,
+   "verdicts": {
+    "same pages": 2,
+    "content differs": 6,
+    "appearance only": 2
+   },
+   "pdfs_wk": 10,
+   "pdfs_mq": 10,
+   "fonts_differ": 2,
+   "bytes_wk": 267874,
+   "bytes_mq": 337405,
+   "seconds_wk": [
+    2.524,
+    2.523,
+    2.524
+   ],
+   "seconds_mq": [
+    0.124,
+    0.122,
+    0.119
+   ],
+   "speed": 20.61
+  }
+ },
+ "documents": [
+  {
+   "set": "print",
+   "name": "01-basic",
+   "score": 0.999891,
+   "text": 1.0,
+   "geom": 0.999637,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 1.0,
+   "fonts_wk": [
+    "TimesNewRomanPS-BoldMT",
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPS-BoldMT",
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 15072,
+   "size_mq": 9384,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 239,
+   "ms_mq": 10,
+   "verdict": "same",
+   "level": "",
+   "first": "",
+   "differences": 0,
+   "fonts_same": true,
+   "note": "",
+   "notes": [],
+   "pictures": [],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "02-headings",
+   "score": 0.999891,
+   "text": 1.0,
+   "geom": 0.999637,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 1.0,
+   "fonts_wk": [
+    "TimesNewRomanPS-BoldMT",
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPS-BoldMT",
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 17092,
+   "size_mq": 10721,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 250,
+   "ms_mq": 0,
+   "verdict": "same",
+   "level": "",
+   "first": "",
+   "differences": 0,
+   "fonts_same": true,
+   "note": "",
+   "notes": [],
+   "pictures": [],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "03-inline",
+   "score": 0.999236,
+   "text": 1.0,
+   "geom": 0.997454,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 0.998682,
+   "fonts_wk": [
+    "CourierNewPSMT",
+    "TimesNewRomanPS-BoldItalicMT",
+    "TimesNewRomanPS-BoldMT",
+    "TimesNewRomanPS-ItalicMT",
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "CourierNewPSMT",
+    "TimesNewRomanPS-BoldItalicMT",
+    "TimesNewRomanPS-BoldMT",
+    "TimesNewRomanPS-ItalicMT",
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 29674,
+   "size_mq": 14763,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 250,
+   "ms_mq": 10,
+   "verdict": "same",
+   "level": "",
+   "first": "",
+   "differences": 0,
+   "fonts_same": true,
+   "note": "",
+   "notes": [],
+   "pictures": [],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "04-css",
+   "score": 0.999713,
+   "text": 1.0,
+   "geom": 0.999045,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 1.0,
+   "fonts_wk": [
+    "TimesNewRomanPS-BoldMT",
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPS-BoldMT",
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 13957,
+   "size_mq": 8536,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 239,
+   "ms_mq": 9,
+   "verdict": "same",
+   "level": "",
+   "first": "",
+   "differences": 0,
+   "fonts_same": true,
+   "note": "",
+   "notes": [],
+   "pictures": [],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "05-ul",
+   "score": 0.999887,
+   "text": 1.0,
+   "geom": 0.999624,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 0.964881,
+   "fonts_wk": [
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 9235,
+   "size_mq": 7083,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 230,
+   "ms_mq": 0,
+   "verdict": "same",
+   "level": "",
+   "first": "",
+   "differences": 0,
+   "fonts_same": true,
+   "note": "",
+   "notes": [],
+   "pictures": [],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "06-ol",
+   "score": 0.9949,
+   "text": 1.0,
+   "geom": 0.983001,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 0.972504,
+   "fonts_wk": [
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 8181,
+   "size_mq": 6116,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 239,
+   "ms_mq": 0,
+   "verdict": "appearance only",
+   "level": "cosmetic",
+   "first": "3 lines from \"1. Numbered one 2. Numbered two\" moved 3 pt to the right",
+   "differences": 1,
+   "fonts_same": true,
+   "note": "",
+   "notes": [
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "3 lines from \"1. Numbered one 2. Numbered two\" moved 3 pt to the right"
+    }
+   ],
+   "pictures": [
+    "06-ol.page-1.png"
+   ],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "07-pre",
+   "score": 0.999883,
+   "text": 1.0,
+   "geom": 0.999609,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 1.0,
+   "fonts_wk": [
+    "CourierNewPSMT",
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "CourierNewPSMT",
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 12218,
+   "size_mq": 7808,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 230,
+   "ms_mq": 9,
+   "verdict": "same",
+   "level": "",
+   "first": "",
+   "differences": 0,
+   "fonts_same": true,
+   "note": "",
+   "notes": [],
+   "pictures": [],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "08-blockquote",
+   "score": 0.999901,
+   "text": 1.0,
+   "geom": 0.999669,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 1.0,
+   "fonts_wk": [
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 9188,
+   "size_mq": 7018,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 230,
+   "ms_mq": 0,
+   "verdict": "same",
+   "level": "",
+   "first": "",
+   "differences": 0,
+   "fonts_same": true,
+   "note": "",
+   "notes": [],
+   "pictures": [],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "09-hr",
+   "score": 0.999889,
+   "text": 1.0,
+   "geom": 0.999632,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 1.0,
+   "fonts_wk": [
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 7794,
+   "size_mq": 5753,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 230,
+   "ms_mq": 9,
+   "verdict": "same",
+   "level": "",
+   "first": "",
+   "differences": 0,
+   "fonts_same": true,
+   "note": "",
+   "notes": [],
+   "pictures": [],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "10-align",
+   "score": 0.999285,
+   "text": 1.0,
+   "geom": 0.997615,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 0.996154,
+   "fonts_wk": [
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 7644,
+   "size_mq": 5697,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 230,
+   "ms_mq": 0,
+   "verdict": "same",
+   "level": "",
+   "first": "",
+   "differences": 0,
+   "fonts_same": true,
+   "note": "",
+   "notes": [],
+   "pictures": [],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "11-pagination",
+   "score": 0.999897,
+   "text": 1.0,
+   "geom": 0.999657,
+   "pages_wk": 2,
+   "pages_mq": 2,
+   "overlay": 1.0,
+   "fonts_wk": [
+    "TimesNewRomanPS-BoldMT",
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPS-BoldMT",
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 20770,
+   "size_mq": 13147,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 250,
+   "ms_mq": 0,
+   "verdict": "same",
+   "level": "",
+   "first": "",
+   "differences": 0,
+   "fonts_same": true,
+   "note": "",
+   "notes": [],
+   "pictures": [],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "12-nested-lists",
+   "score": 0.999892,
+   "text": 1.0,
+   "geom": 0.999639,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 0.88998,
+   "fonts_wk": [
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 7761,
+   "size_mq": 5876,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 229,
+   "ms_mq": 9,
+   "verdict": "appearance only",
+   "level": "cosmetic",
+   "first": "page 1 lacks rules, frames or tints in 2 places where the old page has them",
+   "differences": 1,
+   "fonts_same": true,
+   "note": "",
+   "notes": [
+    {
+     "of": "appearance",
+     "kind": "drawing",
+     "level": "cosmetic",
+     "note": "page 1 lacks rules, frames or tints in 2 places where the old page has them"
+    }
+   ],
+   "pictures": [
+    "12-nested-lists.page-1.png"
+   ],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "13-longword",
+   "score": 0.999857,
+   "text": 1.0,
+   "geom": 0.999522,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 0.999531,
+   "fonts_wk": [
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 9861,
+   "size_mq": 7583,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 230,
+   "ms_mq": 0,
+   "verdict": "same",
+   "level": "",
+   "first": "",
+   "differences": 0,
+   "fonts_same": true,
+   "note": "",
+   "notes": [],
+   "pictures": [],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "14-links",
+   "score": 0.999777,
+   "text": 1.0,
+   "geom": 0.999256,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 1.0,
+   "fonts_wk": [
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 8887,
+   "size_mq": 6890,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 230,
+   "ms_mq": 9,
+   "verdict": "same",
+   "level": "",
+   "first": "",
+   "differences": 0,
+   "fonts_same": true,
+   "note": "",
+   "notes": [],
+   "pictures": [],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "15-table",
+   "score": 0.999883,
+   "text": 1.0,
+   "geom": 0.999609,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 1.0,
+   "fonts_wk": [
+    "TimesNewRomanPS-BoldMT",
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPS-BoldMT",
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 12961,
+   "size_mq": 7636,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 240,
+   "ms_mq": 10,
+   "verdict": "same",
+   "level": "",
+   "first": "",
+   "differences": 0,
+   "fonts_same": true,
+   "note": "",
+   "notes": [],
+   "pictures": [],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "16-br",
+   "score": 0.999877,
+   "text": 1.0,
+   "geom": 0.999589,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 1.0,
+   "fonts_wk": [
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 7163,
+   "size_mq": 5280,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 230,
+   "ms_mq": 0,
+   "verdict": "same",
+   "level": "",
+   "first": "",
+   "differences": 0,
+   "fonts_same": true,
+   "note": "",
+   "notes": [],
+   "pictures": [],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "17-fontsize",
+   "score": 0.99991,
+   "text": 1.0,
+   "geom": 0.999701,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 1.0,
+   "fonts_wk": [
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 8776,
+   "size_mq": 6657,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 239,
+   "ms_mq": 0,
+   "verdict": "same",
+   "level": "",
+   "first": "",
+   "differences": 0,
+   "fonts_same": true,
+   "note": "",
+   "notes": [],
+   "pictures": [],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "18-margins",
+   "score": 0.999902,
+   "text": 1.0,
+   "geom": 0.999673,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 1.0,
+   "fonts_wk": [
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 7960,
+   "size_mq": 5958,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 230,
+   "ms_mq": 9,
+   "verdict": "same",
+   "level": "",
+   "first": "",
+   "differences": 0,
+   "fonts_same": true,
+   "note": "",
+   "notes": [],
+   "pictures": [],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "19-empty",
+   "score": 0.999876,
+   "text": 1.0,
+   "geom": 0.999588,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 1.0,
+   "fonts_wk": [
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 7331,
+   "size_mq": 5442,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 230,
+   "ms_mq": 0,
+   "verdict": "same",
+   "level": "",
+   "first": "",
+   "differences": 0,
+   "fonts_same": true,
+   "note": "",
+   "notes": [],
+   "pictures": [],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "20-whitespace",
+   "score": 0.997955,
+   "text": 1.0,
+   "geom": 0.993183,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 0.996241,
+   "fonts_wk": [
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 9178,
+   "size_mq": 6954,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 229,
+   "ms_mq": 0,
+   "verdict": "same",
+   "level": "",
+   "first": "",
+   "differences": 0,
+   "fonts_same": true,
+   "note": "",
+   "notes": [],
+   "pictures": [],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "21-img",
+   "score": 0.999893,
+   "text": 1.0,
+   "geom": 0.999642,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 1.0,
+   "fonts_wk": [
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 8695,
+   "size_mq": 7092,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 230,
+   "ms_mq": 9,
+   "verdict": "same",
+   "level": "",
+   "first": "",
+   "differences": 0,
+   "fonts_same": true,
+   "note": "",
+   "notes": [],
+   "pictures": [],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "22-links",
+   "score": 0.999206,
+   "text": 1.0,
+   "geom": 0.997355,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 0.998807,
+   "fonts_wk": [
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 8856,
+   "size_mq": 6798,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 230,
+   "ms_mq": 0,
+   "verdict": "same",
+   "level": "",
+   "first": "",
+   "differences": 0,
+   "fonts_same": true,
+   "note": "",
+   "notes": [],
+   "pictures": [],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "23-page-a4",
+   "score": 0.999877,
+   "text": 1.0,
+   "geom": 0.99959,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 1.0,
+   "fonts_wk": [
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 9553,
+   "size_mq": 7349,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 230,
+   "ms_mq": 0,
+   "verdict": "same",
+   "level": "",
+   "first": "",
+   "differences": 0,
+   "fonts_same": true,
+   "note": "",
+   "notes": [],
+   "pictures": [],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "24-page-custom",
+   "score": 0.999875,
+   "text": 1.0,
+   "geom": 0.999583,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 1.0,
+   "fonts_wk": [
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 7992,
+   "size_mq": 5974,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 230,
+   "ms_mq": 10,
+   "verdict": "same",
+   "level": "",
+   "first": "",
+   "differences": 0,
+   "fonts_same": true,
+   "note": "",
+   "notes": [],
+   "pictures": [],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "25-inline-mixed",
+   "score": 0.999248,
+   "text": 1.0,
+   "geom": 0.997494,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 0.999043,
+   "fonts_wk": [
+    "CourierNewPSMT",
+    "TimesNewRomanPS-BoldMT",
+    "TimesNewRomanPS-ItalicMT",
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "CourierNewPSMT",
+    "TimesNewRomanPS-BoldMT",
+    "TimesNewRomanPS-ItalicMT",
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 24680,
+   "size_mq": 13270,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 240,
+   "ms_mq": 9,
+   "verdict": "same",
+   "level": "",
+   "first": "",
+   "differences": 0,
+   "fonts_same": true,
+   "note": "",
+   "notes": [],
+   "pictures": [],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "26-heading-sizes",
+   "score": 0.999838,
+   "text": 1.0,
+   "geom": 0.99946,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 1.0,
+   "fonts_wk": [
+    "TimesNewRomanPS-BoldMT",
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPS-BoldMT",
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 14263,
+   "size_mq": 8666,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 240,
+   "ms_mq": 0,
+   "verdict": "same",
+   "level": "",
+   "first": "",
+   "differences": 0,
+   "fonts_same": true,
+   "note": "",
+   "notes": [],
+   "pictures": [],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "27-longtable",
+   "score": 0.999869,
+   "text": 1.0,
+   "geom": 0.999565,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 1.0,
+   "fonts_wk": [
+    "TimesNewRomanPS-BoldMT",
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPS-BoldMT",
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 16747,
+   "size_mq": 10840,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 239,
+   "ms_mq": 9,
+   "verdict": "appearance only",
+   "level": "cosmetic",
+   "first": "the paragraph beginning \"k1\" breaks into lines differently (18 lines, now 13)",
+   "differences": 1,
+   "fonts_same": true,
+   "note": "",
+   "notes": [
+    {
+     "of": "appearance",
+     "kind": "reflow",
+     "level": "cosmetic",
+     "note": "the paragraph beginning \"k1\" breaks into lines differently (18 lines, now 13)"
+    }
+   ],
+   "pictures": [
+    "27-longtable.page-1.png"
+   ],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "28-nested-blockquote",
+   "score": 0.999886,
+   "text": 1.0,
+   "geom": 0.999619,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 1.0,
+   "fonts_wk": [
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 9883,
+   "size_mq": 7596,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 230,
+   "ms_mq": 9,
+   "verdict": "same",
+   "level": "",
+   "first": "",
+   "differences": 0,
+   "fonts_same": true,
+   "note": "",
+   "notes": [],
+   "pictures": [],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "29-flex",
+   "score": 0.999888,
+   "text": 1.0,
+   "geom": 0.999627,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 1.0,
+   "fonts_wk": [
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 7947,
+   "size_mq": 5804,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 230,
+   "ms_mq": 0,
+   "verdict": "same",
+   "level": "",
+   "first": "",
+   "differences": 0,
+   "fonts_same": true,
+   "note": "",
+   "notes": [],
+   "pictures": [],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "30-grid",
+   "score": 0.999894,
+   "text": 1.0,
+   "geom": 0.999648,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 1.0,
+   "fonts_wk": [
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 7339,
+   "size_mq": 5282,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 230,
+   "ms_mq": 9,
+   "verdict": "same",
+   "level": "",
+   "first": "",
+   "differences": 0,
+   "fonts_same": true,
+   "note": "",
+   "notes": [],
+   "pictures": [],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "31-footnote",
+   "score": 0.998696,
+   "text": 1.0,
+   "geom": 0.995654,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 0.999491,
+   "fonts_wk": [
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 9259,
+   "size_mq": 6879,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 229,
+   "ms_mq": 10,
+   "verdict": "same",
+   "level": "",
+   "first": "",
+   "differences": 0,
+   "fonts_same": true,
+   "note": "",
+   "notes": [],
+   "pictures": [],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "32-layout-mixed",
+   "score": 0.999874,
+   "text": 1.0,
+   "geom": 0.999579,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 1.0,
+   "fonts_wk": [
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 9795,
+   "size_mq": 7551,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 230,
+   "ms_mq": 0,
+   "verdict": "same",
+   "level": "",
+   "first": "",
+   "differences": 0,
+   "fonts_same": true,
+   "note": "",
+   "notes": [],
+   "pictures": [],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "33-grid-fragmented",
+   "score": 0.999889,
+   "text": 1.0,
+   "geom": 0.999629,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 0.999833,
+   "fonts_wk": [
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 11093,
+   "size_mq": 8314,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 230,
+   "ms_mq": 9,
+   "verdict": "same",
+   "level": "",
+   "first": "",
+   "differences": 0,
+   "fonts_same": true,
+   "note": "",
+   "notes": [],
+   "pictures": [],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "34-flex-justify",
+   "score": 0.999877,
+   "text": 1.0,
+   "geom": 0.99959,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 1.0,
+   "fonts_wk": [
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 8678,
+   "size_mq": 6558,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 230,
+   "ms_mq": 0,
+   "verdict": "same",
+   "level": "",
+   "first": "",
+   "differences": 0,
+   "fonts_same": true,
+   "note": "",
+   "notes": [],
+   "pictures": [],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "35-toc-pages",
+   "score": 0.999874,
+   "text": 1.0,
+   "geom": 0.999581,
+   "pages_wk": 2,
+   "pages_mq": 2,
+   "overlay": 1.0,
+   "fonts_wk": [
+    "TimesNewRomanPS-BoldMT",
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPS-BoldMT",
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 18851,
+   "size_mq": 11919,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 239,
+   "ms_mq": 0,
+   "verdict": "same",
+   "level": "",
+   "first": "",
+   "differences": 0,
+   "fonts_same": true,
+   "note": "",
+   "notes": [],
+   "pictures": [],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "36-svg",
+   "score": 0.999807,
+   "text": 1.0,
+   "geom": 0.999357,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 1.0,
+   "fonts_wk": [
+    "ArialMT",
+    "TimesNewRomanPS-BoldMT",
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "ArialMT",
+    "TimesNewRomanPS-BoldMT",
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 18542,
+   "size_mq": 10286,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 250,
+   "ms_mq": 10,
+   "verdict": "same",
+   "level": "",
+   "first": "",
+   "differences": 0,
+   "fonts_same": true,
+   "note": "",
+   "notes": [],
+   "pictures": [],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "37-headings-scaled",
+   "score": 0.99986,
+   "text": 1.0,
+   "geom": 0.999533,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 1.0,
+   "fonts_wk": [
+    "TimesNewRomanPS-BoldMT",
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPS-BoldMT",
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 14520,
+   "size_mq": 8811,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 239,
+   "ms_mq": 9,
+   "verdict": "file differs",
+   "level": "cosmetic",
+   "first": "the language of the file is \"en\", was \"\"",
+   "differences": 1,
+   "fonts_same": true,
+   "note": "",
+   "notes": [
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"en\", was \"\""
+    }
+   ],
+   "pictures": [
+    "37-headings-scaled.page-1.png"
+   ],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "38-font-keywords",
+   "score": 0.999857,
+   "text": 1.0,
+   "geom": 0.999525,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 1.0,
+   "fonts_wk": [
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 9727,
+   "size_mq": 7191,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 240,
+   "ms_mq": 0,
+   "verdict": "file differs",
+   "level": "cosmetic",
+   "first": "the language of the file is \"en\", was \"\"",
+   "differences": 1,
+   "fonts_same": true,
+   "note": "",
+   "notes": [
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"en\", was \"\""
+    }
+   ],
+   "pictures": [
+    "38-font-keywords.page-1.png"
+   ],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "39-dl",
+   "score": 0.999895,
+   "text": 1.0,
+   "geom": 0.99965,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 1.0,
+   "fonts_wk": [
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 9518,
+   "size_mq": 7310,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 230,
+   "ms_mq": 10,
+   "verdict": "file differs",
+   "level": "cosmetic",
+   "first": "the language of the file is \"en\", was \"\"",
+   "differences": 1,
+   "fonts_same": true,
+   "note": "",
+   "notes": [
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"en\", was \"\""
+    }
+   ],
+   "pictures": [
+    "39-dl.page-1.png"
+   ],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "40-list-types",
+   "score": 0.99392,
+   "text": 1.0,
+   "geom": 0.979735,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 0.909502,
+   "fonts_wk": [
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 8980,
+   "size_mq": 6869,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 229,
+   "ms_mq": 9,
+   "verdict": "appearance only",
+   "level": "cosmetic",
+   "first": "the language of the file is \"en\", was \"\"",
+   "differences": 4,
+   "fonts_same": true,
+   "note": "",
+   "notes": [
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "5 lines from \"a. alpha b. beta IV. four\" moved 2.9 pt to the right"
+    },
+    {
+     "of": "appearance",
+     "kind": "drawing",
+     "level": "cosmetic",
+     "note": "page 1 lacks rules, frames or tints in 1 place where the old page has them"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "3 lines from \"i. one ii. two iii. three\" moved 2.7 pt to the right"
+    },
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"en\", was \"\""
+    }
+   ],
+   "pictures": [
+    "40-list-types.page-1.png"
+   ],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "41-white-space",
+   "score": 0.999895,
+   "text": 1.0,
+   "geom": 0.99965,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 1.0,
+   "fonts_wk": [
+    "CourierNewPSMT",
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "CourierNewPSMT",
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 15293,
+   "size_mq": 10398,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 239,
+   "ms_mq": 0,
+   "verdict": "file differs",
+   "level": "cosmetic",
+   "first": "the language of the file is \"en\", was \"\"",
+   "differences": 1,
+   "fonts_same": true,
+   "note": "",
+   "notes": [
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"en\", was \"\""
+    }
+   ],
+   "pictures": [
+    "41-white-space.page-1.png"
+   ],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "42-inline-format",
+   "score": 0.988787,
+   "text": 0.986928,
+   "geom": 0.984409,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 0.998056,
+   "fonts_wk": [
+    "CourierNewPSMT",
+    "TimesNewRomanPS-ItalicMT",
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "CourierNewPSMT",
+    "TimesNewRomanPS-ItalicMT",
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 21281,
+   "size_mq": 12977,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 239,
+   "ms_mq": 0,
+   "verdict": "appearance only",
+   "level": "cosmetic",
+   "first": "the language of the file is \"en\", was \"\"",
+   "differences": 2,
+   "fonts_same": true,
+   "note": "The first line's words stand up to 1.4 pt along the line from where wkhtmltopdf puts them (subscript and superscript). The pages look the same.",
+   "notes": [
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"Water is H 2 O and\": the words stand up to 1.4 pt from where they stood along the line"
+    },
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"en\", was \"\""
+    }
+   ],
+   "pictures": [
+    "42-inline-format.page-1.png"
+   ],
+   "miss": true
+  },
+  {
+   "set": "print",
+   "name": "43-selectors",
+   "score": 0.99989,
+   "text": 1.0,
+   "geom": 0.999634,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 0.977437,
+   "fonts_wk": [
+    "TimesNewRomanPS-BoldMT",
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPS-BoldMT",
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 16573,
+   "size_mq": 10693,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 239,
+   "ms_mq": 10,
+   "verdict": "file differs",
+   "level": "cosmetic",
+   "first": "the language of the file is \"en\", was \"\"",
+   "differences": 1,
+   "fonts_same": true,
+   "note": "",
+   "notes": [
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"en\", was \"\""
+    }
+   ],
+   "pictures": [
+    "43-selectors.page-1.png"
+   ],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "44-generated",
+   "score": 0.999469,
+   "text": 1.0,
+   "geom": 0.998229,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 1.0,
+   "fonts_wk": [
+    "TimesNewRomanPS-BoldMT",
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPS-BoldMT",
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 16955,
+   "size_mq": 11179,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 239,
+   "ms_mq": 9,
+   "verdict": "file differs",
+   "level": "cosmetic",
+   "first": "the language of the file is \"en\", was \"\"",
+   "differences": 1,
+   "fonts_same": true,
+   "note": "",
+   "notes": [
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"en\", was \"\""
+    }
+   ],
+   "pictures": [
+    "44-generated.page-1.png"
+   ],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "45-counters",
+   "score": 0.99905,
+   "text": 1.0,
+   "geom": 0.996833,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 1.0,
+   "fonts_wk": [
+    "TimesNewRomanPS-BoldMT",
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPS-BoldMT",
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 15263,
+   "size_mq": 9249,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 240,
+   "ms_mq": 0,
+   "verdict": "appearance only",
+   "level": "cosmetic",
+   "first": "the language of the file is \"en\", was \"\"",
+   "differences": 2,
+   "fonts_same": true,
+   "note": "",
+   "notes": [
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "2 lines from \"2.1.a Deep 2.1.b Deep\": the words stand up to 1.4 pt from where they stood along the line"
+    },
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"en\", was \"\""
+    }
+   ],
+   "pictures": [
+    "45-counters.page-1.png"
+   ],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "46-table-spans",
+   "score": 0.996332,
+   "text": 1.0,
+   "geom": 0.987774,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 0.955882,
+   "fonts_wk": [
+    "TimesNewRomanPS-BoldMT",
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPS-BoldMT",
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 15172,
+   "size_mq": 8940,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 239,
+   "ms_mq": 0,
+   "verdict": "appearance only",
+   "level": "cosmetic",
+   "first": "the language of the file is \"en\", was \"\"",
+   "differences": 4,
+   "fonts_same": true,
+   "note": "",
+   "notes": [
+    {
+     "of": "appearance",
+     "kind": "drawing",
+     "level": "cosmetic",
+     "note": "rules, frames or tints differ on page 1: 1 place only in the old, 3 only in the new"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"3\" moved 1.8 pt to the right"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"6\" moved 1.8 pt to the right"
+    },
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"en\", was \"\""
+    }
+   ],
+   "pictures": [
+    "46-table-spans.page-1.png"
+   ],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "47-table-borders",
+   "score": 0.999853,
+   "text": 1.0,
+   "geom": 0.999509,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 1.0,
+   "fonts_wk": [
+    "TimesNewRomanPS-BoldMT",
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPS-BoldMT",
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 16341,
+   "size_mq": 10615,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 240,
+   "ms_mq": 10,
+   "verdict": "file differs",
+   "level": "cosmetic",
+   "first": "the language of the file is \"en\", was \"\"",
+   "differences": 1,
+   "fonts_same": true,
+   "note": "",
+   "notes": [
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"en\", was \"\""
+    }
+   ],
+   "pictures": [
+    "47-table-borders.page-1.png"
+   ],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "48-table-widths",
+   "score": 0.999864,
+   "text": 1.0,
+   "geom": 0.999548,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 0.999622,
+   "fonts_wk": [
+    "TimesNewRomanPS-BoldMT",
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPS-BoldMT",
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 17386,
+   "size_mq": 11482,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 240,
+   "ms_mq": 9,
+   "verdict": "file differs",
+   "level": "cosmetic",
+   "first": "the language of the file is \"en\", was \"\"",
+   "differences": 1,
+   "fonts_same": true,
+   "note": "",
+   "notes": [
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"en\", was \"\""
+    }
+   ],
+   "pictures": [
+    "48-table-widths.page-1.png"
+   ],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "49-floats",
+   "score": 0.999894,
+   "text": 1.0,
+   "geom": 0.999648,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 0.99991,
+   "fonts_wk": [
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 10758,
+   "size_mq": 8290,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 229,
+   "ms_mq": 0,
+   "verdict": "file differs",
+   "level": "cosmetic",
+   "first": "the language of the file is \"en\", was \"\"",
+   "differences": 1,
+   "fonts_same": true,
+   "note": "",
+   "notes": [
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"en\", was \"\""
+    }
+   ],
+   "pictures": [
+    "49-floats.page-1.png"
+   ],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "50-inline-block",
+   "score": 0.997953,
+   "text": 1.0,
+   "geom": 0.993178,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 0.996717,
+   "fonts_wk": [
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 9518,
+   "size_mq": 7263,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 230,
+   "ms_mq": 9,
+   "verdict": "file differs",
+   "level": "cosmetic",
+   "first": "the language of the file is \"en\", was \"\"",
+   "differences": 1,
+   "fonts_same": true,
+   "note": "",
+   "notes": [
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"en\", was \"\""
+    }
+   ],
+   "pictures": [
+    "50-inline-block.page-1.png"
+   ],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "51-box-model",
+   "score": 0.999873,
+   "text": 1.0,
+   "geom": 0.999577,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 1.0,
+   "fonts_wk": [
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 9840,
+   "size_mq": 7603,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 229,
+   "ms_mq": 0,
+   "verdict": "file differs",
+   "level": "cosmetic",
+   "first": "the language of the file is \"en\", was \"\"",
+   "differences": 1,
+   "fonts_same": true,
+   "note": "",
+   "notes": [
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"en\", was \"\""
+    }
+   ],
+   "pictures": [
+    "51-box-model.page-1.png"
+   ],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "52-sizing",
+   "score": 0.99989,
+   "text": 1.0,
+   "geom": 0.999633,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 1.0,
+   "fonts_wk": [
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 11577,
+   "size_mq": 9027,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 240,
+   "ms_mq": 0,
+   "verdict": "file differs",
+   "level": "cosmetic",
+   "first": "the language of the file is \"en\", was \"\"",
+   "differences": 1,
+   "fonts_same": true,
+   "note": "",
+   "notes": [
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"en\", was \"\""
+    }
+   ],
+   "pictures": [
+    "52-sizing.page-1.png"
+   ],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "53-text-props",
+   "score": 0.998409,
+   "text": 1.0,
+   "geom": 0.994696,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 0.995082,
+   "fonts_wk": [
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 11938,
+   "size_mq": 9368,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 229,
+   "ms_mq": 9,
+   "verdict": "appearance only",
+   "level": "cosmetic",
+   "first": "the language of the file is \"en\", was \"\"",
+   "differences": 2,
+   "fonts_same": true,
+   "note": "",
+   "notes": [
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"Letter spacing applied here.\": the words stand up to 9.2 pt from where they stood along the line"
+    },
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"en\", was \"\""
+    }
+   ],
+   "pictures": [
+    "53-text-props.page-1.png"
+   ],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "54-justify-hyphens",
+   "score": 0.999504,
+   "text": 1.0,
+   "geom": 0.998346,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 0.998873,
+   "fonts_wk": [
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 11002,
+   "size_mq": 8445,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 230,
+   "ms_mq": 9,
+   "verdict": "file differs",
+   "level": "cosmetic",
+   "first": "the language of the file is \"en\", was \"\"",
+   "differences": 1,
+   "fonts_same": true,
+   "note": "",
+   "notes": [
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"en\", was \"\""
+    }
+   ],
+   "pictures": [
+    "54-justify-hyphens.page-1.png"
+   ],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "55-page-sizes",
+   "score": 0.999895,
+   "text": 1.0,
+   "geom": 0.999649,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 1.0,
+   "fonts_wk": [
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 10688,
+   "size_mq": 8247,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 230,
+   "ms_mq": 0,
+   "verdict": "file differs",
+   "level": "cosmetic",
+   "first": "the language of the file is \"en\", was \"\"",
+   "differences": 1,
+   "fonts_same": true,
+   "note": "",
+   "notes": [
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"en\", was \"\""
+    }
+   ],
+   "pictures": [
+    "55-page-sizes.page-1.png"
+   ],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "56-margin-boxes",
+   "score": 0.999891,
+   "text": 1.0,
+   "geom": 0.999635,
+   "pages_wk": 2,
+   "pages_mq": 2,
+   "overlay": 1.0,
+   "fonts_wk": [
+    "TimesNewRomanPS-BoldMT",
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPS-BoldMT",
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 19862,
+   "size_mq": 12396,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 250,
+   "ms_mq": 10,
+   "verdict": "file differs",
+   "level": "cosmetic",
+   "first": "the language of the file is \"en\", was \"\"",
+   "differences": 1,
+   "fonts_same": true,
+   "note": "",
+   "notes": [
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"en\", was \"\""
+    }
+   ],
+   "pictures": [
+    "56-margin-boxes.page-1.png"
+   ],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "57-breaks",
+   "score": 0.99988,
+   "text": 1.0,
+   "geom": 0.999601,
+   "pages_wk": 2,
+   "pages_mq": 2,
+   "overlay": 1.0,
+   "fonts_wk": [
+    "TimesNewRomanPS-BoldMT",
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPS-BoldMT",
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 16914,
+   "size_mq": 10833,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 239,
+   "ms_mq": 9,
+   "verdict": "file differs",
+   "level": "cosmetic",
+   "first": "the language of the file is \"en\", was \"\"",
+   "differences": 1,
+   "fonts_same": true,
+   "note": "",
+   "notes": [
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"en\", was \"\""
+    }
+   ],
+   "pictures": [
+    "57-breaks.page-1.png"
+   ],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "58-footnotes",
+   "score": 0.99974,
+   "text": 1.0,
+   "geom": 0.999133,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 0.999836,
+   "fonts_wk": [
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 13152,
+   "size_mq": 9507,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 239,
+   "ms_mq": 9,
+   "verdict": "file differs",
+   "level": "cosmetic",
+   "first": "the language of the file is \"en\", was \"\"",
+   "differences": 1,
+   "fonts_same": true,
+   "note": "",
+   "notes": [
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"en\", was \"\""
+    }
+   ],
+   "pictures": [
+    "58-footnotes.page-1.png"
+   ],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "59-toc-leaders",
+   "score": 0.999892,
+   "text": 1.0,
+   "geom": 0.99964,
+   "pages_wk": 2,
+   "pages_mq": 2,
+   "overlay": 0.999992,
+   "fonts_wk": [
+    "TimesNewRomanPS-BoldMT",
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPS-BoldMT",
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 24023,
+   "size_mq": 15293,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 250,
+   "ms_mq": 0,
+   "verdict": "file differs",
+   "level": "cosmetic",
+   "first": "the language of the file is \"en\", was \"\"",
+   "differences": 1,
+   "fonts_same": true,
+   "note": "",
+   "notes": [
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"en\", was \"\""
+    }
+   ],
+   "pictures": [
+    "59-toc-leaders.page-1.png"
+   ],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "60-images",
+   "score": 0.999022,
+   "text": 1.0,
+   "geom": 0.996741,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 1.0,
+   "fonts_wk": [
+    "ArialMT",
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "ArialMT",
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 16303,
+   "size_mq": 11395,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 240,
+   "ms_mq": 0,
+   "verdict": "appearance only",
+   "level": "cosmetic",
+   "first": "the language of the file is \"en\", was \"\"",
+   "differences": 2,
+   "fonts_same": true,
+   "note": "",
+   "notes": [
+    {
+     "of": "appearance",
+     "kind": "picture-moved",
+     "level": "cosmetic",
+     "note": "a picture on page 1 moved 0.2 pt to the right, 1.1 pt up"
+    },
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"en\", was \"\""
+    }
+   ],
+   "pictures": [
+    "60-images.page-1.png"
+   ],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "61-svg-inline",
+   "score": 0.999534,
+   "text": 1.0,
+   "geom": 0.998447,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 1.0,
+   "fonts_wk": [
+    "ArialMT",
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "ArialMT",
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 15162,
+   "size_mq": 9762,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 239,
+   "ms_mq": 10,
+   "verdict": "content differs",
+   "level": "blocking",
+   "first": "a picture on page 1 is gone",
+   "differences": 3,
+   "fonts_same": true,
+   "note": "The pages look the same: both paint the gradient red to blue, wkhtmltopdf as a picture and marqius-wkhtmltopdf as a gradient, and both set the label in Arial. Compare's picture of this page shows marqius-wkhtmltopdf's box flat grey because compare does not draw gradients.",
+   "notes": [
+    {
+     "of": "content",
+     "kind": "picture-missing",
+     "level": "blocking",
+     "note": "a picture on page 1 is gone"
+    },
+    {
+     "of": "appearance",
+     "kind": "drawing",
+     "level": "cosmetic",
+     "note": "page 1 has rules, frames or tints in 1 place where the old page has none"
+    },
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"en\", was \"\""
+    }
+   ],
+   "pictures": [
+    "61-svg-inline.page-1.png"
+   ],
+   "miss": true
+  },
+  {
+   "set": "print",
+   "name": "62-position",
+   "score": 0.998217,
+   "text": 1.0,
+   "geom": 0.994056,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 0.980884,
+   "fonts_wk": [
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 10478,
+   "size_mq": 8044,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 230,
+   "ms_mq": 9,
+   "verdict": "appearance only",
+   "level": "cosmetic",
+   "first": "the language of the file is \"en\", was \"\"",
+   "differences": 2,
+   "fonts_same": true,
+   "note": "",
+   "notes": [
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"After shifted word.\" moved 3.2 pt down"
+    },
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"en\", was \"\""
+    }
+   ],
+   "pictures": [
+    "62-position.page-1.png"
+   ],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "63-columns",
+   "score": 0.999892,
+   "text": 1.0,
+   "geom": 0.999639,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 1.0,
+   "fonts_wk": [
+    "TimesNewRomanPS-BoldMT",
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPS-BoldMT",
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 16872,
+   "size_mq": 10891,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 240,
+   "ms_mq": 0,
+   "verdict": "file differs",
+   "level": "cosmetic",
+   "first": "the language of the file is \"en\", was \"\"",
+   "differences": 1,
+   "fonts_same": true,
+   "note": "",
+   "notes": [
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"en\", was \"\""
+    }
+   ],
+   "pictures": [
+    "63-columns.page-1.png"
+   ],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "64-flex-advanced",
+   "score": 0.999884,
+   "text": 1.0,
+   "geom": 0.999612,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 1.0,
+   "fonts_wk": [
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 10070,
+   "size_mq": 7736,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 229,
+   "ms_mq": 0,
+   "verdict": "file differs",
+   "level": "cosmetic",
+   "first": "the language of the file is \"en\", was \"\"",
+   "differences": 1,
+   "fonts_same": true,
+   "note": "",
+   "notes": [
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"en\", was \"\""
+    }
+   ],
+   "pictures": [
+    "64-flex-advanced.page-1.png"
+   ],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "65-grid-advanced",
+   "score": 0.999914,
+   "text": 1.0,
+   "geom": 0.999712,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 1.0,
+   "fonts_wk": [
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 7331,
+   "size_mq": 5407,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 230,
+   "ms_mq": 9,
+   "verdict": "file differs",
+   "level": "cosmetic",
+   "first": "the language of the file is \"en\", was \"\"",
+   "differences": 1,
+   "fonts_same": true,
+   "note": "",
+   "notes": [
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"en\", was \"\""
+    }
+   ],
+   "pictures": [
+    "65-grid-advanced.page-1.png"
+   ],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "66-list-inside",
+   "score": 0.997808,
+   "text": 1.0,
+   "geom": 0.992695,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 0.99088,
+   "fonts_wk": [
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 10380,
+   "size_mq": 8050,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 230,
+   "ms_mq": 0,
+   "verdict": "appearance only",
+   "level": "cosmetic",
+   "first": "the language of the file is \"en\", was \"\"",
+   "differences": 2,
+   "fonts_same": true,
+   "note": "",
+   "notes": [
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "2 lines from \"1. Custom padding 2. Two\" moved 3 pt to the right"
+    },
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"en\", was \"\""
+    }
+   ],
+   "pictures": [
+    "66-list-inside.page-1.png"
+   ],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "67-unicode",
+   "score": 0.669409,
+   "text": 0.70283,
+   "geom": 0.393313,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 0.793202,
+   "fonts_wk": [
+    "LiberationSerif",
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "DejaVuSerif",
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 18808,
+   "size_mq": 14281,
+   "made_wk": true,
+   "made_mq": true,
+   "better": true,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 240,
+   "ms_mq": 0,
+   "verdict": "content differs",
+   "level": "blocking",
+   "first": "\"â€œdoubleâ€​ â€˜singleâ€™ Â«guillemetsÂ».\" is now \"“double” ‘single’ «guillemets».\"",
+   "differences": 6,
+   "fonts_same": false,
+   "note": "The page does not name its character set. wkhtmltopdf assumes an old Western one, so every Greek, Cyrillic and accented letter, maths sign and curly quote comes out garbled (Î±Î²Î³ for αβγ, cafÃ© for café); marqius-wkhtmltopdf prints them as written. Name the character set in the page, or pass --encoding utf-8, and both agree (options/encoding).",
+   "notes": [
+    {
+     "of": "content",
+     "kind": "text",
+     "level": "blocking",
+     "note": "\"Î±Î²Î³Î´Îµ Î‘Î’Î“Î”.\" is now \"αβγδε ΑΒΓΔ.\""
+    },
+    {
+     "of": "content",
+     "kind": "text",
+     "level": "blocking",
+     "note": "\"ÐŸÑ€Ð¸Ð²ÐµÑ‚ Ð¼Ð¸Ñ€.\" is now \"Привет мир.\""
+    },
+    {
+     "of": "content",
+     "kind": "text",
+     "level": "blocking",
+     "note": "\"cafÃ© naÃ¯ve ZÃ¼rich Ã…ngstrÃ¶m faÃ§ade.\" is now \"café naïve Zürich Ångström façade.\""
+    },
+    {
+     "of": "content",
+     "kind": "text",
+     "level": "blocking",
+     "note": "\"â‰¤ â‰¥ â‰ Â± âˆž âˆš âˆ‘ âˆ« â†’ â‡’.\" is now \"≤ ≥ ≠ ± ∞ √ ∑ ∫ → ⇒.\""
+    },
+    {
+     "of": "content",
+     "kind": "text",
+     "level": "blocking",
+     "note": "\"â€œdoubleâ€​ â€˜singleâ€™ Â«guillemetsÂ».\" is now \"“double” ‘single’ «guillemets».\""
+    },
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"en\", was \"\""
+    }
+   ],
+   "pictures": [
+    "67-unicode.page-1.png"
+   ],
+   "miss": true
+  },
+  {
+   "set": "print",
+   "name": "68-overflow-wrap",
+   "score": 0.999779,
+   "text": 1.0,
+   "geom": 0.999263,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 0.99921,
+   "fonts_wk": [
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 9881,
+   "size_mq": 7576,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 230,
+   "ms_mq": 0,
+   "verdict": "file differs",
+   "level": "cosmetic",
+   "first": "the language of the file is \"en\", was \"\"",
+   "differences": 1,
+   "fonts_same": true,
+   "note": "",
+   "notes": [
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"en\", was \"\""
+    }
+   ],
+   "pictures": [
+    "68-overflow-wrap.page-1.png"
+   ],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "69-borders",
+   "score": 0.999877,
+   "text": 1.0,
+   "geom": 0.999591,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 0.965815,
+   "fonts_wk": [
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 9777,
+   "size_mq": 6561,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 229,
+   "ms_mq": 9,
+   "verdict": "content differs",
+   "level": "blocking",
+   "first": "a picture on page 1 is gone",
+   "differences": 3,
+   "fonts_same": true,
+   "note": "wkhtmltopdf draws the rounded box as a picture, marqius-wkhtmltopdf as shapes. The pages look the same.",
+   "notes": [
+    {
+     "of": "content",
+     "kind": "picture-missing",
+     "level": "blocking",
+     "note": "a picture on page 1 is gone"
+    },
+    {
+     "of": "appearance",
+     "kind": "drawing",
+     "level": "cosmetic",
+     "note": "page 1 has rules, frames or tints in 1 place where the old page has none"
+    },
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"en\", was \"\""
+    }
+   ],
+   "pictures": [
+    "69-borders.page-1.png"
+   ],
+   "miss": true
+  },
+  {
+   "set": "print",
+   "name": "70-visibility",
+   "score": 0.819622,
+   "text": 0.810811,
+   "geom": 0.714055,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 1.0,
+   "fonts_wk": [
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 8862,
+   "size_mq": 6569,
+   "made_wk": true,
+   "made_mq": true,
+   "better": true,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 230,
+   "ms_mq": 10,
+   "verdict": "content differs",
+   "level": "blocking",
+   "first": "a picture on page 1 is gone",
+   "differences": 3,
+   "fonts_same": true,
+   "note": "wkhtmltopdf turns the half-transparent line into a low-resolution picture (96 dots an inch), so it prints blurred and its words cannot be searched or copied; marqius-wkhtmltopdf keeps them as sharp text. The rest of the page is the same.",
+   "notes": [
+    {
+     "of": "content",
+     "kind": "added",
+     "level": "blocking",
+     "note": "\"Half opacity.\" is new"
+    },
+    {
+     "of": "content",
+     "kind": "picture-missing",
+     "level": "blocking",
+     "note": "a picture on page 1 is gone"
+    },
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"en\", was \"\""
+    }
+   ],
+   "pictures": [
+    "70-visibility.page-1.png"
+   ],
+   "miss": true
+  },
+  {
+   "set": "print",
+   "name": "71-forms",
+   "score": 0.999757,
+   "text": 1.0,
+   "geom": 0.999191,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 1.0,
+   "fonts_wk": [
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 11084,
+   "size_mq": 7806,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 229,
+   "ms_mq": 9,
+   "verdict": "content differs",
+   "level": "blocking",
+   "first": "a picture on page 1 is gone",
+   "differences": 3,
+   "fonts_same": true,
+   "note": "",
+   "note_due": "print/71-forms is 0.9998, overlay 1.000 (the note was written for 0.12.8: 0.9892, overlay 0.682)",
+   "notes": [
+    {
+     "of": "content",
+     "kind": "picture-missing",
+     "level": "blocking",
+     "note": "a picture on page 1 is gone"
+    },
+    {
+     "of": "appearance",
+     "kind": "drawing",
+     "level": "cosmetic",
+     "note": "page 1 has rules, frames or tints in 1 place where the old page has none"
+    },
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"en\", was \"\""
+    }
+   ],
+   "pictures": [
+    "71-forms.page-1.png"
+   ],
+   "miss": true
+  },
+  {
+   "set": "print",
+   "name": "72-cascade",
+   "score": 0.999893,
+   "text": 1.0,
+   "geom": 0.999642,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 1.0,
+   "fonts_wk": [
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 10183,
+   "size_mq": 7789,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 230,
+   "ms_mq": 9,
+   "verdict": "file differs",
+   "level": "cosmetic",
+   "first": "the language of the file is \"en\", was \"\"",
+   "differences": 1,
+   "fonts_same": true,
+   "note": "",
+   "notes": [
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"en\", was \"\""
+    }
+   ],
+   "pictures": [
+    "72-cascade.page-1.png"
+   ],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "73-vars-calc",
+   "score": 0.999871,
+   "text": 1.0,
+   "geom": 0.999568,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 1.0,
+   "fonts_wk": [
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 9633,
+   "size_mq": 7481,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 229,
+   "ms_mq": 0,
+   "verdict": "file differs",
+   "level": "cosmetic",
+   "first": "the language of the file is \"en\", was \"\"",
+   "differences": 1,
+   "fonts_same": true,
+   "note": "",
+   "notes": [
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"en\", was \"\""
+    }
+   ],
+   "pictures": [
+    "73-vars-calc.page-1.png"
+   ],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "74-media",
+   "score": 0.999859,
+   "text": 1.0,
+   "geom": 0.99953,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 1.0,
+   "fonts_wk": [
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 9096,
+   "size_mq": 6888,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 230,
+   "ms_mq": 0,
+   "verdict": "file differs",
+   "level": "cosmetic",
+   "first": "the language of the file is \"en\", was \"\"",
+   "differences": 1,
+   "fonts_same": true,
+   "note": "",
+   "notes": [
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"en\", was \"\""
+    }
+   ],
+   "pictures": [
+    "74-media.page-1.png"
+   ],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "75-nested-lists-mixed",
+   "score": 0.996158,
+   "text": 1.0,
+   "geom": 0.987192,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 0.948231,
+   "fonts_wk": [
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 9972,
+   "size_mq": 7700,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 230,
+   "ms_mq": 10,
+   "verdict": "appearance only",
+   "level": "cosmetic",
+   "first": "the language of the file is \"en\", was \"\"",
+   "differences": 5,
+   "fonts_same": true,
+   "note": "",
+   "notes": [
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"1. One\" moved 3 pt to the right"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "2 lines from \"1. Deep 1 2. Deep 2\" moved 3 pt to the right"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"2. Two\" moved 3 pt to the right"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"3. Three\" moved 3 pt to the right"
+    },
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"en\", was \"\""
+    }
+   ],
+   "pictures": [
+    "75-nested-lists-mixed.page-1.png"
+   ],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "76-long-paragraphs",
+   "score": 0.999653,
+   "text": 1.0,
+   "geom": 0.998843,
+   "pages_wk": 3,
+   "pages_mq": 3,
+   "overlay": 0.999851,
+   "fonts_wk": [
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 24062,
+   "size_mq": 11949,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 259,
+   "ms_mq": 9,
+   "verdict": "file differs",
+   "level": "cosmetic",
+   "first": "the language of the file is \"en\", was \"\"",
+   "differences": 1,
+   "fonts_same": true,
+   "note": "",
+   "notes": [
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"en\", was \"\""
+    }
+   ],
+   "pictures": [
+    "76-long-paragraphs.page-1.png"
+   ],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "77-links-outline",
+   "score": 0.999758,
+   "text": 1.0,
+   "geom": 0.999194,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 1.0,
+   "fonts_wk": [
+    "TimesNewRomanPS-BoldMT",
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPS-BoldMT",
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 16842,
+   "size_mq": 10904,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 240,
+   "ms_mq": 9,
+   "verdict": "file differs",
+   "level": "cosmetic",
+   "first": "the language of the file is \"en\", was \"\"",
+   "differences": 1,
+   "fonts_same": true,
+   "note": "",
+   "notes": [
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"en\", was \"\""
+    }
+   ],
+   "pictures": [
+    "77-links-outline.page-1.png"
+   ],
+   "miss": false
+  },
+  {
+   "set": "print",
+   "name": "78-trim-bleed",
+   "score": 0.999891,
+   "text": 1.0,
+   "geom": 0.999637,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 1.0,
+   "fonts_wk": [
+    "TimesNewRomanPS-BoldMT",
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPS-BoldMT",
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 16348,
+   "size_mq": 10489,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 239,
+   "ms_mq": 0,
+   "verdict": "file differs",
+   "level": "cosmetic",
+   "first": "the language of the file is \"en\", was \"\"",
+   "differences": 1,
+   "fonts_same": true,
+   "note": "",
+   "notes": [
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"en\", was \"\""
+    }
+   ],
+   "pictures": [
+    "78-trim-bleed.page-1.png"
+   ],
+   "miss": false
+  },
+  {
+   "set": "everyday",
+   "name": "certificate",
+   "score": 0.956417,
+   "text": 0.98998,
+   "geom": 0.871424,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 0.975462,
+   "fonts_wk": [
+    "TimesNewRomanPS-BoldMT",
+    "TimesNewRomanPS-ItalicMT",
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPS-BoldMT",
+    "TimesNewRomanPS-ItalicMT",
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 26457,
+   "size_mq": 16555,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 250,
+   "ms_mq": 0,
+   "verdict": "appearance only",
+   "level": "cosmetic",
+   "first": "the same letters, divided into words differently",
+   "differences": 1,
+   "fonts_same": true,
+   "note": "wkhtmltopdf writes the letter-spaced title as single letters (it reads back as C E RT IFIC AT E); marqius-wkhtmltopdf keeps the word whole. The pages look the same.",
+   "notes": [
+    {
+     "of": "appearance",
+     "kind": "spacing",
+     "level": "cosmetic",
+     "note": "the same letters, divided into words differently"
+    }
+   ],
+   "pictures": [
+    "certificate.page-1.png"
+   ],
+   "miss": true
+  },
+  {
+   "set": "everyday",
+   "name": "columns",
+   "score": 0.995256,
+   "text": 1.0,
+   "geom": 0.984185,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 0.99941,
+   "fonts_wk": [
+    "Verdana",
+    "Verdana-Bold"
+   ],
+   "fonts_mq": [
+    "Verdana",
+    "Verdana-Bold"
+   ],
+   "size_wk": 17611,
+   "size_mq": 15069,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 239,
+   "ms_mq": 9,
+   "verdict": "appearance only",
+   "level": "cosmetic",
+   "first": "the line \"£32\" moved 1.9 pt to the right",
+   "differences": 6,
+   "fonts_same": true,
+   "note": "",
+   "notes": [
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"Linen napkins\" moved 1.9 pt to the right"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"Set of four, stonewashed, in sage\" moved 1.9 pt to the right"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"£22 BEST SELLER\" moved 1.9 pt to the right"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"Throw cushion\" moved 1.9 pt to the right"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"Cotton cover with feather pad, 45\" moved 1.9 pt to the right"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"£32\" moved 1.9 pt to the right"
+    }
+   ],
+   "pictures": [
+    "columns.page-1.png"
+   ],
+   "miss": false
+  },
+  {
+   "set": "everyday",
+   "name": "invoice",
+   "score": 0.999393,
+   "text": 1.0,
+   "geom": 0.997975,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 0.999724,
+   "fonts_wk": [
+    "Arial-BoldMT",
+    "ArialMT"
+   ],
+   "fonts_mq": [
+    "Arial-BoldMT",
+    "ArialMT"
+   ],
+   "size_wk": 21406,
+   "size_mq": 15025,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 240,
+   "ms_mq": 10,
+   "verdict": "appearance only",
+   "level": "cosmetic",
+   "first": "the line \"Due: 17 Dec 2026\" moved 1 pt to the left",
+   "differences": 1,
+   "fonts_same": true,
+   "note": "",
+   "notes": [
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"Due: 17 Dec 2026\" moved 1 pt to the left"
+    }
+   ],
+   "pictures": [
+    "invoice.page-1.png"
+   ],
+   "miss": false
+  },
+  {
+   "set": "everyday",
+   "name": "label",
+   "score": 0.998434,
+   "text": 1.0,
+   "geom": 0.994781,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 1.0,
+   "fonts_wk": [
+    "Arial-BoldMT",
+    "ArialMT"
+   ],
+   "fonts_mq": [
+    "Arial-BoldMT",
+    "ArialMT"
+   ],
+   "size_wk": 18461,
+   "size_mq": 12719,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 239,
+   "ms_mq": 9,
+   "verdict": "appearance only",
+   "level": "cosmetic",
+   "first": "the line \"Order 2026-118 Weight 14.2 kg Parcel\": the words stand up to 2 pt from where they stood along the line",
+   "differences": 1,
+   "fonts_same": true,
+   "note": "",
+   "notes": [
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"Order 2026-118 Weight 14.2 kg Parcel\": the words stand up to 2 pt from where they stood along the line"
+    }
+   ],
+   "pictures": [
+    "label.page-1.png"
+   ],
+   "miss": false
+  },
+  {
+   "set": "everyday",
+   "name": "letter",
+   "score": 0.999709,
+   "text": 1.0,
+   "geom": 0.999031,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 1.0,
+   "fonts_wk": [
+    "Georgia",
+    "Georgia-Bold"
+   ],
+   "fonts_mq": [
+    "Georgia",
+    "Georgia-Bold"
+   ],
+   "size_wk": 18471,
+   "size_mq": 16014,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 239,
+   "ms_mq": 0,
+   "verdict": "same",
+   "level": "",
+   "first": "",
+   "differences": 0,
+   "fonts_same": true,
+   "note": "",
+   "notes": [],
+   "pictures": [],
+   "miss": false
+  },
+  {
+   "set": "everyday",
+   "name": "receipt",
+   "score": 0.999607,
+   "text": 1.0,
+   "geom": 0.998692,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 0.99146,
+   "fonts_wk": [
+    "CourierNewPS-BoldMT",
+    "CourierNewPSMT"
+   ],
+   "fonts_mq": [
+    "CourierNewPS-BoldMT",
+    "CourierNewPSMT"
+   ],
+   "size_wk": 16452,
+   "size_mq": 11648,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 239,
+   "ms_mq": 0,
+   "verdict": "same",
+   "level": "",
+   "first": "",
+   "differences": 0,
+   "fonts_same": true,
+   "note": "",
+   "notes": [],
+   "pictures": [],
+   "miss": false
+  },
+  {
+   "set": "everyday",
+   "name": "report",
+   "score": 0.999857,
+   "text": 1.0,
+   "geom": 0.999522,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 0.999026,
+   "fonts_wk": [
+    "Arial-BoldMT",
+    "ArialMT"
+   ],
+   "fonts_mq": [
+    "Arial-BoldMT",
+    "ArialMT"
+   ],
+   "size_wk": 23432,
+   "size_mq": 16868,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 250,
+   "ms_mq": 10,
+   "verdict": "same",
+   "level": "",
+   "first": "",
+   "differences": 0,
+   "fonts_same": true,
+   "note": "",
+   "notes": [],
+   "pictures": [],
+   "miss": false
+  },
+  {
+   "set": "everyday",
+   "name": "statement",
+   "score": 0.978872,
+   "text": 0.97318,
+   "geom": 0.974274,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 0.999596,
+   "fonts_wk": [
+    "Arial-BoldMT",
+    "ArialMT"
+   ],
+   "fonts_mq": [
+    "Arial-BoldMT",
+    "ArialMT"
+   ],
+   "size_wk": 18959,
+   "size_mq": 13071,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 240,
+   "ms_mq": 9,
+   "verdict": "content differs",
+   "level": "blocking",
+   "first": "\"Mr\" is new",
+   "differences": 2,
+   "fonts_same": true,
+   "note": "The pages look the same. The customer's name block is read back in another order, which the text measure counts.",
+   "notes": [
+    {
+     "of": "content",
+     "kind": "missing",
+     "level": "blocking",
+     "note": "\"Mr\" is gone"
+    },
+    {
+     "of": "content",
+     "kind": "added",
+     "level": "blocking",
+     "note": "\"Mr\" is new"
+    }
+   ],
+   "pictures": [
+    "statement.page-1.png"
+   ],
+   "miss": true
+  },
+  {
+   "set": "options",
+   "name": "a5-portrait",
+   "score": 0.954357,
+   "text": 0.990718,
+   "geom": 0.863326,
+   "pages_wk": 2,
+   "pages_mq": 2,
+   "overlay": 0.777921,
+   "fonts_wk": [
+    "Arial-BoldMT",
+    "ArialMT"
+   ],
+   "fonts_mq": [
+    "Arial-BoldMT",
+    "ArialMT"
+   ],
+   "size_wk": 29621,
+   "size_mq": 21343,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 250,
+   "ms_mq": 9,
+   "verdict": "appearance only",
+   "level": "review",
+   "first": "page 2 began at \"Midlands\"; page 2 now begins at \"South East\"",
+   "differences": 5,
+   "fonts_same": true,
+   "note": "Uses report.html (12 px Arial, line-height 1.45) on A5 paper. Page 1 matches line for line, but wkhtmltopdf moves the table's \"Midlands\" row to page 2 where marqius-wkhtmltopdf still fits it at the foot of page 1, so page 2 starts a row later and its lines sit 17.4 pt higher.",
+   "notes": [
+    {
+     "of": "appearance",
+     "kind": "page-break",
+     "level": "review",
+     "note": "page 2 began at \"Midlands\"; page 2 now begins at \"South East\""
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "40 lines from \"South East 39,120 95.9% 3.1% South\" moved 17.4 pt up"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "5 lines from \"1. Move small items into labelled\" moved 2.2 pt to the right, 17.4 pt up"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"The next review will be presented\" moved 17.4 pt up"
+    },
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"en\", was \"\""
+    }
+   ],
+   "pictures": [
+    "a5-portrait.page-1.png",
+    "a5-portrait.page-2.png"
+   ],
+   "miss": true
+  },
+  {
+   "set": "options",
+   "name": "cover-toc",
+   "score": 0.998477,
+   "text": 1.0,
+   "geom": 0.994924,
+   "pages_wk": 4,
+   "pages_mq": 4,
+   "overlay": 0.994875,
+   "fonts_wk": [
+    "Arial-BoldMT",
+    "ArialMT",
+    "Georgia"
+   ],
+   "fonts_mq": [
+    "Arial-BoldMT",
+    "ArialMT",
+    "Georgia"
+   ],
+   "size_wk": 42794,
+   "size_mq": 28361,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 679,
+   "ms_mq": 10,
+   "verdict": "appearance only",
+   "level": "cosmetic",
+   "first": "the language of the file is \"en\", was \"\"",
+   "differences": 7,
+   "fonts_same": true,
+   "note": "",
+   "notes": [
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "4 lines from \"Quarterly operations review 3 1. Summary\" moved 1.2 pt down"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "4 lines from \"2. Warehouse 3 2.1 Picking and\" moved 2.4 pt down"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "4 lines from \"2.2 Stock 3 3. Delivery 3\" moved 3.6 pt down"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "4 lines from \"3.1 On-time performance 3 3.2 Vehicles\" moved 4.8 pt down"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "4 lines from \"4. Customer service 3 5. Plans\" moved 6 pt down"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "5 lines from \"1. Move small items into labelled\" moved 2.2 pt to the right"
+    },
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"en\", was \"\""
+    }
+   ],
+   "pictures": [
+    "cover-toc.page-1.png",
+    "cover-toc.page-2.png",
+    "cover-toc.page-4.png"
+   ],
+   "miss": false
+  },
+  {
+   "set": "options",
+   "name": "default-header",
+   "score": 0.999782,
+   "text": 1.0,
+   "geom": 0.999272,
+   "pages_wk": 2,
+   "pages_mq": 2,
+   "overlay": 0.999977,
+   "fonts_wk": [
+    "Arial-BoldMT",
+    "ArialMT"
+   ],
+   "fonts_mq": [
+    "Arial-BoldMT",
+    "ArialMT"
+   ],
+   "size_wk": 29703,
+   "size_mq": 21413,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 250,
+   "ms_mq": 9,
+   "verdict": "appearance only",
+   "level": "cosmetic",
+   "first": "the language of the file is \"en\", was \"\"",
+   "differences": 2,
+   "fonts_same": true,
+   "note": "",
+   "notes": [
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "5 lines from \"1. Move small items into labelled\" moved 2.2 pt to the right"
+    },
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"en\", was \"\""
+    }
+   ],
+   "pictures": [
+    "default-header.page-1.png",
+    "default-header.page-2.png"
+   ],
+   "miss": false
+  },
+  {
+   "set": "options",
+   "name": "encoding",
+   "score": 0.999898,
+   "text": 1.0,
+   "geom": 0.999659,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 1.0,
+   "fonts_wk": [
+    "Arial-BoldMT",
+    "ArialMT"
+   ],
+   "fonts_mq": [
+    "Arial-BoldMT",
+    "ArialMT"
+   ],
+   "size_wk": 18756,
+   "size_mq": 13214,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 239,
+   "ms_mq": 0,
+   "verdict": "file differs",
+   "level": "cosmetic",
+   "first": "the language of the file is \"fr\", was \"\"",
+   "differences": 1,
+   "fonts_same": true,
+   "note": "",
+   "notes": [
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"fr\", was \"\""
+    }
+   ],
+   "pictures": [
+    "encoding.page-1.png"
+   ],
+   "miss": false
+  },
+  {
+   "set": "options",
+   "name": "grayscale",
+   "score": 0.999785,
+   "text": 1.0,
+   "geom": 0.999282,
+   "pages_wk": 2,
+   "pages_mq": 2,
+   "overlay": 0.999975,
+   "fonts_wk": [
+    "Arial-BoldMT",
+    "ArialMT"
+   ],
+   "fonts_mq": [
+    "Arial-BoldMT",
+    "ArialMT"
+   ],
+   "size_wk": 29392,
+   "size_mq": 21084,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 250,
+   "ms_mq": 10,
+   "verdict": "appearance only",
+   "level": "cosmetic",
+   "first": "the language of the file is \"en\", was \"\"",
+   "differences": 2,
+   "fonts_same": true,
+   "note": "",
+   "notes": [
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "5 lines from \"1. Move small items into labelled\" moved 2.2 pt to the right"
+    },
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"en\", was \"\""
+    }
+   ],
+   "pictures": [
+    "grayscale.page-1.png",
+    "grayscale.page-2.png"
+   ],
+   "miss": false
+  },
+  {
+   "set": "options",
+   "name": "html-header-footer",
+   "score": 0.999546,
+   "text": 1.0,
+   "geom": 0.998485,
+   "pages_wk": 2,
+   "pages_mq": 2,
+   "overlay": 0.999086,
+   "fonts_wk": [
+    "Arial-BoldMT",
+    "ArialMT"
+   ],
+   "fonts_mq": [
+    "Arial-BoldMT",
+    "ArialMT"
+   ],
+   "size_wk": 30748,
+   "size_mq": 21863,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 459,
+   "ms_mq": 30,
+   "verdict": "appearance only",
+   "level": "cosmetic",
+   "first": "the language of the file is \"en\", was \"\"",
+   "differences": 6,
+   "fonts_same": true,
+   "note": "",
+   "notes": [
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"Quarterly operations review\" moved 2.7 pt to the right"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"Page 1 of 2\" moved 1.2 pt to the right"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "5 lines from \"1. Move small items into labelled\" moved 2.2 pt to the right"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"Quarterly operations review\" moved 2.7 pt to the right"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"Page 2 of 2\" moved 1.2 pt to the right"
+    },
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"en\", was \"\""
+    }
+   ],
+   "pictures": [
+    "html-header-footer.page-1.png",
+    "html-header-footer.page-2.png"
+   ],
+   "miss": false
+  },
+  {
+   "set": "options",
+   "name": "javascript",
+   "score": 0.999562,
+   "text": 1.0,
+   "geom": 0.998541,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 1.0,
+   "fonts_wk": [
+    "Arial-BoldMT",
+    "ArialMT"
+   ],
+   "fonts_mq": [
+    "Arial-BoldMT",
+    "ArialMT"
+   ],
+   "size_wk": 18615,
+   "size_mq": 12956,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 240,
+   "ms_mq": 30,
+   "verdict": "file differs",
+   "level": "cosmetic",
+   "first": "the language of the file is \"en\", was \"\"",
+   "differences": 1,
+   "fonts_same": true,
+   "note": "The page builds its invoice table with a script (getElementById, createElement). marqius-wkhtmltopdf runs it with the page's DOM, as wkhtmltopdf does, and the pages look the same.",
+   "notes": [
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"en\", was \"\""
+    }
+   ],
+   "pictures": [
+    "javascript.page-1.png"
+   ],
+   "miss": false
+  },
+  {
+   "set": "options",
+   "name": "landscape-letter",
+   "score": 0.924072,
+   "text": 0.892821,
+   "geom": 0.925539,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 1.0,
+   "fonts_wk": [
+    "Verdana",
+    "Verdana-Bold"
+   ],
+   "fonts_mq": [
+    "Verdana",
+    "Verdana-Bold"
+   ],
+   "size_wk": 18553,
+   "size_mq": 16824,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 250,
+   "ms_mq": 0,
+   "verdict": "appearance only",
+   "level": "cosmetic",
+   "first": "the language of the file is \"en\", was \"\"",
+   "differences": 11,
+   "fonts_same": true,
+   "note": "The table's columns stand 1 to 2 pt further right. The pages look the same.",
+   "notes": [
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "7 lines from \"Item Supplier Hull Leeds Bristol Reading\" moved 1.4 pt to the right"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "7 lines from \"A4 copier paper, 80gsm, box of\" moved 1.2 pt to the right"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "7 lines from \"A3 copier paper, 80gsm, box of\" moved 1.2 pt to the right"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "7 lines from \"Toner cartridge, black, high yield Imaging\" moved 1.2 pt to the right"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "5 lines from \"Toner cartridge, cyan Imaging Direct 23\" moved 1.2 pt to the right"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"12\" moved 1.4 pt to the right"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "7 lines from \"Archive boxes, pack of 10 Boxwell\" moved 1.2 pt to the right"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "7 lines from \"Envelopes, C4, self-seal, box of 250\" moved 1.2 pt to the right"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "7 lines from \"Shipping labels, A4 sheets, 21 a\" moved 1.2 pt to the right"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "7 lines from \"Packing tape, 48 mm, roll of\" moved 1.2 pt to the right"
+    },
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"en\", was \"\""
+    }
+   ],
+   "pictures": [
+    "landscape-letter.page-1.png"
+   ],
+   "miss": true
+  },
+  {
+   "set": "options",
+   "name": "long-statement",
+   "score": 0.974134,
+   "text": 0.960833,
+   "geom": 0.979057,
+   "pages_wk": 3,
+   "pages_mq": 3,
+   "overlay": 0.999402,
+   "fonts_wk": [
+    "Arial-BoldMT",
+    "ArialMT"
+   ],
+   "fonts_mq": [
+    "Arial-BoldMT",
+    "ArialMT"
+   ],
+   "size_wk": 33578,
+   "size_mq": 24170,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 280,
+   "ms_mq": 10,
+   "verdict": "appearance only",
+   "level": "cosmetic",
+   "first": "the language of the file is \"en\", was \"\"",
+   "differences": 5,
+   "fonts_same": true,
+   "note": "The amounts stand 1.2 pt further right. The pages look the same.",
+   "notes": [
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"Page 1 of 3\" moved 1.1 pt to the left"
+    },
+    {
+     "of": "appearance",
+     "kind": "size",
+     "level": "cosmetic",
+     "note": "12 words of 8 pt are now 8.3 pt"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"Page 2 of 3\" moved 1.1 pt to the left"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"Page 3 of 3\" moved 1.1 pt to the left"
+    },
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"en\", was \"\""
+    }
+   ],
+   "pictures": [
+    "long-statement.page-1.png",
+    "long-statement.page-2.png",
+    "long-statement.page-3.png"
+   ],
+   "miss": true
+  },
+  {
+   "set": "options",
+   "name": "lowquality",
+   "score": 0.999785,
+   "text": 1.0,
+   "geom": 0.999282,
+   "pages_wk": 2,
+   "pages_mq": 2,
+   "overlay": 0.999975,
+   "fonts_wk": [
+    "Arial-BoldMT",
+    "ArialMT"
+   ],
+   "fonts_mq": [
+    "Arial-BoldMT",
+    "ArialMT"
+   ],
+   "size_wk": 29445,
+   "size_mq": 21190,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 250,
+   "ms_mq": 10,
+   "verdict": "appearance only",
+   "level": "cosmetic",
+   "first": "the language of the file is \"en\", was \"\"",
+   "differences": 2,
+   "fonts_same": true,
+   "note": "",
+   "notes": [
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "5 lines from \"1. Move small items into labelled\" moved 2.2 pt to the right"
+    },
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"en\", was \"\""
+    }
+   ],
+   "pictures": [
+    "lowquality.page-1.png",
+    "lowquality.page-2.png"
+   ],
+   "miss": false
+  },
+  {
+   "set": "options",
+   "name": "no-charset",
+   "score": 0.630668,
+   "text": 0.761523,
+   "geom": 0.166357,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 0.890017,
+   "fonts_wk": [
+    "Arial-BoldMT",
+    "ArialMT"
+   ],
+   "fonts_mq": [
+    "Arial-BoldMT",
+    "ArialMT"
+   ],
+   "size_wk": 19587,
+   "size_mq": 13214,
+   "made_wk": true,
+   "made_mq": true,
+   "better": true,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 239,
+   "ms_mq": 0,
+   "verdict": "content differs",
+   "level": "blocking",
+   "first": "\"Â· KrakÃ³w Â· Ã˜resund.\" is now \"· Kraków · Øresund.\"",
+   "differences": 11,
+   "fonts_same": true,
+   "note": "An invoice that does not name its character set: wkhtmltopdf garbles every accented letter and the euro sign (SociÃ©tÃ© for Société, â‚¬ for €); marqius-wkhtmltopdf prints them as written. With --encoding utf-8 both agree (options/encoding).",
+   "notes": [
+    {
+     "of": "content",
+     "kind": "text",
+     "level": "blocking",
+     "note": "\"nÂ°\" is now \"n°\""
+    },
+    {
+     "of": "content",
+     "kind": "text",
+     "level": "blocking",
+     "note": "\"SociÃ©tÃ©\" is now \"Société\""
+    },
+    {
+     "of": "content",
+     "kind": "text",
+     "level": "blocking",
+     "note": "\"CafÃ© Ã‰toile,\" is now \"Café Étoile,\""
+    },
+    {
+     "of": "content",
+     "kind": "text",
+     "level": "blocking",
+     "note": "\"DÃ©signation\" is now \"Désignation\""
+    },
+    {
+     "of": "content",
+     "kind": "text",
+     "level": "blocking",
+     "note": "\"crÃ¨me brÃ»lÃ©e, pÃ¢tÃ©s, Å“ufs, dÃ©jÃ livrÃ©s\" is now \"crème brûlée, pâtés, œufs, déjà livrés\""
+    },
+    {
+     "of": "content",
+     "kind": "text",
+     "level": "blocking",
+     "note": "\"dÃ»\" is now \"dû\""
+    },
+    {
+     "of": "content",
+     "kind": "text",
+     "level": "blocking",
+     "note": "\"â‚¬\" is now \"€\""
+    },
+    {
+     "of": "content",
+     "kind": "text",
+     "level": "blocking",
+     "note": "\"Ã\" is now \"à\""
+    },
+    {
+     "of": "content",
+     "kind": "text",
+     "level": "blocking",
+     "note": "\"ZÃ¼rich Â· Ã…ngstrÃ¶m Â· faÃ§ade Â· naÃ¯ve Â· SÃ£o\" is now \"Zürich · Ångström · façade · naïve · São\""
+    },
+    {
+     "of": "content",
+     "kind": "text",
+     "level": "blocking",
+     "note": "\"Â· KrakÃ³w Â· Ã˜resund.\" is now \"· Kraków · Øresund.\""
+    },
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"fr\", was \"\""
+    }
+   ],
+   "pictures": [
+    "no-charset.page-1.png"
+   ],
+   "miss": true
+  },
+  {
+   "set": "options",
+   "name": "no-margins",
+   "score": 0.999552,
+   "text": 1.0,
+   "geom": 0.998505,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 1.0,
+   "fonts_wk": [
+    "Arial-BoldMT",
+    "ArialMT"
+   ],
+   "fonts_mq": [
+    "Arial-BoldMT",
+    "ArialMT"
+   ],
+   "size_wk": 17366,
+   "size_mq": 11701,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 240,
+   "ms_mq": 10,
+   "verdict": "appearance only",
+   "level": "cosmetic",
+   "first": "the language of the file is \"en\", was \"\"",
+   "differences": 2,
+   "fonts_same": true,
+   "note": "",
+   "notes": [
+    {
+     "of": "appearance",
+     "kind": "drawing",
+     "level": "cosmetic",
+     "note": "page 1 lacks rules, frames or tints in 1 place where the old page has them"
+    },
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"en\", was \"\""
+    }
+   ],
+   "pictures": [
+    "no-margins.page-1.png"
+   ],
+   "miss": false
+  },
+  {
+   "set": "options",
+   "name": "outline",
+   "score": 0.999785,
+   "text": 1.0,
+   "geom": 0.999282,
+   "pages_wk": 2,
+   "pages_mq": 2,
+   "overlay": 0.999975,
+   "fonts_wk": [
+    "Arial-BoldMT",
+    "ArialMT"
+   ],
+   "fonts_mq": [
+    "Arial-BoldMT",
+    "ArialMT"
+   ],
+   "size_wk": 28777,
+   "size_mq": 20445,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 250,
+   "ms_mq": 9,
+   "verdict": "appearance only",
+   "level": "cosmetic",
+   "first": "the language of the file is \"en\", was \"\"",
+   "differences": 2,
+   "fonts_same": true,
+   "note": "",
+   "notes": [
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "5 lines from \"1. Move small items into labelled\" moved 2.2 pt to the right"
+    },
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"en\", was \"\""
+    }
+   ],
+   "pictures": [
+    "outline.page-1.png",
+    "outline.page-2.png"
+   ],
+   "miss": false
+  },
+  {
+   "set": "options",
+   "name": "page-offset",
+   "score": 0.999755,
+   "text": 1.0,
+   "geom": 0.999185,
+   "pages_wk": 2,
+   "pages_mq": 2,
+   "overlay": 0.999976,
+   "fonts_wk": [
+    "Arial-BoldMT",
+    "ArialMT"
+   ],
+   "fonts_mq": [
+    "Arial-BoldMT",
+    "ArialMT"
+   ],
+   "size_wk": 29509,
+   "size_mq": 21261,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 250,
+   "ms_mq": 9,
+   "verdict": "appearance only",
+   "level": "cosmetic",
+   "first": "the language of the file is \"en\", was \"\"",
+   "differences": 4,
+   "fonts_same": true,
+   "note": "",
+   "notes": [
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"5\" moved 1.7 pt up"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "5 lines from \"1. Move small items into labelled\" moved 2.2 pt to the right"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"6\" moved 1.7 pt up"
+    },
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"en\", was \"\""
+    }
+   ],
+   "pictures": [
+    "page-offset.page-1.png",
+    "page-offset.page-2.png"
+   ],
+   "miss": false
+  },
+  {
+   "set": "options",
+   "name": "print-media",
+   "score": 0.987181,
+   "text": 1.0,
+   "geom": 0.957271,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 0.937592,
+   "fonts_wk": [
+    "Arial-BoldMT",
+    "ArialMT"
+   ],
+   "fonts_mq": [
+    "Arial-BoldMT",
+    "ArialMT"
+   ],
+   "size_wk": 18696,
+   "size_mq": 13037,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 250,
+   "ms_mq": 9,
+   "verdict": "appearance only",
+   "level": "cosmetic",
+   "first": "the language of the file is \"en\", was \"\"",
+   "differences": 3,
+   "fonts_same": true,
+   "note": "In the order table, marqius-wkhtmltopdf wraps \"12 × A4 copier paper\" onto two lines; wkhtmltopdf keeps it on one.",
+   "notes": [
+    {
+     "of": "appearance",
+     "kind": "reflow",
+     "level": "cosmetic",
+     "note": "the paragraph beginning \"12 × A4 copier paper £294.00\" breaks into lines differently (1 lines, now 3)"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "4 lines from \"4 × toner cartridge £272.00 Total,\" moved 7.8 pt down"
+    },
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"en\", was \"\""
+    }
+   ],
+   "pictures": [
+    "print-media.page-1.png"
+   ],
+   "miss": true
+  },
+  {
+   "set": "options",
+   "name": "script-file",
+   "score": 0.999671,
+   "text": 1.0,
+   "geom": 0.998902,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 1.0,
+   "fonts_wk": [
+    "Arial-BoldMT",
+    "ArialMT"
+   ],
+   "fonts_mq": [
+    "Arial-BoldMT",
+    "ArialMT"
+   ],
+   "size_wk": 17497,
+   "size_mq": 11967,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 239,
+   "ms_mq": 30,
+   "verdict": "file differs",
+   "level": "cosmetic",
+   "first": "the language of the file is \"en\", was \"\"",
+   "differences": 1,
+   "fonts_same": true,
+   "note": "The pages are the same: the script file runs, as in wkhtmltopdf, and writes the delivery note's number, lines and parcel count. The files differ only in that marqius-wkhtmltopdf's names its language (en), where wkhtmltopdf's names none.",
+   "notes": [
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"en\", was \"\""
+    }
+   ],
+   "pictures": [
+    "script-file.page-1.png"
+   ],
+   "miss": false
+  },
+  {
+   "set": "options",
+   "name": "text-headers",
+   "score": 0.999706,
+   "text": 1.0,
+   "geom": 0.999018,
+   "pages_wk": 2,
+   "pages_mq": 2,
+   "overlay": 0.999934,
+   "fonts_wk": [
+    "Arial-BoldMT",
+    "ArialMT"
+   ],
+   "fonts_mq": [
+    "Arial-BoldMT",
+    "ArialMT"
+   ],
+   "size_wk": 30011,
+   "size_mq": 21596,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 250,
+   "ms_mq": 10,
+   "verdict": "appearance only",
+   "level": "cosmetic",
+   "first": "the language of the file is \"en\", was \"\"",
+   "differences": 5,
+   "fonts_same": true,
+   "note": "",
+   "notes": [
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"Quarterly operations review\" moved 1.4 pt to the left"
+    },
+    {
+     "of": "appearance",
+     "kind": "size",
+     "level": "cosmetic",
+     "note": "6 words of 8 pt are now 8.3 pt"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "5 lines from \"1. Move small items into labelled\" moved 2.2 pt to the right"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"Quarterly operations review\" moved 1.4 pt to the left"
+    },
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"en\", was \"\""
+    }
+   ],
+   "pictures": [
+    "text-headers.page-1.png",
+    "text-headers.page-2.png"
+   ],
+   "miss": false
+  },
+  {
+   "set": "options",
+   "name": "user-style-sheet",
+   "score": 0.999596,
+   "text": 1.0,
+   "geom": 0.998652,
+   "pages_wk": 2,
+   "pages_mq": 2,
+   "overlay": 0.999134,
+   "fonts_wk": [
+    "TimesNewRomanPS-BoldMT",
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPS-BoldMT",
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 32682,
+   "size_mq": 23562,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 250,
+   "ms_mq": 9,
+   "verdict": "appearance only",
+   "level": "cosmetic",
+   "first": "the language of the file is \"en\", was \"\"",
+   "differences": 7,
+   "fonts_same": true,
+   "note": "",
+   "notes": [
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "2 lines from \"Accuracy Minutes per order\" moved 1.2 pt to the left"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "2 lines from \"41,208 99.62%\" moved 1.1 pt to the left"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "2 lines from \"43,915 99.68%\" moved 1.1 pt to the left"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "2 lines from \"46,377 99.71%\" moved 1 pt to the left"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"Share\" moved 1.2 pt to the left"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "5 lines from \"1. Move small items into labelled\" moved 3 pt to the right"
+    },
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"en\", was \"\""
+    }
+   ],
+   "pictures": [
+    "user-style-sheet.page-1.png",
+    "user-style-sheet.page-2.png"
+   ],
+   "miss": false
+  },
+  {
+   "set": "options",
+   "name": "zoom",
+   "score": 0.969672,
+   "text": 1.0,
+   "geom": 0.898907,
+   "pages_wk": 2,
+   "pages_mq": 2,
+   "overlay": 0.606254,
+   "fonts_wk": [
+    "Arial-BoldMT",
+    "ArialMT"
+   ],
+   "fonts_mq": [
+    "Arial-BoldMT",
+    "ArialMT"
+   ],
+   "size_wk": 29533,
+   "size_mq": 21320,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 250,
+   "ms_mq": 10,
+   "verdict": "appearance only",
+   "level": "cosmetic",
+   "first": "the language of the file is \"en\", was \"\"",
+   "differences": 61,
+   "fonts_same": true,
+   "note": "Uses report.html at --zoom 1.25. marqius-wkhtmltopdf scales text a little differently: the 21 pt title comes out 20.7 pt, and words stand up to 3.5 pt along their lines from where wkhtmltopdf puts them; the page breaks are the same.",
+   "notes": [
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"Quarterly operations review\": the words stand up to 3.5 pt from where they stood along the line"
+    },
+    {
+     "of": "appearance",
+     "kind": "size",
+     "level": "cosmetic",
+     "note": "3 words of 21 pt are now 20.7 pt"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "2 lines from \"Three changes made the difference: earlier\": the words stand up to 1.3 pt from where they stood along the line"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "2 lines from \"Customer service handled 11,240 contacts, 6%\" moved 1.8 pt down"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"2. Warehouse\" moved 2.8 pt down"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"2.1 Picking and packing\" moved 2.2 pt down"
+    },
+    {
+     "of": "appearance",
+     "kind": "size",
+     "level": "cosmetic",
+     "note": "11 words of 12 pt are now 12.2 pt"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "3 lines from \"Picking accuracy stayed above 99.6% throughout\" moved 2.6 pt down"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"Orders picked\" moved 1.3 pt to the right, 3.3 pt down"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"Accuracy\" moved 3.3 pt down"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "2 lines from \"Minutes per order July\" moved 3.3 pt down"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"41,208\" moved 3.7 pt down"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "3 lines from \"99.62% 3.3 August\" moved 3.7 pt down"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"43,915\" moved 4.1 pt down"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "3 lines from \"99.68% 3.0 September\" moved 4.1 pt down"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"46,377\" moved 4.5 pt down"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "4 lines from \"99.71% 2.8 2.2 Stock Stock counts\" moved 4.5 pt down"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "3 lines from \"items stored in mixed bins, which\" moved 5.3 pt down"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"3. Delivery\" moved 6.5 pt down"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"3.1 On-time performance\" moved 6 pt down"
+    },
+    {
+     "of": "appearance",
+     "kind": "reflow",
+     "level": "cosmetic",
+     "note": "the paragraph beginning \"The delivery teams completed 128,902 drops.\" breaks into lines differently (3 lines, now 3)"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"The\" moved 6.4 pt down"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"On time\" moved 5.8 pt up"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"Second attempts\" moved 1.5 pt to the right, 5.8 pt up"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"North\" moved 12.1 pt up"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"31,550\" moved 12.1 pt up"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"96.1%\" moved 12.1 pt up"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"2.9%\" moved 12.1 pt up"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"Midlands\" moved 11.7 pt up"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"28,744\" moved 11.7 pt up"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"96.8%\" moved 11.7 pt up"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"2.4%\" moved 11.7 pt up"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"South East\" moved 11.3 pt up"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"39,120\" moved 11.3 pt up"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"95.9%\" moved 11.3 pt up"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"3.1%\" moved 11.3 pt up"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"South West\" moved 10.9 pt up"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"18,203\" moved 10.9 pt up"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"97.4%\" moved 10.9 pt up"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"2.0%\" moved 10.9 pt up"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"Scotland\" moved 10.5 pt up"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"11,285\" moved 10.5 pt up"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"95.2%\" moved 10.5 pt up"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "3 lines from \"3.6% 3.2 Vehicles Six electric vans\" moved 10.5 pt up"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "3 lines from \"vans they replace, and drivers report\" moved 9.7 pt up"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "6 lines from \"4. Customer service Most contacts were\" moved 8.5 pt up"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"Where is my order?\" moved 7.6 pt up"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "2 lines from \"38% −5 pts\" moved 7.6 pt up"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"Change of address or date\" moved 7.2 pt up"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "2 lines from \"21% −2 pts\" moved 7.2 pt up"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"Damaged or missing items\" moved 6.8 pt up"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "2 lines from \"14% −1 pt\" moved 6.8 pt up"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"Returns and refunds\" moved 6.4 pt up"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "2 lines from \"17% +3 pts\" moved 6.4 pt up"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"Other\" moved 6 pt up"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "3 lines from \"10% +5 pts Satisfaction with the\" moved 6 pt up"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"5. Plans for the fourth quarter\" moved 4.8 pt up"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "4 lines from \"1. Move small items into labelled\" moved 2.5 pt to the right, 5 pt up"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"5. Publish delivery performance on the\" moved 2.5 pt to the right, 4.2 pt up"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"The next review will be presented\" moved 4 pt up"
+    },
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"en\", was \"\""
+    }
+   ],
+   "pictures": [
+    "zoom.page-1.png",
+    "zoom.page-2.png"
+   ],
+   "miss": true
+  },
+  {
+   "set": "international",
+   "name": "european",
+   "score": 0.997383,
+   "text": 1.0,
+   "geom": 0.991276,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 0.999726,
+   "fonts_wk": [
+    "DejaVuSans",
+    "Verdana",
+    "Verdana-Bold"
+   ],
+   "fonts_mq": [
+    "DejaVuSans",
+    "Verdana",
+    "Verdana-Bold"
+   ],
+   "size_wk": 23236,
+   "size_mq": 17688,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 240,
+   "ms_mq": 9,
+   "verdict": "file differs",
+   "level": "cosmetic",
+   "first": "the language of the file is \"en\", was \"\"",
+   "differences": 1,
+   "fonts_same": true,
+   "note": "",
+   "notes": [
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"en\", was \"\""
+    }
+   ],
+   "pictures": [
+    "european.page-1.png"
+   ],
+   "miss": false
+  },
+  {
+   "set": "international",
+   "name": "greek-russian",
+   "score": 0.997935,
+   "text": 1.0,
+   "geom": 0.993118,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 0.999527,
+   "fonts_wk": [
+    "TimesNewRomanPS-BoldMT",
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "TimesNewRomanPS-BoldMT",
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 24018,
+   "size_mq": 17554,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 240,
+   "ms_mq": 9,
+   "verdict": "same",
+   "level": "",
+   "first": "",
+   "differences": 0,
+   "fonts_same": true,
+   "note": "",
+   "notes": [],
+   "pictures": [],
+   "miss": false
+  },
+  {
+   "set": "international",
+   "name": "invoice-ar",
+   "score": 0.43182,
+   "text": 0.41443,
+   "geom": 0.082017,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 0.997912,
+   "fonts_wk": [
+    "Arial-BoldMT",
+    "ArialMT"
+   ],
+   "fonts_mq": [
+    "Arial-BoldMT",
+    "ArialMT"
+   ],
+   "size_wk": 24219,
+   "size_mq": 17903,
+   "made_wk": true,
+   "made_mq": true,
+   "better": true,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 250,
+   "ms_mq": 0,
+   "verdict": "content differs",
+   "level": "blocking",
+   "first": "\"ﯾ ﻮ ﻣ ً\" is now \"يومًا مع ذكر رقم الفاتورة. شكرً\"",
+   "differences": 19,
+   "fonts_same": true,
+   "note": "The pages look the same. Copied or searched, marqius-wkhtmltopdf's text gives back 48 of the invoice's 56 words as written, wkhtmltopdf's 2: it stores the Arabic as separate letter shapes, which is most of the text measure's loss.",
+   "notes": [
+    {
+     "of": "content",
+     "kind": "text",
+     "level": "blocking",
+     "note": "\"ا ﻟ ﺘ ﺎ ر ﯾ ﺦ :\" is now \"التاريخ:\""
+    },
+    {
+     "of": "content",
+     "kind": "text",
+     "level": "blocking",
+     "note": "\"إ ﻟ ﻰ : ﺷ ﺮ ﻛ ﺔ أ ﻛ ﻤ ﻲ ﻟ ﻠ ﺘ ﺠ ﺎ ر ة ، ﺷ ﺎ ر ع ا ﻟ ﻤ ﯿ ﻨ ﺎ ء\" is now \"إلى: شركة أكمي للتجارة، شارع الميناء\""
+    },
+    {
+     "of": "content",
+     "kind": "text",
+     "level": "blocking",
+     "note": "\"ا ﻟ ﺒ ﻨ ﺪ ا ﻟ ﻜ ﻤ ﯿ ﺔ ﺳ ﻌ ﺮ ا ﻟ ﻮ ﺣ ﺪ ة ا ﻟ ﻤ ﺒ ﻠ ﻎ و ر ق ﺗ ﺼ ﻮ ﯾ ﺮ\" is now \"البند الكمية سعر الوحدة المبلغ ورق تصوير\""
+    },
+    {
+     "of": "content",
+     "kind": "text",
+     "level": "blocking",
+     "note": "\"ﺧ ﺮ ﻃ ﻮ ﺷ ﺔ ﺣ ﺒ ﺮ ﺳ ﻮ د ا ء ، ﺳ ﻌ ﺔ ﻋ ﺎ ﻟ ﯿ ﺔ\" is now \"خرطوشة حبر سوداء، سعة عالية\""
+    },
+    {
+     "of": "content",
+     "kind": "text",
+     "level": "blocking",
+     "note": "\"ﺻ ﻨ ﺎ د ﯾ ﻖ أ ر ﺷ ﯿ ﻒ ، ﻋ ﺒ ﻮ ة ﻣ ﻦ\" is now \"صناديق أرشيف، عبوة من\""
+    },
+    {
+     "of": "content",
+     "kind": "text",
+     "level": "blocking",
+     "note": "\"ا ﻟ ﺘ ﻮ ﺻ ﯿ ﻞ\" is now \"التوصيل\""
+    },
+    {
+     "of": "content",
+     "kind": "text",
+     "level": "blocking",
+     "note": "\"د ر ﻫ ﻢ ﺿ ﺮ ﯾ ﺒ ﺔ ا ﻟ ﻘ ﯿ ﻤ ﺔ ا ﻟ ﻤ ﻀ ﺎ ﻓ ﺔ\" is now \"درهم ضريبة القيمة المضافة\""
+    },
+    {
+     "of": "content",
+     "kind": "text",
+     "level": "blocking",
+     "note": "\"د ر ﻫ ﻢ ﯾ ﺮ ﺟ ﻰ ا ﻟ ﺪ ﻓ ﻊ ﺧ ﻼ ل\" is now \"درهم يرجى الدفع خلال\""
+    },
+    {
+     "of": "content",
+     "kind": "text",
+     "level": "blocking",
+     "note": "\"ﻣ ﻊ ذ ﻛ ﺮ ر ﻗ ﻢ ا ﻟ ﻔ ﺎ ﺗ ﻮ ر ة . ﺷ ﻜ ﺮ ً ا ﻟ ﺘ ﻌ ﺎ ﻣ ﻠ ﻜ ﻢ ﻣ ﻌ ﻨ ﺎ .\" is now \"لتعاملكم معنا.\""
+    },
+    {
+     "of": "content",
+     "kind": "text",
+     "level": "blocking",
+     "note": "\"ﯾ ﻮ ﻣ ً\" is now \"يومًا مع ذكر رقم الفاتورة. شكرً\""
+    },
+    {
+     "of": "appearance",
+     "kind": "spacing",
+     "level": "cosmetic",
+     "note": "the same letters, divided into words differently"
+    },
+    {
+     "of": "appearance",
+     "kind": "spacing",
+     "level": "cosmetic",
+     "note": "the same letters, divided into words differently"
+    },
+    {
+     "of": "appearance",
+     "kind": "spacing",
+     "level": "cosmetic",
+     "note": "the same letters, divided into words differently"
+    },
+    {
+     "of": "appearance",
+     "kind": "spacing",
+     "level": "cosmetic",
+     "note": "the same letters, divided into words differently"
+    },
+    {
+     "of": "appearance",
+     "kind": "spacing",
+     "level": "cosmetic",
+     "note": "the same letters, divided into words differently"
+    },
+    {
+     "of": "appearance",
+     "kind": "reflow",
+     "level": "cosmetic",
+     "note": "the paragraph beginning \"ا ﻟ ﻤ ﺠ ﻤ ﻮ\" breaks into lines differently (6 lines, now 6)"
+    },
+    {
+     "of": "appearance",
+     "kind": "spacing",
+     "level": "cosmetic",
+     "note": "the same letters, divided into words differently"
+    },
+    {
+     "of": "file",
+     "kind": "pdf-type",
+     "level": "review",
+     "note": "the file is PDF 1.5, was PDF 1.4"
+    },
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"ar\", was \"\""
+    }
+   ],
+   "pictures": [
+    "invoice-ar.page-1.png"
+   ],
+   "miss": true
+  },
+  {
+   "set": "international",
+   "name": "invoice-zh",
+   "score": 0.881813,
+   "text": 0.923358,
+   "geom": 0.733779,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 0.999853,
+   "fonts_wk": [
+    "NotoSansCJKsc-Bold",
+    "NotoSansCJKsc-Regular"
+   ],
+   "fonts_mq": [
+    "NotoSansCJKsc-Bold",
+    "NotoSansCJKsc-Regular"
+   ],
+   "size_wk": 28716,
+   "size_mq": 26247,
+   "made_wk": true,
+   "made_mq": true,
+   "better": true,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 250,
+   "ms_mq": 9,
+   "verdict": "content differs",
+   "level": "blocking",
+   "first": "\"北⻛办公⽤品有限公司\" is now \"北风办公用品有限公司\"",
+   "differences": 2,
+   "fonts_same": true,
+   "note": "The pages look the same, but wkhtmltopdf's text has look-alike signs in place of some characters, so a search for the company's name in its PDF finds nothing; marqius-wkhtmltopdf's has the real characters.",
+   "notes": [
+    {
+     "of": "content",
+     "kind": "text",
+     "level": "blocking",
+     "note": "\"北⻛办公⽤品有限公司\" is now \"北风办公用品有限公司\""
+    },
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"zh-CN\", was \"\""
+    }
+   ],
+   "pictures": [
+    "invoice-zh.page-1.png"
+   ],
+   "miss": true
+  },
+  {
+   "set": "international",
+   "name": "letter-hi",
+   "score": 0.757913,
+   "text": 0.794613,
+   "geom": 0.535355,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 0.998674,
+   "fonts_wk": [
+    "Arial-BoldMT",
+    "ArialMT",
+    "DejaVuSans",
+    "DejaVuSans-Bold",
+    "FreeSans",
+    "FreeSansBold"
+   ],
+   "fonts_mq": [
+    "Arial-BoldMT",
+    "ArialMT",
+    "DejaVuSans",
+    "DejaVuSans-Bold",
+    "FreeSans",
+    "FreeSansBold"
+   ],
+   "size_wk": 39912,
+   "size_mq": 73076,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 259,
+   "ms_mq": 9,
+   "verdict": "content differs",
+   "level": "blocking",
+   "first": "\"ग�ाहक\" is now \"ग्राहक\"",
+   "differences": 18,
+   "fonts_same": true,
+   "note": "The pages look the same, but for two quantities and the total in the table, which stand 1.2 to 1.5 pt further right. Copied or searched, marqius-wkhtmltopdf's text reads back as clean Hindi; wkhtmltopdf's does not (16 of its letters have no text at all), which is most of the text measure's loss.",
+   "notes": [
+    {
+     "of": "content",
+     "kind": "text",
+     "level": "blocking",
+     "note": "\"नॉथ�िवंड स�लाइज़ िदनांक:\" is now \"नॉर्थविंड सप्लाइज़ दिनांक:\""
+    },
+    {
+     "of": "content",
+     "kind": "unreadable",
+     "level": "review",
+     "note": "16 of the 274 letters of the old document are drawn with no word of what they are (the file gives its font no map to letters): they cannot be compared"
+    },
+    {
+     "of": "content",
+     "kind": "text",
+     "level": "blocking",
+     "note": "\"िप � य ग�ाहक,\" is now \"प्रिय ग्राहक,\""
+    },
+    {
+     "of": "content",
+     "kind": "text",
+     "level": "blocking",
+     "note": "\"ऑड�र सं�या\" is now \"ऑर्डर संख्या\""
+    },
+    {
+     "of": "content",
+     "kind": "text",
+     "level": "blocking",
+     "note": "\"िलए ध�यवाद।\" is now \"लिए धन्यवाद।\""
+    },
+    {
+     "of": "content",
+     "kind": "text",
+     "level": "blocking",
+     "note": "\"िववरण मा�ा रािश\" is now \"विवरण मात्रा राशि\""
+    },
+    {
+     "of": "content",
+     "kind": "text",
+     "level": "blocking",
+     "note": "\"िड�बा\" is now \"डिब्बा\""
+    },
+    {
+     "of": "content",
+     "kind": "text",
+     "level": "blocking",
+     "note": "\"काि��ज,\" is now \"कार्ट्रिज,\""
+    },
+    {
+     "of": "content",
+     "kind": "text",
+     "level": "blocking",
+     "note": "\"प � �न\" is now \"प्रश्न\""
+    },
+    {
+     "of": "content",
+     "kind": "text",
+     "level": "blocking",
+     "note": "\"िकसी\" is now \"किसी\""
+    },
+    {
+     "of": "content",
+     "kind": "text",
+     "level": "blocking",
+     "note": "\"िलए\" is now \"लिए\""
+    },
+    {
+     "of": "content",
+     "kind": "text",
+     "level": "blocking",
+     "note": "\"संपक � कर�।\" is now \"संपर्क करें।\""
+    },
+    {
+     "of": "content",
+     "kind": "text",
+     "level": "blocking",
+     "note": "\"ग�ाहक\" is now \"ग्राहक\""
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"12\" moved 1.5 pt to the right"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"4\" moved 1.3 pt to the right"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"₹11,100.00\" moved 1.2 pt to the right"
+    },
+    {
+     "of": "file",
+     "kind": "pdf-type",
+     "level": "review",
+     "note": "the file is PDF 1.5, was PDF 1.4"
+    },
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"hi\", was \"\""
+    }
+   ],
+   "pictures": [
+    "letter-hi.page-1.png"
+   ],
+   "miss": true
+  },
+  {
+   "set": "international",
+   "name": "letter-ja",
+   "score": 0.856918,
+   "text": 0.942238,
+   "geom": 0.619329,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 0.995716,
+   "fonts_wk": [
+    "NotoSansMonoCJKhk-Regular",
+    "NotoSansMonoCJKsc-Bold",
+    "TimesNewRomanPSMT"
+   ],
+   "fonts_mq": [
+    "NotoSansCJKjp-Bold",
+    "NotoSansCJKjp-Regular",
+    "TimesNewRomanPSMT"
+   ],
+   "size_wk": 38688,
+   "size_mq": 32140,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 269,
+   "ms_mq": 20,
+   "verdict": "content differs",
+   "level": "blocking",
+   "first": "\"品名：トナーカートリッジ（黒、⼤容量） 数量：4本\" is now \"品名：トナーカートリッジ（黒、大容量） 数量：4本\"",
+   "differences": 9,
+   "fonts_same": false,
+   "note": "The pages look the same. wkhtmltopdf sets the text in Noto Sans Mono CJK HK, marqius-wkhtmltopdf in Noto Sans CJK JP, the face lang=\"ja\" asks for; wkhtmltopdf's text reads back with some characters as radicals.",
+   "notes": [
+    {
+     "of": "content",
+     "kind": "text",
+     "level": "blocking",
+     "note": "\"営業部 御中\" is now \"営業部 御中\""
+    },
+    {
+     "of": "content",
+     "kind": "text",
+     "level": "blocking",
+     "note": "\"営業部 ⼭⽥ 花⼦\" is now \"営業部 山田 花子\""
+    },
+    {
+     "of": "content",
+     "kind": "text",
+     "level": "blocking",
+     "note": "\"拝啓 時下ますますご清祥のこととお慶び申し上げます。平素は格別のご⾼配を賜り、厚く御礼申し上げます。\" is now \"拝啓 時下ますますご清祥のこととお慶び申し上げます。平素は格別のご高配を賜り、厚く御礼申し上げます。\""
+    },
+    {
+     "of": "content",
+     "kind": "text",
+     "level": "blocking",
+     "note": "\"品名：A4コピー⽤紙（80g/m²、5冊⼊り） 数量：12箱\" is now \"品名：A4コピー用紙（80g/m²、5冊入り） 数量：12箱\""
+    },
+    {
+     "of": "content",
+     "kind": "text",
+     "level": "blocking",
+     "note": "\"品名：トナーカートリッジ（黒、⼤容量） 数量：4本\" is now \"品名：トナーカートリッジ（黒、大容量） 数量：4本\""
+    },
+    {
+     "of": "appearance",
+     "kind": "font",
+     "level": "cosmetic",
+     "note": "8 words set in notosansmonocjkhk are now in notosanscjkjp"
+    },
+    {
+     "of": "appearance",
+     "kind": "font",
+     "level": "cosmetic",
+     "note": "1 words set in notosansmonocjksc bold are now in notosanscjkjp bold"
+    },
+    {
+     "of": "appearance",
+     "kind": "moved",
+     "level": "cosmetic",
+     "note": "the line \"3. お⾒積り有効期限：2026年12⽉17⽇\" moved 2.4 pt to the right"
+    },
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"ja\", was \"\""
+    }
+   ],
+   "pictures": [
+    "letter-ja.page-1.png"
+   ],
+   "miss": true
+  },
+  {
+   "set": "international",
+   "name": "mixed-scripts",
+   "score": 0.989043,
+   "text": 0.995181,
+   "geom": 0.971507,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 0.999865,
+   "fonts_wk": [
+    "Arial-BoldMT",
+    "ArialMT",
+    "NotoSansCJKhk-Regular"
+   ],
+   "fonts_mq": [
+    "Arial-BoldMT",
+    "ArialMT",
+    "NotoSansCJKjp-Regular"
+   ],
+   "size_wk": 28260,
+   "size_mq": 21256,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 259,
+   "ms_mq": 9,
+   "verdict": "appearance only",
+   "level": "cosmetic",
+   "first": "the language of the file is \"en\", was \"\"",
+   "differences": 2,
+   "fonts_same": false,
+   "note": "The pages look the same. wkhtmltopdf sets all the Chinese, Japanese and Korean words in Noto Sans CJK HK, marqius-wkhtmltopdf in Noto Sans CJK JP.",
+   "notes": [
+    {
+     "of": "appearance",
+     "kind": "font",
+     "level": "cosmetic",
+     "note": "11 words set in notosanscjkhk are now in notosanscjkjp"
+    },
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"en\", was \"\""
+    }
+   ],
+   "pictures": [
+    "mixed-scripts.page-1.png"
+   ],
+   "miss": true
+  },
+  {
+   "set": "international",
+   "name": "notice-he",
+   "score": 0.607066,
+   "text": 0.8,
+   "geom": 0.023553,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 1.0,
+   "fonts_wk": [
+    "Arial-BoldMT",
+    "ArialMT"
+   ],
+   "fonts_mq": [
+    "Arial-BoldMT",
+    "ArialMT"
+   ],
+   "size_wk": 17457,
+   "size_mq": 11461,
+   "made_wk": true,
+   "made_mq": true,
+   "better": true,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 240,
+   "ms_mq": 0,
+   "verdict": "appearance only",
+   "level": "cosmetic",
+   "first": "the language of the file is \"he\", was \"\"",
+   "differences": 7,
+   "fonts_same": true,
+   "note": "The pages look the same. Copied or searched, marqius-wkhtmltopdf's text gives back 43 of the notice's 48 words as written, wkhtmltopdf's 28: it splits many Hebrew words into single letters, which is the text measure's loss.",
+   "notes": [
+    {
+     "of": "appearance",
+     "kind": "reflow",
+     "level": "cosmetic",
+     "note": "the paragraph beginning \"ה ו ד ע ה ע\" breaks into lines differently (1 lines, now 1)"
+    },
+    {
+     "of": "appearance",
+     "kind": "reflow",
+     "level": "cosmetic",
+     "note": "the paragraph beginning \"ה ח ל מ י ו\" breaks into lines differently (1 lines, now 1)"
+    },
+    {
+     "of": "appearance",
+     "kind": "reflow",
+     "level": "cosmetic",
+     "note": "the paragraph beginning \"ר א ש ו ן –\" breaks into lines differently (6 lines, now 6)"
+    },
+    {
+     "of": "appearance",
+     "kind": "spacing",
+     "level": "cosmetic",
+     "note": "the same letters, divided into words differently"
+    },
+    {
+     "of": "appearance",
+     "kind": "reflow",
+     "level": "cosmetic",
+     "note": "the paragraph beginning \"ה ז מ נ ו ת\" breaks into lines differently (1 lines, now 1)"
+    },
+    {
+     "of": "appearance",
+     "kind": "spacing",
+     "level": "cosmetic",
+     "note": "the same letters, divided into words differently"
+    },
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"he\", was \"\""
+    }
+   ],
+   "pictures": [
+    "notice-he.page-1.png"
+   ],
+   "miss": true
+  },
+  {
+   "set": "international",
+   "name": "receipt-ko",
+   "score": 0.999519,
+   "text": 1.0,
+   "geom": 0.998396,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 0.99907,
+   "fonts_wk": [
+    "NotoSansCJKkr-Bold",
+    "NotoSansCJKkr-Regular"
+   ],
+   "fonts_mq": [
+    "NotoSansCJKkr-Bold",
+    "NotoSansCJKkr-Regular"
+   ],
+   "size_wk": 13928,
+   "size_mq": 12704,
+   "made_wk": true,
+   "made_mq": true,
+   "better": false,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 240,
+   "ms_mq": 9,
+   "verdict": "content differs",
+   "level": "blocking",
+   "first": "\"08:42 계산대\" is now \"08:42 계산대\"",
+   "differences": 2,
+   "fonts_same": true,
+   "note": "The pages look the same. The wide space after the time reads back as a different space character in the two PDFs.",
+   "notes": [
+    {
+     "of": "content",
+     "kind": "text",
+     "level": "blocking",
+     "note": "\"08:42 계산대\" is now \"08:42 계산대\""
+    },
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"ko\", was \"\""
+    }
+   ],
+   "pictures": [
+    "receipt-ko.page-1.png"
+   ],
+   "miss": true
+  },
+  {
+   "set": "international",
+   "name": "receipt-th",
+   "score": 0.676929,
+   "text": 0.670213,
+   "geom": 0.472742,
+   "pages_wk": 1,
+   "pages_mq": 1,
+   "overlay": 0.999743,
+   "fonts_wk": [
+    "Arial-BoldMT",
+    "ArialMT",
+    "FreeSerif",
+    "FreeSerifBold"
+   ],
+   "fonts_mq": [
+    "Arial-BoldMT",
+    "ArialMT",
+    "FreeSerif",
+    "FreeSerifBold"
+   ],
+   "size_wk": 29440,
+   "size_mq": 107376,
+   "made_wk": true,
+   "made_mq": true,
+   "better": true,
+   "status_wk": 0,
+   "status_mq": 0,
+   "ms_wk": 250,
+   "ms_mq": 10,
+   "verdict": "content differs",
+   "level": "blocking",
+   "first": "\"ขอบคุณที ่ ใช บริการ ้\" is now \"ขอบคุณที่ใช้บริการ\"",
+   "differences": 7,
+   "fonts_same": true,
+   "note": "The pages look the same. Copied or searched, marqius-wkhtmltopdf's text comes back as clean Thai; wkhtmltopdf's has its tone and vowel marks split off.",
+   "notes": [
+    {
+     "of": "content",
+     "kind": "text",
+     "level": "blocking",
+     "note": "\"น ้ํ าส มคั ้ น ้\" is now \"น้ำส้มคั ้น\""
+    },
+    {
+     "of": "content",
+     "kind": "text",
+     "level": "blocking",
+     "note": "\"ร ้ านของเราเปิดทุกวันตั งแต ้ เวลาเจ็ดโมงเช ่ าถึงหกโมงเย็น ้ หากต องการใบก ้ ากับภาษีเต็มรูปแบบ … (20 words)\" is now \"ร้านของเราเปิดทุกวันตั ้งแต่เวลาเจ็ดโมงเช้าถึงหกโมงเย็น หากต้องการใบกำกั บภาษีเต็มรูปแบบ … (8 words)\""
+    },
+    {
+     "of": "content",
+     "kind": "text",
+     "level": "blocking",
+     "note": "\"ขอบคุณที ่ ใช บริการ ้\" is now \"ขอบคุณที่ใช้บริการ\""
+    },
+    {
+     "of": "appearance",
+     "kind": "reflow",
+     "level": "cosmetic",
+     "note": "the paragraph beginning \"ใบเสร็จรั บเงิน\" breaks into lines differently (2 lines, now 2)"
+    },
+    {
+     "of": "appearance",
+     "kind": "spacing",
+     "level": "cosmetic",
+     "note": "the same letters, divided into words differently"
+    },
+    {
+     "of": "file",
+     "kind": "pdf-type",
+     "level": "review",
+     "note": "the file is PDF 1.5, was PDF 1.4"
+    },
+    {
+     "of": "file",
+     "kind": "metadata",
+     "level": "cosmetic",
+     "note": "the language of the file is \"th\", was \"\""
+    }
+   ],
+   "pictures": [
+    "receipt-th.page-1.png"
+   ],
+   "miss": true
+  }
+ ]
+}
